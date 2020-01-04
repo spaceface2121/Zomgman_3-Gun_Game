@@ -57,17 +57,13 @@ public class Player extends MovingDirectionalMapObject {
         health -= damage;
         if (!isAlive()) {
             respawn();
-            System.out.println("dead"); //delet thisv
         }
     }
 
-    public Ghost respawn() {
-        Ghost ghost = new Ghost(this);
-        return ghost;
-    }
-
-    public boolean getIsGhost() {
-        return isGhost;
+    public void respawn() {
+        setObjectData(getInitialPlayerData(player1or2));
+        health = 100;
+        downgradeGun();
     }
 
     public boolean isAlive() {

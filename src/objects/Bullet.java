@@ -14,6 +14,7 @@ public class Bullet extends MovingDirectionalMapObject {
         super(getInitialBulletData(gun), getOtherImage(gun), gun.getDir(), GunLogic.getxVel(gun.getType(), gun.getDir()), GunLogic.getyVel(gun.getType(), gun.getDir()));
         distanceTraveled = 0;
         range = GunLogic.getRange(gun.getType());
+        damage = GunLogic.getDamagePerHit(gun.getType());
     }
 
     private static ObjectData getInitialBulletData(Gun gun) {

@@ -115,12 +115,16 @@ public class Gun extends DirectionalMapObject {
     }
 
     public void upgrade() {
-        type++;
-        setGunProperties();
+        if (type > 0) {
+            type++;
+            setGunProperties();
+        }
     }
     public void downgrade() {
-        type--;
-        setGunProperties();
+        if (type > 0) {
+            type--;
+            setGunProperties();
+        }
     }
 
     public boolean isPlayer1or2() {

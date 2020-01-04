@@ -13,4 +13,8 @@ public class MapObject {
     public ObjectData getObjectData() {
         return objectData;
     }
+
+    public void setObjectData(ObjectData objectData) {
+        this.objectData = objectData;
+    }
 }
