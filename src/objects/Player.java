@@ -3,7 +3,6 @@ package objects;
 import javafx.scene.image.Image;
 import logic.CollisionLogic;
 import logic.GunLogic;
-import logic.PlayerLogic;
 import main.Game;
 import main.data.Images;
 import main.data.ObjectData;
@@ -12,13 +11,14 @@ public class Player extends MovingDirectionalMapObject {
     private Gun gun;
     private byte health;
     private byte points;
+    private boolean isGhost;
 
     private boolean shoot = false, falling = false;
     private boolean player1or2;
 
     private byte timesJumped = 0;
 
-    public Player (boolean player1or2) {
+    public Player(boolean player1or2) {
         super(getInitialPlayerData(player1or2), getOtherImage(player1or2), player1or2, 0, 0); //player1or2 is equivalent in terms of its boolean value to direction (dir)
 
         health = 100;
@@ -55,6 +55,19 @@ public class Player extends MovingDirectionalMapObject {
 
     public void takeDamage(int damage) {
         health -= damage;
+        if (!isAlive()) {
+            respawn();
+            System.out.println("dead"); //delet thisv
+        }
+    }
+
+    public Ghost respawn() {
+        Ghost ghost = new Ghost(this);
+        return ghost;
+    }
+
+    public boolean getIsGhost() {
+        return isGhost;
     }
 
     public boolean isAlive() {
@@ -92,11 +105,11 @@ public class Player extends MovingDirectionalMapObject {
                 setyVel(0);
                 timesJumped = 0;
             } else if (CollisionLogic.collidedTopWithBlock(getObjectData())) {
-                setyVel((float)-0.5 * getyVel());
+                setyVel((float) - 0.5 * getyVel());
             } else {
                 setyVel((float)(getyVel() + 0.5));
             }
-        } else if (!CollisionLogic.collidedBottomWithBlock(getObjectData())){
+        } else if (!CollisionLogic.collidedBottomWithBlock(getObjectData())) {
             falling = true;
         }
     }
