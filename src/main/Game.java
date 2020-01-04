@@ -113,13 +113,14 @@ public class Game extends Application {
                         }
                     }
             );
+
             Images.generateScaledImages(scaleFullX, scaleFullY);
             GunLogic.generateScaledRanges(scaleFullX);
 
             player1 = new Player(true);
             player2 = new Player(false);
 
-            Map map = new Map(scaleFullX, scaleFullY);
+            map = new Map(scaleFullX, scaleFullY);
 
 
             loop.getKeyFrames().add(keyFrame);

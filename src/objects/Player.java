@@ -100,8 +100,8 @@ public class Player extends MovingDirectionalMapObject {
                 falling = false;
                 setyVel(0);
                 timesJumped = 0;
-            } else if (CollisionLogic.collidedTopWithBlock(getObjectData())) {
-                setyVel((float) - 0.5 * getyVel());
+            } else if (CollisionLogic.collidedTopWithBlock(getObjectData()) || getObjectData().y <= 0) {
+                setyVel((float)(- 0.5 * getyVel() + 0.01)); //glue on ceiling
             } else {
                 setyVel((float)(getyVel() + 0.5));
             }
