@@ -10,6 +10,8 @@ public class Images {
                             REVOLVER_R = 13, REVOLVER_L = 14, SHOTGUN_R = 15, SHOTGUN_L = 16, SNIPER_R = 17, SNIPER_L = 18, LIGHT_BULLET_R = 19, LIGHT_BULLET_L = 20,
                             STANDARD_BULLET_R = 21, STANDARD_BULLET_L = 22, HEAVY_BULLET_R = 23, HEAVY_BULLET_L = 24, GHOST_R = 25, GHOST_L = 26;
 
+    private static final byte GUNS_START = GLOCK_R, GUNS_END = SNIPER_L;
+
 
     private static final String P1_RIGHT_IMAGE_PATHNAME = "file:resources/player_1.jpg"; //CHANGE THE NAME NIGGUH
     private static final String P1_LEFT_IMAGE_PATHNAME = "file:resources/player_1.jpg";
@@ -29,14 +31,14 @@ public class Images {
 
     /*-------------------------*/
 
-    private static final String GLOCK_RIGHT_IMAGE_PATHNAME = "file:resources/glock_r.png";
-    private static final String GLOCK_LEFT_IMAGE_PATHNAME = "file:resources/glock_l.png";
-    private static final String UZI_RIGHT_IMAGE_PATHNAME = "file:resources/uzi_r.png";
-    private static final String UZI_LEFT_IMAGE_PATHNAME = "file:resources/uzi_l.png";
+    private static final String GLOCK_RIGHT_IMAGE_PATHNAME = "file:resources/glock_right.png";
+    private static final String GLOCK_LEFT_IMAGE_PATHNAME = "file:resources/glock_left.png";
+    private static final String UZI_RIGHT_IMAGE_PATHNAME = "file:resources/ak_right.jpeg";
+    private static final String UZI_LEFT_IMAGE_PATHNAME = "file:resources/ak_left.jpeg";
     private static final String MP5_RIGHT_IMAGE_PATHNAME = "file:resources/mp5_r.png";
     private static final String MP5_LEFT_IMAGE_PATHNAME = "file:resources/mp5_l.png";
-    private static final String AK_RIGHT_IMAGE_PATHNAME = "file:resources/ak_r.png";
-    private static final String AK_LEFT_IMAGE_PATHNAME = "file:resources/ak_l.png";
+    private static final String AK_RIGHT_IMAGE_PATHNAME = "file:resources/ak_right.jpeg";
+    private static final String AK_LEFT_IMAGE_PATHNAME = "file:resources/ak_left.jpeg";
     private static final String REVOLVER_RIGHT_IMAGE_PATHNAME = "file:resources/revolver_r.png";
     private static final String REVOLVER_LEFT_IMAGE_PATHNAME = "file:resources/revolver_l.png";
     private static final String SHOTGUN_RIGHT_IMAGE_PATHNAME = "file:resources/shotgun_r.png";
@@ -90,6 +92,11 @@ public class Images {
             HEAVY_BULLET_LEFT_IMAGE_PATHNAME, GHOST_RIGHT_IMAGE_PATHNAME, GHOST_LEFT_IMAGE_PATHNAME));
 
     private static ArrayList<Image> images = new ArrayList<>();
+
+    public static ArrayList<Image> rightGunImages = new ArrayList<>();
+
+    public static ArrayList<Image>  leftGunImages = new ArrayList<>();
+
 //            new ArrayList<>(Arrays.asList(P1_RIGHT_IMAGE, P1_LEFT_IMAGE, P2_RIGHT_IMAGE, P2_LEFT_IMAGE, BLOCK_IMAGE, GLOCK_RIGHT_IMAGE,
 //            GLOCK_LEFT_IMAGE, UZI_RIGHT_IMAGE, UZI_LEFT_IMAGE, MP5_RIGHT_IMAGE, MP5_LEFT_IMAGE, AK_RIGHT_IMAGE, AK_LEFT_IMAGE, REVOLVER_RIGHT_IMAGE,
 //            REVOLVER_LEFT_IMAGE, SHOTGUN_RIGHT_IMAGE, SHOTGUN_LEFT_IMAGE, SNIPER_RIGHT_IMAGE, SNIPER_LEFT_IMAGE, LIGHT_BULLET_RIGHT_IMAGE,
@@ -100,9 +107,21 @@ public class Images {
         for (int i = 0; i < IMAGE_PATHNAMES.size(); i++) {
             Image originalImage = new Image(IMAGE_PATHNAMES.get(i)); //only generates original image cuz its the only way to obtain its dimensions
             double w = originalImage.getWidth(), h = originalImage.getHeight();
-            images.add(new Image(IMAGE_PATHNAMES.get(i), w * scaleX, h * scaleY, false, false)); //makes a new image with the proper scaled dimensions
+            Image scaledImage = new Image(IMAGE_PATHNAMES.get(i), w * scaleX, h * scaleY, false, false);
+            if (i >= GUNS_START && i <= GUNS_END) {
+                if (IMAGE_PATHNAMES.get(i).contains("right")) {
+                    rightGunImages.add(scaledImage);
+                } else if (IMAGE_PATHNAMES.get(i).contains("left")) {
+                    leftGunImages.add(scaledImage);
+                } else {
+                    System.out.println("something gay is going on");
+                }
+            }
+            images.add(scaledImage); //makes a new image with the proper scaled dimensions
         }
     }
+
+
 
     public static ArrayList<Image> getImages() {
         return images;

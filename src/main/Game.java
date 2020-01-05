@@ -113,7 +113,6 @@ public class Game extends Application {
                         }
                     }
             );
-
             Images.generateScaledImages(scaleFullX, scaleFullY);
             GunLogic.generateScaledRanges(scaleFullX);
 

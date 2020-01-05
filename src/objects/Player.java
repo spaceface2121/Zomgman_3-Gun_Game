@@ -11,7 +11,6 @@ public class Player extends MovingDirectionalMapObject {
     private Gun gun;
     private byte health;
     private byte points;
-    private boolean isGhost;
 
     private boolean shoot = false, falling = false;
     private boolean player1or2;
@@ -80,9 +79,6 @@ public class Player extends MovingDirectionalMapObject {
     }
 
     public void shoot() {
-        switch(gun.getFireMode()) {
-            case GunLogic.BURST:
-        }
         shoot = true;
         gun.fire();
     }
@@ -94,6 +90,10 @@ public class Player extends MovingDirectionalMapObject {
     public void move() {
         super.move(false);
         gun.updateCoordinates(this);
+
+        if (shoot) {
+
+        }
 
         if (falling) {
             if (CollisionLogic.collidedBottomWithBlock(getObjectData())) {
@@ -112,6 +112,14 @@ public class Player extends MovingDirectionalMapObject {
 
     public Gun getGun() {
         return gun;
+    }
+
+    public byte getHealth() {
+        return health;
+    }
+
+    public boolean isShooting() {
+        return shoot;
     }
 
     public boolean isPlayer1or2() {

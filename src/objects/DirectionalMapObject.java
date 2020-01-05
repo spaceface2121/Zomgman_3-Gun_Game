@@ -21,6 +21,10 @@ public class DirectionalMapObject extends MapObject {
         dir = !dir;
     }
 
+    public void setOtherImage(Image otherImage) {
+        this.otherImage = otherImage;
+    }
+
     public boolean getDir() {
         return dir;
     }

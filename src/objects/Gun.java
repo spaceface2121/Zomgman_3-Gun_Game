@@ -1,17 +1,19 @@
 package objects;
 
 import javafx.scene.image.Image;
+import javafx.util.Duration;
 import logic.CollisionLogic;
 import logic.GunLogic;
 import main.Main;
 import main.data.Images;
 import main.data.ObjectData;
-import objects.Bullet;
 
 import java.util.ArrayList;
 
 public class Gun extends DirectionalMapObject {
     private byte type, fireMode, ammoRemaining, numSuccessiveRoundsFired;
+    private int delay;
+    private long timeAtLastShot = 0;
     private boolean player1or2; //who this gun belongs to
 
     private ArrayList<Bullet> bullets;
@@ -49,19 +51,25 @@ public class Gun extends DirectionalMapObject {
 
     private void setGunProperties() {
         fireMode = GunLogic.getFireMode(type); // 0 = semi, 1 = burst, 2 = auto, 3 = shotgun
-        //damagePerHit = GunLogic.getDamagePerHit(type);
         ammoRemaining = GunLogic.getMagCapacity(type);
+        delay = GunLogic.getDelayBetweenShots(type);
     }
 
 
     public void fire() {
+        long currTime = System.currentTimeMillis();
         switch (fireMode) {
             case GunLogic.SEMI:
             case GunLogic.BURST:
-                if (numSuccessiveRoundsFired >= 3) {
-                    break;
+//                if (numSuccessiveRoundsFired >= 3) {
+//                    break;
+//                }
+            case GunLogic.AUTO:
+                if (currTime - timeAtLastShot > delay) {
+                    bullets.add(new Bullet(this));
+                    timeAtLastShot = currTime;
                 }
-            case GunLogic.AUTO: bullets.add(new Bullet(this)); break;
+                break;
             case GunLogic.BUCKSHOT:
                 for (int i = -1; i <= 1; i++) {
                     Bullet bullet = new Bullet(this);
@@ -74,17 +82,21 @@ public class Gun extends DirectionalMapObject {
     public void moveBullets() {
         for (int i = 0; i < bullets.size(); i++) {
             Bullet bullet = bullets.get(i);
-            Player player;
+            Player playerToTakeDamage, thisPlayer;
 
             if (player1or2) { //if this gun (and subsequently these bullets) belong to player 1
-                player = Main.getGame().getPlayer2();
+                playerToTakeDamage = Main.getGame().getPlayer2();
             } else { //if player 2
-                player = Main.getGame().getPlayer1(); //you may notice that im getting the "wrong" player here but this is actually the player i wanna check for collision with the bullets
+                thisPlayer = Main.getGame().getPlayer1();
+                playerToTakeDamage = Main.getGame().getPlayer1(); //you may notice that im getting the "wrong" player here but this is actually the player i wanna check for collision with the bullets
             }
 
-            if (Math.abs(bullet.getDistanceTraveled()) > bullet.getRange() || bullet.isOutOfBounds() || CollisionLogic.collidedWithBlock(bullet.getObjectData()) || CollisionLogic.collided(player.getObjectData(), bullet.getObjectData())) {
-                if (CollisionLogic.collided(player.getObjectData(), bullet.getObjectData())) {
-                    player.takeDamage(bullet.getDamage());
+            if (Math.abs(bullet.getDistanceTraveled()) > bullet.getRange() || bullet.isOutOfBounds() || CollisionLogic.collidedWithBlock(bullet.getObjectData()) || CollisionLogic.collided(playerToTakeDamage.getObjectData(), bullet.getObjectData())) {
+                if (CollisionLogic.collided(playerToTakeDamage.getObjectData(), bullet.getObjectData())) {
+                    if (playerToTakeDamage.getHealth() - bullet.getDamage() <= 0) {
+                        upgrade();
+                    }
+                    playerToTakeDamage.takeDamage(bullet.getDamage());
                 }
                 bullets.remove(i);
                 i--;
@@ -115,15 +127,29 @@ public class Gun extends DirectionalMapObject {
     }
 
     public void upgrade() {
-        if (type > 0) {
+        if (type < GunLogic.SNIPER) {
             type++;
+            System.out.println("gun upgraded " + type);
             setGunProperties();
+            setImages();
         }
     }
     public void downgrade() {
         if (type > 0) {
             type--;
+            System.out.println("gun downgraded " + type);
             setGunProperties();
+            setImages();
+        }
+    }
+
+    public void setImages() {
+        if (getDir()) {
+            getObjectData().image = Images.rightGunImages.get(type);
+            setOtherImage(Images.leftGunImages.get(type));
+        } else {
+            getObjectData().image = Images.leftGunImages.get(type);
+            setOtherImage(Images.rightGunImages.get(type));
         }
     }
 

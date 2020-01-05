@@ -20,14 +20,14 @@ public class Bullet extends MovingDirectionalMapObject {
     private static ObjectData getInitialBulletData(Gun gun) {
         ObjectData gunData = gun.getObjectData();
 
+        float x;
+        if (gun.getDir()) { //if facing right
+            x = gunData.x + gunData.w;
+        } else { //if facing left
+            x = gunData.x;
+        }
         switch(gun.getType()) { //DONT FORGET TO ACTUALLY DO THIS
             case GunLogic.GLOCK:
-                float x;
-                if (gun.getDir()) { //if facing right
-                    x = gunData.x + gunData.w;
-                } else { //if facing left
-                    x = gunData.x;
-                }
                 return new ObjectData(x, (int)(gunData.y + gunData.h / 2.0), getOtherImage(gun));
             case GunLogic.UZI:
 
@@ -42,7 +42,7 @@ public class Bullet extends MovingDirectionalMapObject {
             case GunLogic.SNIPER:
 
         }
-        return gunData = new ObjectData(5, 4, new Image("ablha"));
+        return new ObjectData(x, (int)(gunData.y + gunData.h / 2.0), getOtherImage(gun));
     }
 
     private static Image getOtherImage(Gun gun) {
