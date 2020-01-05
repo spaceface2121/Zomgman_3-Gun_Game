@@ -13,10 +13,10 @@ public class Images {
     private static final byte GUNS_START = GLOCK_R, GUNS_END = SNIPER_L;
 
 
-    private static final String P1_RIGHT_IMAGE_PATHNAME = "file:resources/player_1.jpg"; //CHANGE THE NAME NIGGUH
-    private static final String P1_LEFT_IMAGE_PATHNAME = "file:resources/player_1.jpg";
-    private static final String P2_RIGHT_IMAGE_PATHNAME = "file:resources/player_2.png";
-    private static final String P2_LEFT_IMAGE_PATHNAME = "file:resources/player_2.png";
+    private static final String P1_RIGHT_IMAGE_PATHNAME = "file:resources/player1_right.png"; //CHANGE THE NAME NIGGUH
+    private static final String P1_LEFT_IMAGE_PATHNAME = "file:resources/player1_left.png";
+    private static final String P2_RIGHT_IMAGE_PATHNAME = "file:resources/player2_right.png";
+    private static final String P2_LEFT_IMAGE_PATHNAME = "file:resources/player2_left.png";
 
 //    public static Image P1_RIGHT_IMAGE = new Image(P1_RIGHT_IMAGE_PATHNAME);
 //    public static Image P1_LEFT_IMAGE = new Image(P1_LEFT_IMAGE_PATHNAME);
