@@ -14,7 +14,7 @@ public class GunLogic {
     private static final int[] RELOAD_TIME_MILLIS = {1200, 1300, 1400, 1500, 2000, 2200, 1500};
     private static final byte[] DAMAGE_PER_HIT = {15, 5, 8, 10, 40, 20, 100};
     private static final byte[] MAG_CAPACITY = {10, 20, 25, 30, 6, 5, 5};
-    private static int[] RANGE = {640, 600, 700, 800, 900, 320, 9999999}; //not final because these will have to be scaled based on screen resolution
+    private static int[] RANGE = {640, 1000, 700, 800, 900, 320, 9999999}; //not final because these will have to be scaled based on screen resolution
 
 //    public static byte[] getVelocities(byte type, boolean dir) {
 //        if (type > X_VELS.length - 1 || type < 0) { //i just use xVels as the reference for how many types of guns there are

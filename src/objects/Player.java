@@ -79,8 +79,15 @@ public class Player extends MovingDirectionalMapObject {
     }
 
     public void shoot() {
-        shoot = true;
-        gun.fire();
+        if (shoot) {
+            switch (gun.getFireMode()) {
+                case GunLogic.BURST:
+                case GunLogic.AUTO: gun.fire(); break;
+            }
+        } else {
+            shoot = true;
+            gun.fire();
+        }
     }
 
     public void stopShooting() {
