@@ -91,10 +91,6 @@ public class Player extends MovingDirectionalMapObject {
         super.move(false);
         gun.updateCoordinates(this);
 
-        if (shoot) {
-
-        }
-
         if (falling) {
             if (CollisionLogic.collidedBottomWithBlock(getObjectData())) {
                 falling = false;

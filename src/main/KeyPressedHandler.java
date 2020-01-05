@@ -67,7 +67,7 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
                         p2.getGun().changeDirection();
                     }
                     GAME.getPlayer2().setxVel(5);
-                } else if (code == KeyCode.SHIFT) {
+                } else if (code == KeyCode.SLASH) {
                     p2.shoot();
                 }
                 break;

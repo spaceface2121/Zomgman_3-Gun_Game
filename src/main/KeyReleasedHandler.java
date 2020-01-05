@@ -46,7 +46,7 @@ public class KeyReleasedHandler implements EventHandler<KeyEvent> {
                     if (p2.getDir()) { //if player 2 is moving right
                         p2.setxVel((byte)0);
                     }
-                } else if (code == KeyCode.SHIFT) {
+                } else if (code == KeyCode.SLASH) {
                     p2.stopShooting();
                 }
                 break;
