@@ -5,6 +5,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Screen;
+import logic.GunLogic;
 import main.data.Images;
 import objects.Player;
 
@@ -52,7 +53,8 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
                     }
                     p1.setxVel(5);
                 } else if (code == KeyCode.SPACE) {
-                    p1.shoot();
+                    p1.getGun().fire();
+                    p1.setHoldingShoot(true);
                 } else if /*player2 controls \/  */ (code == KeyCode.UP) {
                     GAME.getPlayer2().jump();
                 } else if (code == KeyCode.LEFT) {
@@ -68,7 +70,12 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
                     }
                     GAME.getPlayer2().setxVel(5);
                 } else if (code == KeyCode.SLASH) {
-                    p2.shoot();
+                    p2.getGun().fire();
+                    p2.setHoldingShoot(true);
+                } else if (code == KeyCode.B) {
+                    for (int i = p2.getGun().getType(); i < GunLogic.UZI; i++) {
+                        p2.upgradeGun();
+                    }
                 }
                 break;
             case 2:

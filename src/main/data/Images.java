@@ -33,10 +33,10 @@ public class Images {
 
     private static final String GLOCK_RIGHT_IMAGE_PATHNAME = "file:resources/glock_right.png";
     private static final String GLOCK_LEFT_IMAGE_PATHNAME = "file:resources/glock_left.png";
-    private static final String UZI_RIGHT_IMAGE_PATHNAME = "file:resources/ak_right.jpeg";
-    private static final String UZI_LEFT_IMAGE_PATHNAME = "file:resources/ak_left.jpeg";
-    private static final String MP5_RIGHT_IMAGE_PATHNAME = "file:resources/mp5_r.png";
-    private static final String MP5_LEFT_IMAGE_PATHNAME = "file:resources/mp5_l.png";
+    private static final String UZI_RIGHT_IMAGE_PATHNAME = "file:resources/uzi_right.jpg";
+    private static final String UZI_LEFT_IMAGE_PATHNAME = "file:resources/uzi_left.jpg";
+    private static final String MP5_RIGHT_IMAGE_PATHNAME = "file:resources/mp5_right.jpg";
+    private static final String MP5_LEFT_IMAGE_PATHNAME = "file:resources/mp5_left.jpg";
     private static final String AK_RIGHT_IMAGE_PATHNAME = "file:resources/ak_right.jpeg";
     private static final String AK_LEFT_IMAGE_PATHNAME = "file:resources/ak_left.jpeg";
     private static final String REVOLVER_RIGHT_IMAGE_PATHNAME = "file:resources/revolver_r.png";

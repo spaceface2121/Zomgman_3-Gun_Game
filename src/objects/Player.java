@@ -12,8 +12,9 @@ public class Player extends MovingDirectionalMapObject {
     private byte health;
     private byte points;
 
-    private boolean shoot = false, falling = false;
+    private boolean falling = false;
     private boolean player1or2;
+    private boolean holdingShoot = false;
 
     private byte timesJumped = 0;
 
@@ -78,22 +79,6 @@ public class Player extends MovingDirectionalMapObject {
         }
     }
 
-    public void shoot() {
-        if (shoot) {
-            switch (gun.getFireMode()) {
-                case GunLogic.BURST:
-                case GunLogic.AUTO: gun.fire(); break;
-            }
-        } else {
-            shoot = true;
-            gun.fire();
-        }
-    }
-
-    public void stopShooting() {
-        shoot = false;
-    }
-
     public void move() {
         super.move(false);
         gun.updateCoordinates(this);
@@ -113,6 +98,11 @@ public class Player extends MovingDirectionalMapObject {
         }
     }
 
+    public void update() {
+        move();
+        //more will be added potentially
+    }
+
     public Gun getGun() {
         return gun;
     }
@@ -121,11 +111,15 @@ public class Player extends MovingDirectionalMapObject {
         return health;
     }
 
-    public boolean isShooting() {
-        return shoot;
-    }
-
     public boolean isPlayer1or2() {
         return player1or2;
+    }
+
+    public void setHoldingShoot(boolean holdingShoot) {
+        this.holdingShoot = holdingShoot;
+    }
+
+    public boolean isHoldingShoot() {
+        return holdingShoot;
     }
 }

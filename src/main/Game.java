@@ -98,10 +98,10 @@ public class Game extends Application {
                                 case 0:
                                     break;
                                 case 1:
-                                    player1.move();
-                                    player2.move();
-                                    player1.getGun().moveBullets();
-                                    player2.getGun().moveBullets();
+                                    player1.update();
+                                    player2.update();
+                                    player1.getGun().update();
+                                    player2.getGun().update();
                                     Render.drawGame();
                                     break;
                                 case 2:

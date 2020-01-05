@@ -1,6 +1,7 @@
 package objects;
 
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import logic.CollisionLogic;
 import logic.GunLogic;
@@ -12,9 +13,11 @@ import java.util.ArrayList;
 
 public class Gun extends DirectionalMapObject {
     private byte type, fireMode, ammoRemaining, numSuccessiveRoundsFired;
-    private int delay;
+    private int delayBetweenShots;
     private long timeAtLastShot = 0;
+    private long timeAtLastPress = 0;
     private boolean player1or2; //who this gun belongs to
+    private boolean firing = false;
 
     private ArrayList<Bullet> bullets;
 
@@ -52,34 +55,69 @@ public class Gun extends DirectionalMapObject {
     private void setGunProperties() {
         fireMode = GunLogic.getFireMode(type); // 0 = semi, 1 = burst, 2 = auto, 3 = shotgun
         ammoRemaining = GunLogic.getMagCapacity(type);
-        delay = GunLogic.getDelayBetweenShots(type);
+        delayBetweenShots = GunLogic.getDelayBetweenShots(type);
     }
 
 
     public void fire() {
+        System.out.println("firing: " + firing + " num: " + numSuccessiveRoundsFired);
         long currTime = System.currentTimeMillis();
+        if (firing) {
+            switch (fireMode) {
+                case GunLogic.SEMI:
+                case GunLogic.BUCKSHOT: return;
+            }
+        } else if (currTime - timeAtLastPress >= GunLogic.BURST_DELAY){
+            firing = true;
+        }
+
         switch (fireMode) {
-            case GunLogic.SEMI:
-            case GunLogic.BURST:
-//                if (numSuccessiveRoundsFired >= 3) {
-//                    break;
-//                }
-            case GunLogic.AUTO:
-                if (currTime - timeAtLastShot > delay) {
-                    bullets.add(new Bullet(this));
-                    timeAtLastShot = currTime;
-                }
-                break;
             case GunLogic.BUCKSHOT:
                 for (int i = -1; i <= 1; i++) {
                     Bullet bullet = new Bullet(this);
                     bullet.setyVel((byte)i);
                     bullets.add(bullet);
                 } break;
+
+            case GunLogic.BURST:
+                System.out.println("in burst fire");
+                if (numSuccessiveRoundsFired >= 3) {
+                    if (player1or2 && Main.getGame().getPlayer1().isHoldingShoot() || !player1or2 && Main.getGame().getPlayer2().isHoldingShoot()) {
+                        System.out.println("holding shoot");
+                        return;
+                    } else {
+                        stopFiring();
+                        break;
+                    }
+                } else if (numSuccessiveRoundsFired == 0 && currTime - timeAtLastPress < GunLogic.BURST_DELAY) {
+                    return;
+                }
+
+            case GunLogic.SEMI:
+            case GunLogic.AUTO:
+                System.out.println("delay: " + delayBetweenShots + " curr - last: " + (currTime - timeAtLastShot));
+                if (currTime - timeAtLastShot > delayBetweenShots) {
+                    bullets.add(new Bullet(this));
+                    numSuccessiveRoundsFired++;
+                    timeAtLastShot = currTime;
+                }
+                break;
         }
     }
 
-    public void moveBullets() {
+    public void stopFiring() {
+        System.out.println("sf");
+        if (firing) {
+            timeAtLastPress = System.currentTimeMillis();
+        }
+        if (!(fireMode == GunLogic.BURST && numSuccessiveRoundsFired < 3)) {
+            firing = false;
+            numSuccessiveRoundsFired = 0;
+            System.out.println("stopped firing: " + firing + " num: " + numSuccessiveRoundsFired);
+        }
+    }
+
+    private void moveBullets() {
         for (int i = 0; i < bullets.size(); i++) {
             Bullet bullet = bullets.get(i);
             Player playerToTakeDamage, thisPlayer;
@@ -103,6 +141,13 @@ public class Gun extends DirectionalMapObject {
             } else {
                 bullet.move();
             }
+        }
+    }
+
+    public void update() {
+        moveBullets();
+        if (firing) {
+            fire();
         }
     }
 

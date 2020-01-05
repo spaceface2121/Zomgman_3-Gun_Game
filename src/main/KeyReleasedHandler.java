@@ -35,7 +35,9 @@ public class KeyReleasedHandler implements EventHandler<KeyEvent> {
                         p1.setxVel((byte)0);
                     }
                 } else if (code == KeyCode.SPACE) {
-                    p1.stopShooting();
+                    System.out.println("space released");
+                    p1.getGun().stopFiring();
+                    p1.setHoldingShoot(false);
                 } else if /*player2 controls \/  */ (code == KeyCode.UP) {
 
                 } else if (code == KeyCode.LEFT) {
@@ -47,7 +49,9 @@ public class KeyReleasedHandler implements EventHandler<KeyEvent> {
                         p2.setxVel((byte)0);
                     }
                 } else if (code == KeyCode.SLASH) {
-                    p2.stopShooting();
+                    System.out.println("slash released");
+                    p2.getGun().stopFiring();
+                    p2.setHoldingShoot(false);
                 }
                 break;
             case 2:
