@@ -5,10 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import main.data.Map;
 import main.data.ObjectData;
-import objects.Bullet;
-import objects.Gun;
-import objects.MapObject;
-import objects.Player;
+import objects.*;
 
 import java.util.ArrayList;
 
@@ -37,6 +34,14 @@ public class Render {
 
         graphicsContext.drawImage(player1.getObjectData().image, player1.getObjectData().x, player1.getObjectData().y);
         graphicsContext.drawImage(player2.getObjectData().image, player2.getObjectData().x, player2.getObjectData().y);
+
+        // draws hands
+        Hand hand1r = player1.getHand(false), hand1l = player1.getHand(true), hand2r = player2.getHand(false), hand2l = player2.getHand(true);
+
+        graphicsContext.drawImage(hand1r.getObjectData().image, hand1r.getObjectData().x, hand1r.getObjectData().y);
+        graphicsContext.drawImage(hand1l.getObjectData().image, hand1l.getObjectData().x, hand1l.getObjectData().y);
+        graphicsContext.drawImage(hand2r.getObjectData().image, hand2r.getObjectData().x, hand2r.getObjectData().y);
+        graphicsContext.drawImage(hand2l.getObjectData().image, hand2l.getObjectData().x, hand2l.getObjectData().y);
 
         // draws guns and their respective bullets
         Gun gun1 = player1.getGun(), gun2 = player2.getGun();

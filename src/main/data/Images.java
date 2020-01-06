@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class Images {
     public static final byte P1_R = 0, P1_L = 1, P2_R = 2, P2_L = 3, BLOCK = 4, GLOCK_R = 5, GLOCK_L = 6, UZI_R = 7, UZI_L = 8, MP5_R = 9, MP5_L = 10, AK_R = 11, AK_L = 12,
                             REVOLVER_R = 13, REVOLVER_L = 14, SHOTGUN_R = 15, SHOTGUN_L = 16, SNIPER_R = 17, SNIPER_L = 18, LIGHT_BULLET_R = 19, LIGHT_BULLET_L = 20,
-                            STANDARD_BULLET_R = 21, STANDARD_BULLET_L = 22, HEAVY_BULLET_R = 23, HEAVY_BULLET_L = 24, GHOST_R = 25, GHOST_L = 26;
+                            STANDARD_BULLET_R = 21, STANDARD_BULLET_L = 22, HEAVY_BULLET_R = 23, HEAVY_BULLET_L = 24, HAND1 = 25, HAND2 = 26;
 
     private static final byte GUNS_START = GLOCK_R, GUNS_END = SNIPER_L;
 
@@ -70,8 +70,8 @@ public class Images {
     private static final String HEAVY_BULLET_RIGHT_IMAGE_PATHNAME = "file:resources/bullet.jpg";
     private static final String HEAVY_BULLET_LEFT_IMAGE_PATHNAME = "file:resources/bullet.jpg";
 
-    private static final String GHOST_RIGHT_IMAGE_PATHNAME = "file:resources/ghostr.png";
-    private static final String GHOST_LEFT_IMAGE_PATHNAME = "file:resources/ghostl.png";
+    private static final String HAND1_IMAGE_PATHNAME = "file:resources/hand1.png";
+    private static final String HAND2_IMAGE_PATHNAME = "file:resources/hand2.png";
 
 
 
@@ -89,7 +89,7 @@ public class Images {
             MP5_RIGHT_IMAGE_PATHNAME, MP5_LEFT_IMAGE_PATHNAME, AK_RIGHT_IMAGE_PATHNAME, AK_LEFT_IMAGE_PATHNAME, REVOLVER_RIGHT_IMAGE_PATHNAME, REVOLVER_LEFT_IMAGE_PATHNAME,
             SHOTGUN_RIGHT_IMAGE_PATHNAME, SHOTGUN_LEFT_IMAGE_PATHNAME, SNIPER_RIGHT_IMAGE_PATHNAME, SNIPER_LEFT_IMAGE_PATHNAME, LIGHT_BULLET_RIGHT_IMAGE_PATHNAME,
             LIGHT_BULLET_LEFT_IMAGE_PATHNAME, STANDARD_BULLET_RIGHT_IMAGE_PATHNAME, STANDARD_BULLET_LEFT_IMAGE_PATHNAME, HEAVY_BULLET_RIGHT_IMAGE_PATHNAME,
-            HEAVY_BULLET_LEFT_IMAGE_PATHNAME, GHOST_RIGHT_IMAGE_PATHNAME, GHOST_LEFT_IMAGE_PATHNAME));
+            HEAVY_BULLET_LEFT_IMAGE_PATHNAME, HAND1_IMAGE_PATHNAME, HAND2_IMAGE_PATHNAME));
 
     private static ArrayList<Image> images = new ArrayList<>();
 

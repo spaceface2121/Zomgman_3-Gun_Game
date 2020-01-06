@@ -1,4 +1,4 @@
-package objects;
+/*package objects;
 
 import javafx.scene.image.Image;
 import main.data.Images;
@@ -24,4 +24,4 @@ public class Ghost extends MovingDirectionalMapObject {
             return Images.getImages().get(Images.GHOST_R);
         }
     }
-}
+}*/

@@ -34,10 +34,10 @@ public class Gun extends DirectionalMapObject {
         float x;
         Image image;
         if (player.getDir()) { //if the player is facing right
-            x = playerData.x + playerData.w - 5;
+            x = playerData.x + playerData.w - 7;
             image = Images.getImages().get(Images.GLOCK_R);
         } else { //if facing left
-            x = playerData.x + 5;
+            x = playerData.x + 7;
             image = Images.getImages().get(Images.GLOCK_L);
         }
         return new ObjectData(x, (float)(playerData.y + 1.0 / 3 * playerData.h), image);
