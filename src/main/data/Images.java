@@ -39,12 +39,12 @@ public class Images {
     private static final String MP5_LEFT_IMAGE_PATHNAME = "file:resources/mp5_left.jpg";
     private static final String AK_RIGHT_IMAGE_PATHNAME = "file:resources/ak_right.jpeg";
     private static final String AK_LEFT_IMAGE_PATHNAME = "file:resources/ak_left.jpeg";
-    private static final String REVOLVER_RIGHT_IMAGE_PATHNAME = "file:resources/revolver_r.png";
-    private static final String REVOLVER_LEFT_IMAGE_PATHNAME = "file:resources/revolver_l.png";
-    private static final String SHOTGUN_RIGHT_IMAGE_PATHNAME = "file:resources/shotgun_r.png";
-    private static final String SHOTGUN_LEFT_IMAGE_PATHNAME = "file:resources/shotgun_l.png";
-    private static final String SNIPER_RIGHT_IMAGE_PATHNAME = "file:resources/sniper_r.png";
-    private static final String SNIPER_LEFT_IMAGE_PATHNAME = "file:resources/sniper_l.png";
+    private static final String REVOLVER_RIGHT_IMAGE_PATHNAME = "file:resources/revolver_right.jpg";
+    private static final String REVOLVER_LEFT_IMAGE_PATHNAME = "file:resources/revolver_left.jpg";
+    private static final String SHOTGUN_RIGHT_IMAGE_PATHNAME = "file:resources/shotgun_right.png";
+    private static final String SHOTGUN_LEFT_IMAGE_PATHNAME = "file:resources/shotgun_left.png";
+    private static final String SNIPER_RIGHT_IMAGE_PATHNAME = "file:resources/sniper_right.png";
+    private static final String SNIPER_LEFT_IMAGE_PATHNAME = "file:resources/sniper_left.png";
 
 //    public static Image GLOCK_RIGHT_IMAGE = new Image (GLOCK_RIGHT_IMAGE_PATHNAME);
 //    public static Image GLOCK_LEFT_IMAGE = new Image (GLOCK_LEFT_IMAGE_PATHNAME);
