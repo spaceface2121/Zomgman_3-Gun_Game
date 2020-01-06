@@ -28,12 +28,14 @@ public class KeyReleasedHandler implements EventHandler<KeyEvent> {
 
                 } else if (code == KeyCode.A) {
                     if (!p1.getDir()) { //if player 1 is moving left
-                        p1.setxVel((byte)0);
+                        //p1.setxVel((byte)0);
                     }
+                    p1.setStrafing(false);
                 } else if (code == KeyCode.D) {
                     if (p1.getDir()) { //if player 1 is moving right
-                        p1.setxVel((byte)0);
+                        //p1.setxVel((byte)0);
                     }
+                    p1.setStrafing(false);
                 } else if (code == KeyCode.SPACE) {
                     System.out.println("space released");
                     p1.getGun().stopFiring();
@@ -42,12 +44,14 @@ public class KeyReleasedHandler implements EventHandler<KeyEvent> {
 
                 } else if (code == KeyCode.LEFT) {
                     if (!p2.getDir()) { //if player 2 is moving left
-                        p2.setxVel((byte)0);
+                        //p2.setxVel((byte)0);
                     }
+                    p2.setStrafing(false);
                 } else if (code ==  KeyCode.RIGHT) {
                     if (p2.getDir()) { //if player 2 is moving right
-                        p2.setxVel((byte)0);
+                        //p2.setxVel((byte)0);
                     }
+                    p2.setStrafing(false);
                 } else if (code == KeyCode.SLASH) {
                     System.out.println("slash released");
                     p2.getGun().stopFiring();

@@ -46,13 +46,31 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
                         p1.changeDirection();
                         p1.getGun().changeDirection();
                     }
-                    p1.setxVel(-PlayerLogic.getxVel());
+                    if (p1.getxVel() != PlayerLogic.getxVel()) {
+                        if (p1.getxVel() > -PlayerLogic.getMinXVel()) {
+                            p1.setxVel(-PlayerLogic.getMinXVel());
+                        } else if (p1.getxVel() > PlayerLogic.getxAcceleration() - PlayerLogic.getxVel()) {
+                            p1.setxVel(p1.getxVel() - PlayerLogic.getxAcceleration());
+                        } else {
+                            p1.setxVel(-PlayerLogic.getxVel());
+                        }
+                    }
+                    p1.setStrafing(true);
                 } else if (code == KeyCode.D) {
                     if (!p1.getDir()) { //if player 1 is moving left
                         p1.changeDirection();
                         p1.getGun().changeDirection();
                     }
-                    p1.setxVel(PlayerLogic.getxVel());
+                    if (p1.getxVel() != -PlayerLogic.getxVel()) {
+                        if (p1.getxVel() < PlayerLogic.getMinXVel()) {
+                            p1.setxVel(PlayerLogic.getMinXVel());
+                        } else if (p1.getxVel() < PlayerLogic.getxVel() - PlayerLogic.getxAcceleration()) {
+                            p1.setxVel(p1.getxVel() + PlayerLogic.getxAcceleration());
+                        } else {
+                            p1.setxVel(PlayerLogic.getxVel());
+                        }
+                    }
+                    p1.setStrafing(true);
                 } else if (code == KeyCode.SPACE) {
                     p1.getGun().fire();
                     p1.setHoldingShoot(true);
@@ -64,12 +82,14 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
                         p2.getGun().changeDirection();
                     }
                     p2.setxVel(-PlayerLogic.getxVel());
+                    p2.setStrafing(true);
                 } else if (code ==  KeyCode.RIGHT) {
                     if (!p2.getDir()) { //if player 2 is moving right
                         p2.changeDirection();
                         p2.getGun().changeDirection();
                     }
                     p2.setxVel(PlayerLogic.getxVel());
+                    p2.setStrafing(true);
                 } else if (code == KeyCode.SLASH) {
                     p2.getGun().fire();
                     p2.setHoldingShoot(true);

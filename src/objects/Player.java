@@ -5,6 +5,7 @@ import logic.CollisionLogic;
 import logic.GunLogic;
 import logic.PlayerLogic;
 import main.Game;
+import main.KeyPressedHandler;
 import main.Main;
 import main.data.Images;
 import main.data.ObjectData;
@@ -16,6 +17,7 @@ public class Player extends MovingDirectionalMapObject {
     private byte points;
 
     private boolean falling = false;
+    private boolean strafing = false;
     private boolean player1or2;
     private boolean holdingShoot = false;
 
@@ -93,6 +95,9 @@ public class Player extends MovingDirectionalMapObject {
             case 0:
             case 1:
                 setyVel(PlayerLogic.getyVel());
+                if (CollisionLogic.collidedRightWithBlock(getObjectData()) || CollisionLogic.collidedLeftWithBlock(getObjectData())) {
+                    setxVel(-getxVel());
+                }
                 timesJumped++; break;
         }
     }
@@ -110,14 +115,33 @@ public class Player extends MovingDirectionalMapObject {
                 timesJumped = 0;
             } else if (CollisionLogic.collidedTopWithBlock(getObjectData()) || CollisionLogic.collidedTopWithPlayer(getObjectData(), player1or2) || getObjectData().y <= 0) {
                 setyVel((float) (-0.5 * getyVel() + 0.01)); //glue on ceiling
-            } else if (CollisionLogic.collidedRightWithBlock(getObjectData()) || CollisionLogic.collidedRight(getObjectData(), getOtherPlayer().getObjectData()) || CollisionLogic.collidedLeftWithBlock(getObjectData()) || CollisionLogic.collidedLeft(getObjectData(), getOtherPlayer().getObjectData())) {
+            } else if (CollisionLogic.collidedRightWithBlock(getObjectData()) || CollisionLogic.collidedLeftWithBlock(getObjectData())) {
+                setyVel(getyVel() + PlayerLogic.getyAcceleration());
                 timesJumped = 0;
             } else {
                 setyVel(getyVel() + PlayerLogic.getyAcceleration());
             }
-        } else if (!CollisionLogic.collidedBottomWithBlock(getObjectData())) {
-                falling = true;
+        } else if (!(CollisionLogic.collidedBottomWithBlock(getObjectData()) && CollisionLogic.collidedBottom(getObjectData(), getOtherPlayer().getObjectData()))) {
+            falling = true;
         }
+
+        if (!strafing && !falling && Math.abs(getxVel()) > 0) {
+            setxVel(getxVel()*(float)0.6);
+        } else if (!strafing && falling && Math.abs(getxVel()) > 0) {
+            setxVel(getxVel()*(float)0.9);
+        }
+    }
+
+    public boolean isFalling() {
+        return falling;
+    }
+
+    public boolean getStrafing() {
+        return strafing;
+    }
+
+    public void setStrafing(boolean s) {
+        strafing = s;
     }
 
     private Player getOtherPlayer() {
