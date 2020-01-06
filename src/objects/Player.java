@@ -5,6 +5,7 @@ import logic.CollisionLogic;
 import logic.GunLogic;
 import logic.PlayerLogic;
 import main.Game;
+import main.Main;
 import main.data.Images;
 import main.data.ObjectData;
 
@@ -108,12 +109,22 @@ public class Player extends MovingDirectionalMapObject {
                 setyVel(0);
                 timesJumped = 0;
             } else if (CollisionLogic.collidedTopWithBlock(getObjectData()) || CollisionLogic.collidedTopWithPlayer(getObjectData(), player1or2) || getObjectData().y <= 0) {
-                setyVel((float)(-0.5 * getyVel() + 0.01)); //glue on ceiling
+                setyVel((float) (-0.5 * getyVel() + 0.01)); //glue on ceiling
+            } else if (CollisionLogic.collidedRightWithBlock(getObjectData()) || CollisionLogic.collidedRight(getObjectData(), getOtherPlayer().getObjectData()) || CollisionLogic.collidedLeftWithBlock(getObjectData()) || CollisionLogic.collidedLeft(getObjectData(), getOtherPlayer().getObjectData())) {
+                timesJumped = 0;
             } else {
                 setyVel(getyVel() + PlayerLogic.getyAcceleration());
             }
         } else if (!CollisionLogic.collidedBottomWithBlock(getObjectData())) {
-            falling = true;
+                falling = true;
+        }
+    }
+
+    private Player getOtherPlayer() {
+        if (player1or2) {
+            return Main.getGame().getPlayer2();
+        } else {
+            return Main.getGame().getPlayer1();
         }
     }
 
