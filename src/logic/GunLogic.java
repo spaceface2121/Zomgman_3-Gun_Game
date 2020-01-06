@@ -8,9 +8,9 @@ public class GunLogic {
     public static final byte SEMI = 0, BURST = 1, AUTO = 2, BUCKSHOT = 3;
     public static final byte GLOCK = 0, UZI = 1, MP5 = 2, AK = 3, REVOLVER = 4, SHOTGUN = 5, SNIPER = 6;
 
-    private static final byte[] X_VELS = {8, 10, 12, 15, 15, 13, 20};
+    private static byte[] X_VELS = {8, 10, 12, 15, 15, 13, 20};
     private static final byte[] FIRE_MODES = {SEMI, BURST, AUTO, AUTO, SEMI, BUCKSHOT, SEMI};
-    private static final int[] SHOT_DELAY_MILLIS = {75, 50, 75, 120, 800, 1200, 1500};
+    private static final int[] SHOT_DELAY_MILLIS = {75, 50, 75, 120, 800, 800, 1500};
     private static final int[] RELOAD_TIME_MILLIS = {1200, 1300, 1400, 1500, 2000, 2200, 1500};
     private static final byte[] DAMAGE_PER_HIT = {15, 12, 12, 20, 40, 20, 50};
     private static final byte[] MAG_CAPACITY = {10, 20, 25, 30, 6, 5, 5};
@@ -56,8 +56,8 @@ public class GunLogic {
         switch (type) {
             case GLOCK:
             case MP5:
-            case AK: return (float)(Math.random() - 0.5);
             case UZI: return (float)(Math.random() * 2 - 1);
+            case AK: return (float)(Math.random() - 0.5);
             case REVOLVER:
             case SNIPER:
             case SHOTGUN: return 0;
@@ -93,9 +93,13 @@ public class GunLogic {
         throw new IllegalArgumentException("Invalid gun type: type = " + type);
     }
 
-    public static void generateScaledRanges(double scaleX) {
+    public static void generateScaledProperties(double scaleX) {
         for (int i = 0; i < RANGE.length; i++) {
             RANGE[i] = (int)(RANGE[i] * scaleX);
+        }
+
+        for (int i = 0; i < X_VELS.length; i++) {
+            X_VELS[i] = (byte)(X_VELS[i] * scaleX);
         }
     }
 }

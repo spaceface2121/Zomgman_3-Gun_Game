@@ -15,4 +15,11 @@ public class ObjectData {
         h = (byte)image.getHeight();
         this.image = image;
     }
+
+    public boolean equals(Object object) {
+        if (object instanceof ObjectData) {
+            return x == ((ObjectData)object).x && y == ((ObjectData)object).y && image == ((ObjectData)object).image;
+        }
+        throw new ClassCastException("object passed in is not ObjectData");
+    }
 }

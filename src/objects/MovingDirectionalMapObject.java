@@ -24,8 +24,8 @@ public class MovingDirectionalMapObject extends DirectionalMapObject {
 //            data.y += yVel;
 //        }
 
-        data.x += CollisionLogic.willCollideHorizontallyWithBlock(data, xVel);
-        data.y += CollisionLogic.willCollideVerticallyWithBlock(data, yVel);
+        data.x += CollisionLogic.willCollideHorizontallyWithObject(data, xVel);
+        data.y += CollisionLogic.willCollideVerticallyWithObject(data, yVel);
 
         if (!allowOutOfBounds) {
             if (data.x < 0) {

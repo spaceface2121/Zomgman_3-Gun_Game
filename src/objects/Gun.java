@@ -34,11 +34,11 @@ public class Gun extends DirectionalMapObject {
         float x;
         Image image;
         if (player.getDir()) { //if the player is facing right
-            x = playerData.x + playerData.w - 7;
             image = Images.getImages().get(Images.GLOCK_R);
+            x = playerData.x + playerData.w - 2;
         } else { //if facing left
-            x = playerData.x + 7;
             image = Images.getImages().get(Images.GLOCK_L);
+            x = (float)(playerData.x - image.getWidth() + 2);
         }
         return new ObjectData(x, (float)(playerData.y + 1.0 / 3 * playerData.h), image);
     }
@@ -60,7 +60,7 @@ public class Gun extends DirectionalMapObject {
 
 
     public void fire() {
-        System.out.println("firing: " + firing + " num: " + numSuccessiveRoundsFired);
+        //System.out.println("firing: " + firing + " num: " + numSuccessiveRoundsFired);
         long currTime = System.currentTimeMillis();
         if (firing) {
             switch (fireMode) {
@@ -73,10 +73,15 @@ public class Gun extends DirectionalMapObject {
 
         switch (fireMode) {
             case GunLogic.BUCKSHOT:
-                for (int i = -1; i <= 1; i++) {
-                    Bullet bullet = new Bullet(this);
-                    bullet.setyVel((byte)i);
-                    bullets.add(bullet);
+                System.out.println("in buckshot");
+                System.out.println("delay: " + delayBetweenShots + " curr - last: " + (currTime - timeAtLastShot));
+                if (currTime - timeAtLastShot > delayBetweenShots) {
+                    for (int i = -1; i <= 1; i++) {
+                        Bullet bullet = new Bullet(this);
+                        bullet.setyVel((byte)i);
+                        bullets.add(bullet);
+                        timeAtLastShot = currTime;
+                    }
                 } break;
 
             case GunLogic.BURST:
@@ -204,9 +209,9 @@ public class Gun extends DirectionalMapObject {
 
     public void updateCoordinates(Player player) {
         if (player.getDir()) { //if facing right
-            getObjectData().x = player.getObjectData().x + player.getObjectData().w - 5;
+            getObjectData().x = player.getObjectData().x + player.getObjectData().w - 2;
         } else { //if facing left
-            getObjectData().x = player.getObjectData().x + 5;
+            getObjectData().x = (float)(player.getObjectData().x - getObjectData().image.getWidth() + 2);
         }
         getObjectData().y = (int)(player.getObjectData().y + 1.0 / 3 * player.getObjectData().h);
     }

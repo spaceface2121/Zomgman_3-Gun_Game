@@ -1,13 +1,17 @@
 package logic;
 
+import main.Main;
 import main.data.Map;
 import main.data.ObjectData;
 import objects.MapObject;
+import objects.Player;
 
+import java.rmi.server.RemoteObjectInvocationHandler;
 import java.util.ArrayList;
 
 public class CollisionLogic {
     private static ArrayList<MapObject> blocks = Map.getBlocks();
+    private static Player[] players = {Main.getGame().getPlayer1(), Main.getGame().getPlayer2()};
 
     private static boolean intersectsOnHorizontalPlane(ObjectData object1Data, ObjectData object2Data) {
         return object2Data.y - object1Data.y < object1Data.h && object1Data.y - object2Data.y < object2Data.h;
@@ -106,7 +110,29 @@ public class CollisionLogic {
 
 
 
-    public static float willCollideHorizontallyWithBlock(ObjectData objectData, float xVel) { //returns the maximum displacement without clipping into a block
+    public static boolean collidedTopWithPlayer(ObjectData objectData, boolean player1or2) { //player1or2 is THIS player, not the one we check collision with
+        ObjectData otherPlayerData;
+        if (player1or2) { //if p1
+            otherPlayerData = Main.getGame().getPlayer2().getObjectData();
+        } else { //if p2
+            otherPlayerData = Main.getGame().getPlayer1().getObjectData();
+        }
+        return collidedTop(objectData, otherPlayerData);
+    }
+
+    public static boolean collidedBottomWithPlayer(ObjectData objectData, boolean player1or2) { //player1or2 is THIS player, not the one we check collision with
+        ObjectData otherPlayerData;
+        if (player1or2) { //if p1
+            otherPlayerData = Main.getGame().getPlayer2().getObjectData();
+        } else { //if p2
+            otherPlayerData = Main.getGame().getPlayer1().getObjectData();
+        }
+        return collidedBottom(objectData, otherPlayerData);
+    }
+
+
+
+    public static float willCollideHorizontallyWithObject(ObjectData objectData, float xVel) { //returns the maximum displacement without clipping into a block
         ObjectData changedObjectData = new ObjectData(objectData.x + xVel, objectData.y, objectData.image);
         for (MapObject block : blocks) {
             if (xVel > 0) { //moving right
@@ -121,10 +147,28 @@ public class CollisionLogic {
                 }
             }
         }
+
+        for (Player player : players) {
+            if (objectData.equals(player.getObjectData())) {
+                continue;
+            }
+
+            if (xVel > 0) { //moving right
+                if (collidedRight(changedObjectData, player.getObjectData())) {
+                    System.out.println("returned yVel: " + (player.getObjectData().x - objectData.x - objectData.w));
+                    return player.getObjectData().x - objectData.x - objectData.w;
+                }
+            } else { //moving left
+                if (collidedLeft(changedObjectData, player.getObjectData())) {
+                    System.out.println("returned yVel: " + (player.getObjectData().x - objectData.x + player.getObjectData().w));
+                    return player.getObjectData().x - objectData.x + player.getObjectData().w;
+                }
+            }
+        }
         return xVel;
     }
 
-    public static float willCollideVerticallyWithBlock(ObjectData objectData, float yVel) {
+    public static float willCollideVerticallyWithObject(ObjectData objectData, float yVel) {
         ObjectData changedObjectData = new ObjectData(objectData.x, objectData.y + yVel, objectData.image);
         for (MapObject block : blocks) {
             if (yVel > 0) { //moving down
@@ -136,6 +180,24 @@ public class CollisionLogic {
                 if (collidedTop(changedObjectData, block.getObjectData())) {
                     System.out.println("returned yVel: " + (block.getObjectData().y - objectData.y - block.getObjectData().h));
                     return block.getObjectData().y - objectData.y + block.getObjectData().h;
+                }
+            }
+        }
+
+        for (Player player : players) {
+            if (objectData.equals(player.getObjectData())) {
+                continue;
+            }
+
+            if (yVel > 0) { //moving down
+                if (collidedBottom(changedObjectData, player.getObjectData())) {
+                    System.out.println("returned yVel: " + (player.getObjectData().y - objectData.y - player.getObjectData().h));
+                    return player.getObjectData().y - objectData.y - player.getObjectData().h;
+                }
+            } else { //moving up
+                if (collidedTop(changedObjectData, player.getObjectData())) {
+                    System.out.println("returned yVel: " + (player.getObjectData().y - objectData.y - player.getObjectData().h));
+                    return player.getObjectData().y - objectData.y + player.getObjectData().h;
                 }
             }
         }

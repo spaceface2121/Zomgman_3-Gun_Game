@@ -76,14 +76,24 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
                     for (int i = p2.getGun().getType(); i < GunLogic.UZI; i++) {
                         p2.upgradeGun();
                     }
+                } else if (code == KeyCode.DIGIT1) {
+                    p1.downgradeGun();
+                } else if (code == KeyCode.DIGIT2) {
+                    p1.upgradeGun();
+                } else if (code == KeyCode.DIGIT9) {
+                    p2.downgradeGun();
+                } else if (code == KeyCode.DIGIT0) {
+                    p2.upgradeGun();
                 }
                 break;
             case 2:
-                if (code == KeyCode.ESCAPE) {
+                if (code == KeyCode.ENTER) {
                     GAME.setScreen((byte)1);
                     maximize();
                     Render.drawGame();
                     System.out.println("screen: " + GAME.getScreen());
+                } else {
+                    //blah
                 }
                 break;
             case 3: break;
@@ -91,7 +101,7 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
     }
 
     private void minimize() {
-        GAME.getStage().setMaximized(false);
+        //GAME.getStage().setMaximized(false);
         GAME.getStage().setFullScreen(false);
         GAME.getStage().setHeight(GAME.h);
         GAME.getStage().setWidth(GAME.w);
@@ -100,7 +110,7 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
     }
 
     private void maximize() {
-        GAME.getStage().setMaximized(true);
+        //GAME.getStage().setMaximized(true);
         GAME.getStage().setFullScreen(true);
         GAME.getStage().setHeight(GAME.fullH);
         GAME.getStage().setWidth(GAME.fullW);

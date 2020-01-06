@@ -97,11 +97,11 @@ public class Player extends MovingDirectionalMapObject {
         leftHand.updateCoordinates(this, true);
 
         if (falling) {
-            if (CollisionLogic.collidedBottomWithBlock(getObjectData())) {
+            if (CollisionLogic.collidedBottomWithBlock(getObjectData()) || CollisionLogic.collidedBottomWithPlayer(getObjectData(), player1or2)) {
                 falling = false;
                 setyVel(0);
                 timesJumped = 0;
-            } else if (CollisionLogic.collidedTopWithBlock(getObjectData()) || getObjectData().y <= 0) {
+            } else if (CollisionLogic.collidedTopWithBlock(getObjectData()) || CollisionLogic.collidedTopWithPlayer(getObjectData(), player1or2) || getObjectData().y <= 0) {
                 setyVel((float)(- 0.5 * getyVel() + 0.01)); //glue on ceiling
             } else {
                 setyVel((float)(getyVel() + 0.5));
