@@ -8,6 +8,7 @@ import main.data.Images;
 import main.data.ObjectData;
 
 public class Player extends MovingDirectionalMapObject {
+    private Hand rightHand, leftHand;
     private Gun gun;
     private byte health;
     private byte points;
@@ -26,6 +27,8 @@ public class Player extends MovingDirectionalMapObject {
         this.player1or2 = player1or2;
         //make sure player1or2 is set before making the gun
         gun = new Gun(this);
+        rightHand = new Hand(this, false);
+        leftHand = new Hand(this, true);
     }
 
     //gets initial player data based on which player it is
@@ -42,6 +45,14 @@ public class Player extends MovingDirectionalMapObject {
             return Images.getImages().get(Images.P1_L);
         } else {
             return Images.getImages().get(Images.P2_R);
+        }
+    }
+
+    public Hand getHand(boolean dir) {
+        if (dir) {
+            return leftHand;
+        } else {
+            return rightHand;
         }
     }
 
@@ -82,6 +93,8 @@ public class Player extends MovingDirectionalMapObject {
     public void move() {
         super.move(false);
         gun.updateCoordinates(this);
+        rightHand.updateCoordinates(this, false);
+        leftHand.updateCoordinates(this, true);
 
         if (falling) {
             if (CollisionLogic.collidedBottomWithBlock(getObjectData())) {
