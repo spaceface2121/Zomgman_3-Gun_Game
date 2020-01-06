@@ -141,4 +141,11 @@ public class Player extends MovingDirectionalMapObject {
     public boolean isHoldingShoot() {
         return holdingShoot;
     }
+
+    public void addHealth(byte additionalHealth) {
+        health += additionalHealth;
+        if (health > 100) {
+            health = 100;
+        }
+    }
 }

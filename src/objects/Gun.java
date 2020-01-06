@@ -128,9 +128,10 @@ public class Gun extends DirectionalMapObject {
             Player playerToTakeDamage, thisPlayer;
 
             if (player1or2) { //if this gun (and subsequently these bullets) belong to player 1
+                thisPlayer = Main.getGame().getPlayer1();
                 playerToTakeDamage = Main.getGame().getPlayer2();
             } else { //if player 2
-                thisPlayer = Main.getGame().getPlayer1();
+                thisPlayer = Main.getGame().getPlayer2();
                 playerToTakeDamage = Main.getGame().getPlayer1(); //you may notice that im getting the "wrong" player here but this is actually the player i wanna check for collision with the bullets
             }
 
@@ -138,6 +139,8 @@ public class Gun extends DirectionalMapObject {
                 if (CollisionLogic.collided(playerToTakeDamage.getObjectData(), bullet.getObjectData())) {
                     if (playerToTakeDamage.getHealth() - bullet.getDamage() <= 0) {
                         upgrade();
+                        System.out.println("upgrading in moving bullets");
+                        //thisPlayer.addHealth((byte)40);
                     }
                     playerToTakeDamage.takeDamage(bullet.getDamage());
                 }

@@ -3,6 +3,7 @@ package main;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import main.data.Map;
 import main.data.ObjectData;
 import objects.*;
@@ -31,8 +32,12 @@ public class Render {
 
         // draws players
         Player player1 = GAME.getPlayer1(), player2 = GAME.getPlayer2();
-
+        graphicsContext.setFont(Font.getDefault());
+//        graphicsContext.fillText(player1.getHealth() + "%", player1.getObjectData().x, player1.getObjectData().y - 20);
+//        graphicsContext.fill();
         graphicsContext.drawImage(player1.getObjectData().image, player1.getObjectData().x, player1.getObjectData().y);
+//        graphicsContext.fillText(player2.getHealth() + "%", player2.getObjectData().x, player2.getObjectData().y - 20);
+//        graphicsContext.fill();
         graphicsContext.drawImage(player2.getObjectData().image, player2.getObjectData().x, player2.getObjectData().y);
 
         // draws guns and their respective bullets

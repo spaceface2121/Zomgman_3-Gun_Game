@@ -73,10 +73,6 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
                 } else if (code == KeyCode.SLASH) {
                     p2.getGun().fire();
                     p2.setHoldingShoot(true);
-                } else if (code == KeyCode.B) {
-                    for (int i = p2.getGun().getType(); i < GunLogic.UZI; i++) {
-                        p2.upgradeGun();
-                    }
                 } else if (code == KeyCode.DIGIT1) {
                     p1.downgradeGun();
                 } else if (code == KeyCode.DIGIT2) {
