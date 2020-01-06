@@ -3,6 +3,7 @@ package objects;
 import javafx.scene.image.Image;
 import logic.CollisionLogic;
 import logic.GunLogic;
+import logic.PlayerLogic;
 import main.Game;
 import main.data.Images;
 import main.data.ObjectData;
@@ -74,6 +75,11 @@ public class Player extends MovingDirectionalMapObject {
     public void respawn() {
         setObjectData(getInitialPlayerData(player1or2));
         health = 100;
+        holdingShoot = false;
+        if (player1or2 && !getDir() || !player1or2 && getDir()) {
+            changeDirection();
+            gun.changeDirection();
+        }
         downgradeGun();
     }
 
@@ -85,7 +91,7 @@ public class Player extends MovingDirectionalMapObject {
         switch (timesJumped) {
             case 0:
             case 1:
-                setyVel(-12);
+                setyVel(PlayerLogic.getyVel());
                 timesJumped++; break;
         }
     }
@@ -102,9 +108,9 @@ public class Player extends MovingDirectionalMapObject {
                 setyVel(0);
                 timesJumped = 0;
             } else if (CollisionLogic.collidedTopWithBlock(getObjectData()) || CollisionLogic.collidedTopWithPlayer(getObjectData(), player1or2) || getObjectData().y <= 0) {
-                setyVel((float)(- 0.5 * getyVel() + 0.01)); //glue on ceiling
+                setyVel((float)(-0.5 * getyVel() + 0.01)); //glue on ceiling
             } else {
-                setyVel((float)(getyVel() + 0.5));
+                setyVel(getyVel() + PlayerLogic.getyAcceleration());
             }
         } else if (!CollisionLogic.collidedBottomWithBlock(getObjectData())) {
             falling = true;

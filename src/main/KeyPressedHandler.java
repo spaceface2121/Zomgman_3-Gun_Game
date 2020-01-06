@@ -6,6 +6,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Screen;
 import logic.GunLogic;
+import logic.PlayerLogic;
 import main.data.Images;
 import objects.Player;
 
@@ -45,30 +46,30 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
                         p1.changeDirection();
                         p1.getGun().changeDirection();
                     }
-                    p1.setxVel(-5);
+                    p1.setxVel(-PlayerLogic.getxVel());
                 } else if (code == KeyCode.D) {
                     if (!p1.getDir()) { //if player 1 is moving left
                         p1.changeDirection();
                         p1.getGun().changeDirection();
                     }
-                    p1.setxVel(5);
+                    p1.setxVel(PlayerLogic.getxVel());
                 } else if (code == KeyCode.SPACE) {
                     p1.getGun().fire();
                     p1.setHoldingShoot(true);
                 } else if /*player2 controls \/  */ (code == KeyCode.UP) {
-                    GAME.getPlayer2().jump();
+                    p2.jump();
                 } else if (code == KeyCode.LEFT) {
                     if (p2.getDir()) { //if player 2 is moving right
                         p2.changeDirection();
                         p2.getGun().changeDirection();
                     }
-                    GAME.getPlayer2().setxVel(-5);
+                    p2.setxVel(-PlayerLogic.getxVel());
                 } else if (code ==  KeyCode.RIGHT) {
                     if (!p2.getDir()) { //if player 2 is moving right
                         p2.changeDirection();
                         p2.getGun().changeDirection();
                     }
-                    GAME.getPlayer2().setxVel(5);
+                    p2.setxVel(PlayerLogic.getxVel());
                 } else if (code == KeyCode.SLASH) {
                     p2.getGun().fire();
                     p2.setHoldingShoot(true);

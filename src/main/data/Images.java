@@ -37,10 +37,10 @@ public class Images {
     private static final String UZI_LEFT_IMAGE_PATHNAME = "file:resources/uzi_left.jpg";
     private static final String MP5_RIGHT_IMAGE_PATHNAME = "file:resources/mp5_right.jpg";
     private static final String MP5_LEFT_IMAGE_PATHNAME = "file:resources/mp5_left.jpg";
-    private static final String AK_RIGHT_IMAGE_PATHNAME = "file:resources/ak_right.jpeg";
-    private static final String AK_LEFT_IMAGE_PATHNAME = "file:resources/ak_left.jpeg";
     private static final String REVOLVER_RIGHT_IMAGE_PATHNAME = "file:resources/revolver_right.jpg";
     private static final String REVOLVER_LEFT_IMAGE_PATHNAME = "file:resources/revolver_left.jpg";
+    private static final String AK_RIGHT_IMAGE_PATHNAME = "file:resources/ak_right.jpeg";
+    private static final String AK_LEFT_IMAGE_PATHNAME = "file:resources/ak_left.jpeg";
     private static final String SHOTGUN_RIGHT_IMAGE_PATHNAME = "file:resources/shotgun_right.png";
     private static final String SHOTGUN_LEFT_IMAGE_PATHNAME = "file:resources/shotgun_left.png";
     private static final String SNIPER_RIGHT_IMAGE_PATHNAME = "file:resources/sniper_right.png";
@@ -86,7 +86,7 @@ public class Images {
 
     private static final ArrayList<String> IMAGE_PATHNAMES = new ArrayList<>(Arrays.asList(P1_RIGHT_IMAGE_PATHNAME, P1_LEFT_IMAGE_PATHNAME, P2_RIGHT_IMAGE_PATHNAME,
             P2_LEFT_IMAGE_PATHNAME, BLOCK_IMAGE_PATHNAME, GLOCK_RIGHT_IMAGE_PATHNAME, GLOCK_LEFT_IMAGE_PATHNAME, UZI_RIGHT_IMAGE_PATHNAME, UZI_LEFT_IMAGE_PATHNAME,
-            MP5_RIGHT_IMAGE_PATHNAME, MP5_LEFT_IMAGE_PATHNAME, AK_RIGHT_IMAGE_PATHNAME, AK_LEFT_IMAGE_PATHNAME, REVOLVER_RIGHT_IMAGE_PATHNAME, REVOLVER_LEFT_IMAGE_PATHNAME,
+            MP5_RIGHT_IMAGE_PATHNAME, MP5_LEFT_IMAGE_PATHNAME, REVOLVER_RIGHT_IMAGE_PATHNAME, REVOLVER_LEFT_IMAGE_PATHNAME, AK_RIGHT_IMAGE_PATHNAME, AK_LEFT_IMAGE_PATHNAME,
             SHOTGUN_RIGHT_IMAGE_PATHNAME, SHOTGUN_LEFT_IMAGE_PATHNAME, SNIPER_RIGHT_IMAGE_PATHNAME, SNIPER_LEFT_IMAGE_PATHNAME, LIGHT_BULLET_RIGHT_IMAGE_PATHNAME,
             LIGHT_BULLET_LEFT_IMAGE_PATHNAME, STANDARD_BULLET_RIGHT_IMAGE_PATHNAME, STANDARD_BULLET_LEFT_IMAGE_PATHNAME, HEAVY_BULLET_RIGHT_IMAGE_PATHNAME,
             HEAVY_BULLET_LEFT_IMAGE_PATHNAME, HAND1_IMAGE_PATHNAME, HAND2_IMAGE_PATHNAME));

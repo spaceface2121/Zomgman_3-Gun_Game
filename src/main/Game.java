@@ -14,6 +14,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import logic.GunLogic;
+import logic.PlayerLogic;
 import main.data.Images;
 import main.data.Map;
 import objects.Player;
@@ -115,6 +116,7 @@ public class Game extends Application {
             );
             Images.generateScaledImages(scaleFullX, scaleFullY);
             GunLogic.generateScaledProperties(scaleFullX);
+            PlayerLogic.generateScaledVels(scaleFullX, scaleFullY);
 
             player1 = new Player(true);
             player2 = new Player(false);

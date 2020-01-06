@@ -26,18 +26,18 @@ public class Hand extends MapObject {
         ObjectData playerData = player.getObjectData();
         float x;
         if (player.getDir() && dir || !(player.getDir() || dir)) { //if the player is facing right and hand is right or player faces left and hand is left
-            x = playerData.x + playerData.w + 40;
+            x = playerData.x + playerData.w + 8;
         } else { //if facing right and hand is left or facing left and hand is right
-            x = playerData.x - 40;
+            x = playerData.x - 5;
         }
         return new ObjectData(x, (float)(playerData.y + 1.0 / 3 * playerData.h), getHandImage(player));
     }
 
     public void updateCoordinates(Player player, boolean dir) {
         if (player.getDir() && dir || !(player.getDir() || dir)) { //if the player is facing right and hand is right or player faces left and hand is left
-            getObjectData().x = player.getObjectData().x + player.getObjectData().w + 40;
+            getObjectData().x = player.getObjectData().x + player.getObjectData().w + 10;
         } else { //if facing right and hand is left or facing left and hand is right
-            getObjectData().x = player.getObjectData().x - 40;
+            getObjectData().x = player.getObjectData().x - 10;
         }
         getObjectData().y = (int)(player.getObjectData().y + 1.0 / 3 * player.getObjectData().h);
     }
