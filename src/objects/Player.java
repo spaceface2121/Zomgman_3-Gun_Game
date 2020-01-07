@@ -122,7 +122,7 @@ public class Player extends MovingDirectionalMapObject {
             } else if (CollisionLogic.collidedTopWithBlock(getObjectData()) || CollisionLogic.collidedTopWithPlayer(getObjectData(), player1or2) || getObjectData().y <= 0) {
                 setyVel((float) (-0.5 * getyVel() + 0.01)); //glue on ceiling
             } else if (CollisionLogic.collidedRightWithBlock(getObjectData()) || CollisionLogic.collidedLeftWithBlock(getObjectData())) {
-                setyVel(getyVel() + PlayerLogic.getyAcceleration());
+                setyVel(getyVel() - PlayerLogic.getyAcceleration());
                 timesJumped = 0;
             } else {
                 setyVel(getyVel() + PlayerLogic.getyAcceleration()); //blah
