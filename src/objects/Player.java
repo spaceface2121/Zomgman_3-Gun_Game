@@ -125,7 +125,7 @@ public class Player extends MovingDirectionalMapObject {
                 setyVel(getyVel() + PlayerLogic.getyAcceleration());
                 timesJumped = 0;
             } else {
-                setyVel(getyVel() + PlayerLogic.getyAcceleration());
+                setyVel(getyVel() + PlayerLogic.getyAcceleration()); //blah
             }
         } else if (!(CollisionLogic.collidedBottomWithBlock(getObjectData()) && CollisionLogic.collidedBottom(getObjectData(), getOtherPlayer().getObjectData()))) {
             falling = true;
