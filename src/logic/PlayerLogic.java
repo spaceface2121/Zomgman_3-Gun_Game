@@ -38,7 +38,7 @@ public class PlayerLogic {
 
 
     public static float getxVel() {
-        return MAX_X_VEL;
+        return MIN_X_VEL;
     }
 
     public static float getMinXVel() {return MIN_X_VEL;}

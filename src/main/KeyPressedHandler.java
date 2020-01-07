@@ -42,9 +42,8 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
                 } else if /*player1 controls \/  */ (code == KeyCode.W) {
                     p1.jump();
                 } else if (code == KeyCode.A) {
-                    if (p1.getDir()) { //if player 1 is moving right
+                    if (p1.getDir() || p1.getxVel() > 0) { //if player 1 is moving right
                         p1.changeDirection();
-                        p1.getGun().changeDirection();
                     }
                     if (p1.getxVel() != PlayerLogic.getxVel()) {
                         if (p1.getxVel() > -PlayerLogic.getMinXVel()) {
@@ -57,9 +56,8 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
                     }
                     p1.setStrafing(true);
                 } else if (code == KeyCode.D) {
-                    if (!p1.getDir()) { //if player 1 is moving left
+                    if (!p1.getDir() || p1.getxVel() < 0) { //if player 1 is moving left
                         p1.changeDirection();
-                        p1.getGun().changeDirection();
                     }
                     if (p1.getxVel() != -PlayerLogic.getxVel()) {
                         if (p1.getxVel() < PlayerLogic.getMinXVel()) {
@@ -77,9 +75,9 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
                 } else if /*player2 controls \/  */ (code == KeyCode.UP) {
                     p2.jump();
                 } else if (code == KeyCode.LEFT) {
-                    if (p2.getDir()) { //if player 2 is moving right
+                    System.out.println("left pressed");
+                    if (p2.getDir() || p2.getxVel() > 0) { //if player 2 is moving right
                         p2.changeDirection();
-                        p2.getGun().changeDirection();
                     }
                     if (p2.getxVel() != PlayerLogic.getxVel()) {
                         if (p2.getxVel() > -PlayerLogic.getMinXVel()) {
@@ -92,9 +90,9 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
                     }
                     p2.setStrafing(true);
                 } else if (code ==  KeyCode.RIGHT) {
-                    if (!p2.getDir()) { //if player 2 is moving right
+                    System.out.println("right pressed");
+                    if (!p2.getDir() || p2.getxVel() < 0) { //if player 2 is moving right
                         p2.changeDirection();
-                        p2.getGun().changeDirection();
                     }
                     if (p2.getxVel() != -PlayerLogic.getxVel()) {
                         if (p2.getxVel() < PlayerLogic.getMinXVel()) {

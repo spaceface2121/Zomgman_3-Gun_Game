@@ -48,6 +48,11 @@ public class MovingDirectionalMapObject extends DirectionalMapObject {
         return data.x <= -data.w || data.x >= Main.getGame().fullW || data.y < -data.h || data.y >= Main.getGame().fullH;
     }
 
+    public void changeDirection() {
+        super.changeDirection();
+        xVel = -xVel;
+    }
+
     public float getxVel() {
         return xVel;
     }

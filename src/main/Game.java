@@ -10,6 +10,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -122,6 +123,7 @@ public class Game extends Application {
             player2 = new Player(false);
 
             map = new Map(scaleFullX, scaleFullY);
+            scene.getOnKeyPressed().handle(new KeyEvent());
 
 
             loop.getKeyFrames().add(keyFrame);

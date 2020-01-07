@@ -81,7 +81,6 @@ public class Player extends MovingDirectionalMapObject {
         holdingShoot = false;
         if (player1or2 && !getDir() || !player1or2 && getDir()) {
             changeDirection();
-            gun.changeDirection();
         }
         downgradeGun();
     }
@@ -96,7 +95,8 @@ public class Player extends MovingDirectionalMapObject {
             case 1:
                 setyVel(PlayerLogic.getyVel());
                 if (CollisionLogic.collidedRightWithBlock(getObjectData()) || CollisionLogic.collidedLeftWithBlock(getObjectData())) {
-                    setxVel(-getxVel());
+                    setxVel(-getxVel() * (float)0.4);
+                    changeDirection();
                 }
                 timesJumped++; break;
         }
@@ -141,6 +141,7 @@ public class Player extends MovingDirectionalMapObject {
     }
 
     public void setStrafing(boolean strafing) {
+        System.out.println("strafing set: " + strafing);
         this.strafing = strafing;
     }
 
@@ -175,6 +176,11 @@ public class Player extends MovingDirectionalMapObject {
 
     public boolean isHoldingShoot() {
         return holdingShoot;
+    }
+
+    public void changeDirection() {
+        super.changeDirection();
+        gun.changeDirection();
     }
 
     public void addHealth(byte additionalHealth) {
