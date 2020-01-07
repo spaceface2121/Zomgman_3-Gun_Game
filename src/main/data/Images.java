@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Images {
-    public static final byte P1_R = 0, P1_L = 1, P2_R = 2, P2_L = 3, BLOCK = 4, GLOCK_R = 5, GLOCK_L = 6, UZI_R = 7, UZI_L = 8, MP5_R = 9, MP5_L = 10, AK_R = 11, AK_L = 12,
-                            REVOLVER_R = 13, REVOLVER_L = 14, SHOTGUN_R = 15, SHOTGUN_L = 16, SNIPER_R = 17, SNIPER_L = 18, LIGHT_BULLET_R = 19, LIGHT_BULLET_L = 20,
-                            STANDARD_BULLET_R = 21, STANDARD_BULLET_L = 22, HEAVY_BULLET_R = 23, HEAVY_BULLET_L = 24, HAND1 = 25, HAND2 = 26;
+    public static final byte P1_R = 0, P1_L = 1, P2_R = 2, P2_L = 3, BLOCK = 4, BACKGROUND = 5, GLOCK_R = 6, GLOCK_L = 7, UZI_R = 8, UZI_L = 9, MP5_R = 10, MP5_L = 12, AK_R = 12, AK_L = 13,
+                            REVOLVER_R = 14, REVOLVER_L = 15, SHOTGUN_R = 16, SHOTGUN_L = 17, SNIPER_R = 18, SNIPER_L = 19, LIGHT_BULLET_R = 20, LIGHT_BULLET_L = 21,
+                            STANDARD_BULLET_R = 22, STANDARD_BULLET_L = 23, HEAVY_BULLET_R = 24, HEAVY_BULLET_L = 25, HAND1 = 26, HAND2 = 27;
 
     private static final byte GUNS_START = GLOCK_R, GUNS_END = SNIPER_L;
 
@@ -26,6 +26,8 @@ public class Images {
     /*-------------------------*/
 
     private static final String BLOCK_IMAGE_PATHNAME = "file:resources/block.jpg";
+
+    private static final String BACKGROUND_IMAGE_PATHNAME = "file:resources/background.jpg";
 
 //    public static Image BLOCK_IMAGE = new Image(BLOCK_IMAGE_PATHNAME);
 
@@ -85,7 +87,7 @@ public class Images {
     /*----------------------------------------------------------------------------------------------------------------*/
 
     private static final ArrayList<String> IMAGE_PATHNAMES = new ArrayList<>(Arrays.asList(P1_RIGHT_IMAGE_PATHNAME, P1_LEFT_IMAGE_PATHNAME, P2_RIGHT_IMAGE_PATHNAME,
-            P2_LEFT_IMAGE_PATHNAME, BLOCK_IMAGE_PATHNAME, GLOCK_RIGHT_IMAGE_PATHNAME, GLOCK_LEFT_IMAGE_PATHNAME, UZI_RIGHT_IMAGE_PATHNAME, UZI_LEFT_IMAGE_PATHNAME,
+            P2_LEFT_IMAGE_PATHNAME, BLOCK_IMAGE_PATHNAME, BACKGROUND_IMAGE_PATHNAME, GLOCK_RIGHT_IMAGE_PATHNAME, GLOCK_LEFT_IMAGE_PATHNAME, UZI_RIGHT_IMAGE_PATHNAME, UZI_LEFT_IMAGE_PATHNAME,
             MP5_RIGHT_IMAGE_PATHNAME, MP5_LEFT_IMAGE_PATHNAME, REVOLVER_RIGHT_IMAGE_PATHNAME, REVOLVER_LEFT_IMAGE_PATHNAME, AK_RIGHT_IMAGE_PATHNAME, AK_LEFT_IMAGE_PATHNAME,
             SHOTGUN_RIGHT_IMAGE_PATHNAME, SHOTGUN_LEFT_IMAGE_PATHNAME, SNIPER_RIGHT_IMAGE_PATHNAME, SNIPER_LEFT_IMAGE_PATHNAME, LIGHT_BULLET_RIGHT_IMAGE_PATHNAME,
             LIGHT_BULLET_LEFT_IMAGE_PATHNAME, STANDARD_BULLET_RIGHT_IMAGE_PATHNAME, STANDARD_BULLET_LEFT_IMAGE_PATHNAME, HEAVY_BULLET_RIGHT_IMAGE_PATHNAME,

@@ -4,6 +4,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import main.data.Images;
 import main.data.Map;
 import main.data.ObjectData;
 import objects.*;
@@ -21,8 +22,7 @@ public class Render {
 
     public static void drawGame() {
         // draws background
-        graphicsContext.setFill(Color.WHITE);
-        graphicsContext.fillRect(0, 0, GAME.fullW, GAME.fullH);
+        graphicsContext.drawImage(Images.getImages().get(Images.BACKGROUND), 0, 0);
 
         // draws blocks
         for (MapObject block : Map.getBlocks()) {
