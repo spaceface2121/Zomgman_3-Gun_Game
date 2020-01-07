@@ -103,6 +103,12 @@ public class Player extends MovingDirectionalMapObject {
     }
 
     public void move() {
+        if (!strafing && !falling && Math.abs(getxVel()) > 0) {
+            setxVel(getxVel()*(float)0.6);
+        } else if (!strafing && falling && Math.abs(getxVel()) > 0) {
+            setxVel(getxVel()*(float)0.9);
+        }
+
         super.move(false);
         gun.updateCoordinates(this);
         rightHand.updateCoordinates(this, false);
@@ -124,12 +130,6 @@ public class Player extends MovingDirectionalMapObject {
         } else if (!(CollisionLogic.collidedBottomWithBlock(getObjectData()) && CollisionLogic.collidedBottom(getObjectData(), getOtherPlayer().getObjectData()))) {
             falling = true;
         }
-
-        if (!strafing && !falling && Math.abs(getxVel()) > 0) {
-            setxVel(getxVel()*(float)0.6);
-        } else if (!strafing && falling && Math.abs(getxVel()) > 0) {
-            setxVel(getxVel()*(float)0.9);
-        }
     }
 
     public boolean isFalling() {
@@ -140,8 +140,8 @@ public class Player extends MovingDirectionalMapObject {
         return strafing;
     }
 
-    public void setStrafing(boolean s) {
-        strafing = s;
+    public void setStrafing(boolean strafing) {
+        this.strafing = strafing;
     }
 
     private Player getOtherPlayer() {

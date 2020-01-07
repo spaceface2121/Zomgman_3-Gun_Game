@@ -53,7 +53,6 @@ public class KeyReleasedHandler implements EventHandler<KeyEvent> {
                     }
                     p2.setStrafing(false);
                 } else if (code == KeyCode.SLASH) {
-                    System.out.println("slash released");
                     p2.getGun().stopFiring();
                     p2.setHoldingShoot(false);
                 }

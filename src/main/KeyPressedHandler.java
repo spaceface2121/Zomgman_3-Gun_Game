@@ -81,14 +81,30 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
                         p2.changeDirection();
                         p2.getGun().changeDirection();
                     }
-                    p2.setxVel(-PlayerLogic.getxVel());
+                    if (p2.getxVel() != PlayerLogic.getxVel()) {
+                        if (p2.getxVel() > -PlayerLogic.getMinXVel()) {
+                            p2.setxVel(-PlayerLogic.getMinXVel());
+                        } else if (p2.getxVel() > PlayerLogic.getxAcceleration() - PlayerLogic.getxVel()) {
+                            p2.setxVel(p2.getxVel() - PlayerLogic.getxAcceleration());
+                        } else {
+                            p2.setxVel(-PlayerLogic.getxVel());
+                        }
+                    }
                     p2.setStrafing(true);
                 } else if (code ==  KeyCode.RIGHT) {
                     if (!p2.getDir()) { //if player 2 is moving right
                         p2.changeDirection();
                         p2.getGun().changeDirection();
                     }
-                    p2.setxVel(PlayerLogic.getxVel());
+                    if (p2.getxVel() != -PlayerLogic.getxVel()) {
+                        if (p2.getxVel() < PlayerLogic.getMinXVel()) {
+                            p2.setxVel(PlayerLogic.getMinXVel());
+                        } else if (p2.getxVel() < PlayerLogic.getxVel() - PlayerLogic.getxAcceleration()) {
+                            p2.setxVel(p2.getxVel() + PlayerLogic.getxAcceleration());
+                        } else {
+                            p2.setxVel(PlayerLogic.getxVel());
+                        }
+                    }
                     p2.setStrafing(true);
                 } else if (code == KeyCode.SLASH) {
                     p2.getGun().fire();

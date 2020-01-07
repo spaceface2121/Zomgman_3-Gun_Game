@@ -32,7 +32,7 @@ public class Render {
 
         // draws players
         Player player1 = GAME.getPlayer1(), player2 = GAME.getPlayer2();
-        graphicsContext.setFont(Font.getDefault());
+//        graphicsContext.setFont(Font.getDefault());
 //        graphicsContext.fillText(player1.getHealth() + "%", player1.getObjectData().x, player1.getObjectData().y - 20);
 //        graphicsContext.fill();
         graphicsContext.drawImage(player1.getObjectData().image, player1.getObjectData().x, player1.getObjectData().y);
