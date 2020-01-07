@@ -72,8 +72,8 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
                     }
                     p1.setStrafing(true);
                 } else if (code == KeyCode.SPACE) {
-                    p1.getGun().fire();
                     p1.setHoldingShoot(true);
+                    p1.getGun().fire();
                 } else if /*player2 controls \/  */ (code == KeyCode.UP) {
                     p2.jump();
                 } else if (code == KeyCode.LEFT) {
@@ -107,8 +107,8 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
                     }
                     p2.setStrafing(true);
                 } else if (code == KeyCode.SLASH) {
-                    p2.getGun().fire();
                     p2.setHoldingShoot(true);
+                    p2.getGun().fire();
                 } else if (code == KeyCode.DIGIT1) {
                     p1.downgradeGun();
                 } else if (code == KeyCode.DIGIT2) {

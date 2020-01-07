@@ -13,11 +13,12 @@ import java.util.ArrayList;
 
 public class Gun extends DirectionalMapObject {
     private byte type, fireMode, ammoRemaining, numSuccessiveRoundsFired;
-    private int delayBetweenShots;
+    private int delayBetweenShots, reloadTime;
     private long timeAtLastShot = 0;
     private long timeAtLastPress = 0;
+    private long timeAtReloadStart = 0;
     private boolean player1or2; //who this gun belongs to
-    private boolean firing = false;
+    private boolean firing = false, reloading = false;
 
     private ArrayList<Bullet> bullets;
 
@@ -56,57 +57,80 @@ public class Gun extends DirectionalMapObject {
         fireMode = GunLogic.getFireMode(type); // 0 = semi, 1 = burst, 2 = auto, 3 = shotgun
         ammoRemaining = GunLogic.getMagCapacity(type);
         delayBetweenShots = GunLogic.getDelayBetweenShots(type);
+        reloadTime = GunLogic.getReloadTime(type);
     }
 
 
     public void fire() {
         //System.out.println("firing: " + firing + " num: " + numSuccessiveRoundsFired);
         long currTime = System.currentTimeMillis();
-        if (firing) {
-            switch (fireMode) {
-                case GunLogic.SEMI:
-                case GunLogic.BUCKSHOT: return;
+
+        if (reloading && currTime - timeAtReloadStart < reloadTime) {
+            return;
+        } else if (reloading) {
+            reloading = false;
+            ammoRemaining = GunLogic.getMagCapacity(type);
+        } else if (ammoRemaining <= 0) {
+            reloading = true;
+            timeAtReloadStart = currTime;
+            numSuccessiveRoundsFired = 0;
+            firing = false;
+            if (player1or2) {
+                Main.getGame().getPlayer1().setHoldingShoot(false);
+            } else {
+                Main.getGame().getPlayer2().setHoldingShoot(false);
             }
-        } else if (currTime - timeAtLastPress >= GunLogic.BURST_DELAY){
-            firing = true;
         }
 
-        switch (fireMode) {
-            case GunLogic.BUCKSHOT:
-                System.out.println("in buckshot");
-                System.out.println("delay: " + delayBetweenShots + " curr - last: " + (currTime - timeAtLastShot));
-                if (currTime - timeAtLastShot > delayBetweenShots) {
-                    for (int i = -1; i <= 1; i++) {
-                        Bullet bullet = new Bullet(this);
-                        bullet.setyVel((byte)i);
-                        bullets.add(bullet);
-                        timeAtLastShot = currTime;
-                    }
-                } break;
+        if (!reloading) {
+            if (firing) {
+                switch (fireMode) {
+                    case GunLogic.SEMI:
+                    case GunLogic.BUCKSHOT: return;
+                }
+            } else if (currTime - timeAtLastPress >= GunLogic.BURST_DELAY){
+                firing = true;
+            }
 
-            case GunLogic.BURST:
-                System.out.println("in burst fire");
-                if (numSuccessiveRoundsFired >= 3) {
-                    if (player1or2 && Main.getGame().getPlayer1().isHoldingShoot() || !player1or2 && Main.getGame().getPlayer2().isHoldingShoot()) {
-                        System.out.println("holding shoot");
+            switch (fireMode) {
+                case GunLogic.BUCKSHOT:
+                    System.out.println("in buckshot");
+                    System.out.println("delay: " + delayBetweenShots + " curr - last: " + (currTime - timeAtLastShot));
+                    if (currTime - timeAtLastShot > delayBetweenShots) {
+                        for (int i = -1; i <= 1; i++) {
+                            Bullet bullet = new Bullet(this);
+                            bullet.setyVel((byte)i);
+                            bullets.add(bullet);
+                            timeAtLastShot = currTime;
+                        }
+                        ammoRemaining--;
+                    } break;
+
+                case GunLogic.BURST:
+                    System.out.println("in burst fire");
+                    if (numSuccessiveRoundsFired >= 3) {
+                        if (player1or2 && Main.getGame().getPlayer1().isHoldingShoot() || !player1or2 && Main.getGame().getPlayer2().isHoldingShoot()) {
+                            System.out.println("holding shoot");
+                            return;
+                        } else {
+                            stopFiring();
+                            break;
+                        }
+                    } else if (numSuccessiveRoundsFired == 0 && currTime - timeAtLastPress < GunLogic.BURST_DELAY) {
                         return;
-                    } else {
-                        stopFiring();
-                        break;
                     }
-                } else if (numSuccessiveRoundsFired == 0 && currTime - timeAtLastPress < GunLogic.BURST_DELAY) {
-                    return;
-                }
 
-            case GunLogic.SEMI:
-            case GunLogic.AUTO:
-                System.out.println("delay: " + delayBetweenShots + " curr - last: " + (currTime - timeAtLastShot));
-                if (currTime - timeAtLastShot > delayBetweenShots) {
-                    bullets.add(new Bullet(this));
-                    numSuccessiveRoundsFired++;
-                    timeAtLastShot = currTime;
-                }
-                break;
+                case GunLogic.SEMI:
+                case GunLogic.AUTO:
+                    System.out.println("delay: " + delayBetweenShots + " curr - last: " + (currTime - timeAtLastShot));
+                    if (currTime - timeAtLastShot > delayBetweenShots) {
+                        bullets.add(new Bullet(this));
+                        numSuccessiveRoundsFired++;
+                        timeAtLastShot = currTime;
+                        ammoRemaining--;
+                    }
+                    break;
+            }
         }
     }
 
@@ -183,16 +207,14 @@ public class Gun extends DirectionalMapObject {
         if (type < GunLogic.SNIPER) {
             type++;
             System.out.println("gun upgraded " + type);
-            setGunProperties();
-            setImages();
+            reset();
         }
     }
     public void downgrade() {
         if (type > 0) {
             type--;
             System.out.println("gun downgraded " + type);
-            setGunProperties();
-            setImages();
+            reset();
         }
     }
 
@@ -217,5 +239,20 @@ public class Gun extends DirectionalMapObject {
             getObjectData().x = (float)(player.getObjectData().x - getObjectData().image.getWidth() + 2);
         }
         getObjectData().y = (int)(player.getObjectData().y + 1.0 / 3 * player.getObjectData().h);
+    }
+
+    public boolean isReloading() {
+        return reloading;
+    }
+
+    private void reset() {
+        numSuccessiveRoundsFired = 0;
+        timeAtLastShot = 0;
+        timeAtLastPress = 0;
+        timeAtReloadStart = 0;
+        firing = false;
+        reloading = false;
+        setGunProperties();
+        setImages();
     }
 }
