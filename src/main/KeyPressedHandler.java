@@ -16,6 +16,7 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
     @Override
     public void handle(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();
+        GAME.setKey(code, true);
         switch (GAME.getScreen()) {
             /*Screens:
               0: Main menu screen
@@ -41,69 +42,69 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
                     System.out.println("screen: " + GAME.getScreen());
                 } else if /*player1 controls \/  */ (code == KeyCode.W) {
                     p1.jump();
-                } else if (code == KeyCode.A) {
-                    if (p1.getDir() || p1.getxVel() > 0) { //if player 1 is moving right
-                        p1.changeDirection();
-                    }
-                    if (p1.getxVel() != PlayerLogic.getxVel()) {
-                        if (p1.getxVel() > -PlayerLogic.getMinXVel()) {
-                            p1.setxVel(-PlayerLogic.getMinXVel());
-                        } else if (p1.getxVel() > PlayerLogic.getxAcceleration() - PlayerLogic.getxVel()) {
-                            p1.setxVel(p1.getxVel() - PlayerLogic.getxAcceleration());
-                        } else {
-                            p1.setxVel(-PlayerLogic.getxVel());
-                        }
-                    }
-                    p1.setStrafing(true);
-                } else if (code == KeyCode.D) {
-                    if (!p1.getDir() || p1.getxVel() < 0) { //if player 1 is moving left
-                        p1.changeDirection();
-                    }
-                    if (p1.getxVel() != -PlayerLogic.getxVel()) {
-                        if (p1.getxVel() < PlayerLogic.getMinXVel()) {
-                            p1.setxVel(PlayerLogic.getMinXVel());
-                        } else if (p1.getxVel() < PlayerLogic.getxVel() - PlayerLogic.getxAcceleration()) {
-                            p1.setxVel(p1.getxVel() + PlayerLogic.getxAcceleration());
-                        } else {
-                            p1.setxVel(PlayerLogic.getxVel());
-                        }
-                    }
-                    p1.setStrafing(true);
+//                } else if (code == KeyCode.A) {
+//                    if (p1.getDir() || p1.getxVel() > 0) { //if player 1 is moving right
+//                        p1.changeDirection();
+//                    }
+//                    if (p1.getxVel() != PlayerLogic.getxVel()) {
+//                        if (p1.getxVel() > -PlayerLogic.getMinXVel()) {
+//                            p1.setxVel(-PlayerLogic.getMinXVel());
+//                        } else if (p1.getxVel() > PlayerLogic.getxAcceleration() - PlayerLogic.getxVel()) {
+//                            p1.setxVel(p1.getxVel() - PlayerLogic.getxAcceleration());
+//                        } else {
+//                            p1.setxVel(-PlayerLogic.getxVel());
+//                        }
+//                    }
+//                    p1.setStrafing(true);
+//                } else if (code == KeyCode.D) {
+//                    if (!p1.getDir() || p1.getxVel() < 0) { //if player 1 is moving left
+//                        p1.changeDirection();
+//                    }
+//                    if (p1.getxVel() != -PlayerLogic.getxVel()) {
+//                        if (p1.getxVel() < PlayerLogic.getMinXVel()) {
+//                            p1.setxVel(PlayerLogic.getMinXVel());
+//                        } else if (p1.getxVel() < PlayerLogic.getxVel() - PlayerLogic.getxAcceleration()) {
+//                            p1.setxVel(p1.getxVel() + PlayerLogic.getxAcceleration());
+//                        } else {
+//                            p1.setxVel(PlayerLogic.getxVel());
+//                        }
+//                    }
+//                    p1.setStrafing(true);
                 } else if (code == KeyCode.SPACE) {
                     p1.setHoldingShoot(true);
                     p1.getGun().fire();
                 } else if /*player2 controls \/  */ (code == KeyCode.UP) {
                     p2.jump();
                 } else if (code == KeyCode.LEFT) {
-                    System.out.println("left pressed");
-                    if (p2.getDir() || p2.getxVel() > 0) { //if player 2 is moving right
-                        p2.changeDirection();
-                    }
-                    if (p2.getxVel() != PlayerLogic.getxVel()) {
-                        if (p2.getxVel() > -PlayerLogic.getMinXVel()) {
-                            p2.setxVel(-PlayerLogic.getMinXVel());
-                        } else if (p2.getxVel() > PlayerLogic.getxAcceleration() - PlayerLogic.getxVel()) {
-                            p2.setxVel(p2.getxVel() - PlayerLogic.getxAcceleration());
-                        } else {
-                            p2.setxVel(-PlayerLogic.getxVel());
-                        }
-                    }
-                    p2.setStrafing(true);
-                } else if (code ==  KeyCode.RIGHT) {
-                    System.out.println("right pressed");
-                    if (!p2.getDir() || p2.getxVel() < 0) { //if player 2 is moving right
-                        p2.changeDirection();
-                    }
-                    if (p2.getxVel() != -PlayerLogic.getxVel()) {
-                        if (p2.getxVel() < PlayerLogic.getMinXVel()) {
-                            p2.setxVel(PlayerLogic.getMinXVel());
-                        } else if (p2.getxVel() < PlayerLogic.getxVel() - PlayerLogic.getxAcceleration()) {
-                            p2.setxVel(p2.getxVel() + PlayerLogic.getxAcceleration());
-                        } else {
-                            p2.setxVel(PlayerLogic.getxVel());
-                        }
-                    }
-                    p2.setStrafing(true);
+//                    System.out.println("left pressed");
+//                    if (p2.getDir() || p2.getxVel() > 0) { //if player 2 is moving right
+//                        p2.changeDirection();
+//                    }
+//                    if (p2.getxVel() != PlayerLogic.getxVel()) {
+//                        if (p2.getxVel() > -PlayerLogic.getMinXVel()) {
+//                            p2.setxVel(-PlayerLogic.getMinXVel());
+//                        } else if (p2.getxVel() > PlayerLogic.getxAcceleration() - PlayerLogic.getxVel()) {
+//                            p2.setxVel(p2.getxVel() - PlayerLogic.getxAcceleration());
+//                        } else {
+//                            p2.setxVel(-PlayerLogic.getxVel());
+//                        }
+//                    }
+//                    p2.setStrafing(true);
+//                } else if (code ==  KeyCode.RIGHT) {
+//                    System.out.println("right pressed");
+//                    if (!p2.getDir() || p2.getxVel() < 0) { //if player 2 is moving right
+//                        p2.changeDirection();
+//                    }
+//                    if (p2.getxVel() != -PlayerLogic.getxVel()) {
+//                        if (p2.getxVel() < PlayerLogic.getMinXVel()) {
+//                            p2.setxVel(PlayerLogic.getMinXVel());
+//                        } else if (p2.getxVel() < PlayerLogic.getxVel() - PlayerLogic.getxAcceleration()) {
+//                            p2.setxVel(p2.getxVel() + PlayerLogic.getxAcceleration());
+//                        } else {
+//                            p2.setxVel(PlayerLogic.getxVel());
+//                        }
+//                    }
+//                    p2.setStrafing(true);
                 } else if (code == KeyCode.SLASH) {
                     p2.setHoldingShoot(true);
                     p2.getGun().fire();

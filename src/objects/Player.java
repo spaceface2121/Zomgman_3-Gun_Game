@@ -1,6 +1,7 @@
 package objects;
 
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import logic.CollisionLogic;
 import logic.GunLogic;
 import logic.PlayerLogic;
@@ -94,15 +95,87 @@ public class Player extends MovingDirectionalMapObject {
             case 0:
             case 1:
                 setyVel(PlayerLogic.getyVel());
-                if (CollisionLogic.collidedRightWithBlock(getObjectData()) || CollisionLogic.collidedLeftWithBlock(getObjectData())) {
-                    setxVel(-getxVel() * (float)0.4);
-                    changeDirection();
-                }
+//                if (CollisionLogic.collidedRightWithBlock(getObjectData()) || CollisionLogic.collidedLeftWithBlock(getObjectData())) {
+//                    setxVel(-getxVel() * (float)0.4);
+//                    changeDirection();
+//                }
                 timesJumped++; break;
         }
     }
 
     public void move() {
+        final Game GAME = Main.getGame();
+        if (player1or2) { //if player 1
+            if (GAME.isPressed(KeyCode.A)) {
+                if (getDir() || getxVel() > 0) { //if player 1 is moving right
+                    changeDirection();
+                }
+                if (getxVel() != PlayerLogic.getxVel()) {
+                    if (getxVel() > -PlayerLogic.getMinXVel()) {
+                        setxVel(-PlayerLogic.getMinXVel());
+                    } else if (getxVel() > PlayerLogic.getxAcceleration() - PlayerLogic.getxVel()) {
+                        setxVel(getxVel() - PlayerLogic.getxAcceleration());
+                    } else {
+                        setxVel(-PlayerLogic.getxVel());
+                    }
+                }
+                setStrafing(true);
+
+            } else if (GAME.isPressed(KeyCode.D)) {
+                if (!getDir() || getxVel() < 0) { //if player 1 is moving left
+                    changeDirection();
+                }
+                if (getxVel() != -PlayerLogic.getxVel()) {
+                    if (getxVel() < PlayerLogic.getMinXVel()) {
+                        setxVel(PlayerLogic.getMinXVel());
+                    } else if (getxVel() < PlayerLogic.getxVel() - PlayerLogic.getxAcceleration()) {
+                        setxVel(getxVel() + PlayerLogic.getxAcceleration());
+                    } else {
+                        setxVel(PlayerLogic.getxVel());
+                    }
+                }
+                setStrafing(true);
+            } else if (GAME.isPressed(KeyCode.SPACE)) {
+//                setHoldingShoot(true);
+//                getGun().fire();
+            }
+        } else { //if player 2
+            if (GAME.isPressed(KeyCode.LEFT)) {
+
+                if (getDir() || getxVel() > 0) { //if player 1 is moving right
+                    changeDirection();
+                }
+                if (getxVel() != PlayerLogic.getxVel()) {
+                    if (getxVel() > -PlayerLogic.getMinXVel()) {
+                        setxVel(-PlayerLogic.getMinXVel());
+                    } else if (getxVel() > PlayerLogic.getxAcceleration() - PlayerLogic.getxVel()) {
+                        setxVel(getxVel() - PlayerLogic.getxAcceleration());
+                    } else {
+                        setxVel(-PlayerLogic.getxVel());
+                    }
+                }
+                setStrafing(true);
+
+            } else if (GAME.isPressed(KeyCode.RIGHT)) {
+                if (!getDir() || getxVel() < 0) { //if player 1 is moving left
+                    changeDirection();
+                }
+                if (getxVel() != -PlayerLogic.getxVel()) {
+                    if (getxVel() < PlayerLogic.getMinXVel()) {
+                        setxVel(PlayerLogic.getMinXVel());
+                    } else if (getxVel() < PlayerLogic.getxVel() - PlayerLogic.getxAcceleration()) {
+                        setxVel(getxVel() + PlayerLogic.getxAcceleration());
+                    } else {
+                        setxVel(PlayerLogic.getxVel());
+                    }
+                }
+                setStrafing(true);
+            } else if (GAME.isPressed(KeyCode.SLASH)) {
+//                setHoldingShoot(true);
+//                getGun().fire();
+            }
+        }
+
         if (!strafing && !falling && Math.abs(getxVel()) > 0) {
             setxVel(getxVel()*(float)0.6);
         } else if (!strafing && falling && Math.abs(getxVel()) > 0) {
@@ -127,7 +200,7 @@ public class Player extends MovingDirectionalMapObject {
             } else {
                 setyVel(getyVel() + PlayerLogic.getyAcceleration()); //blah
             }
-        } else if (!(CollisionLogic.collidedBottomWithBlock(getObjectData()) && CollisionLogic.collidedBottom(getObjectData(), getOtherPlayer().getObjectData()))) {
+        } else if (!(CollisionLogic.collidedBottomWithBlock(getObjectData()) && !CollisionLogic.collidedBottom(getObjectData(), getOtherPlayer().getObjectData()))) {
             falling = true;
         }
     }

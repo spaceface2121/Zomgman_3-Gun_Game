@@ -11,6 +11,7 @@ public class KeyReleasedHandler implements EventHandler<KeyEvent> {
     @Override
     public void handle(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();
+        GAME.setKey(code, false);
         switch (GAME.getScreen()) {
             /*Screens:
               0: Main menu screen
