@@ -44,7 +44,7 @@ public class KeyReleasedHandler implements EventHandler<KeyEvent> {
 
                 } else if (code == KeyCode.LEFT) {
                     System.out.println("left released");
-                    if (KeyPress) { //if player 2 is moving left
+                    if (!p2.getDir()) { //if player 2 is moving left
                         //p2.setxVel((byte)0);
                     }
                     p2.setStrafing(false);

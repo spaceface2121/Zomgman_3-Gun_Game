@@ -10,6 +10,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -19,6 +20,8 @@ import logic.PlayerLogic;
 import main.data.Images;
 import main.data.Map;
 import objects.Player;
+
+import java.util.BitSet;
 
 
 public class Game extends Application {
@@ -35,6 +38,8 @@ public class Game extends Application {
 
     private Map map;
     private Player player1, player2;
+
+    private BitSet keyboardBitSet = new BitSet();
 
     public void initialize() {
         Game.launch();
@@ -123,7 +128,6 @@ public class Game extends Application {
             player2 = new Player(false);
 
             map = new Map(scaleFullX, scaleFullY);
-            scene.getOnKeyPressed().handle(new KeyEvent());
 
 
             loop.getKeyFrames().add(keyFrame);
@@ -131,6 +135,14 @@ public class Game extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void setKey(KeyCode key, boolean pressed) {
+        keyboardBitSet.set(key.ordinal(), pressed);
+    }
+
+    public boolean isPressed(KeyCode key) {
+        return keyboardBitSet.get(key.ordinal());
     }
 
     public void setScreen(byte screen) {
