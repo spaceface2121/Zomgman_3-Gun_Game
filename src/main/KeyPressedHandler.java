@@ -42,6 +42,7 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
                     System.out.println("screen: " + GAME.getScreen());
                 } else if /*player1 controls \/  */ (code == KeyCode.W) {
                     p1.jump();
+                    p1.setJumping(true);
 //                } else if (code == KeyCode.A) {
 //                    if (p1.getDir() || p1.getxVel() > 0) { //if player 1 is moving right
 //                        p1.changeDirection();
@@ -75,6 +76,7 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
                     p1.getGun().fire();
                 } else if /*player2 controls \/  */ (code == KeyCode.UP) {
                     p2.jump();
+                    p2.setJumping(true);
                 } else if (code == KeyCode.LEFT) {
 //                    System.out.println("left pressed");
 //                    if (p2.getDir() || p2.getxVel() > 0) { //if player 2 is moving right

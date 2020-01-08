@@ -19,6 +19,7 @@ public class Player extends MovingDirectionalMapObject {
 
     private boolean falling = false;
     private boolean strafing = false;
+    private boolean jumping = false;
     private boolean player1or2;
     private boolean holdingShoot = false;
 
@@ -193,7 +194,12 @@ public class Player extends MovingDirectionalMapObject {
             } else if (CollisionLogic.collidedTopWithBlock(getObjectData()) || CollisionLogic.collidedTopWithPlayer(getObjectData(), player1or2) || getObjectData().y <= 0) {
                 setyVel((float) (-0.5 * getyVel() + 0.01)); //so you bounce off when you jump and hit ur head
             } else if (CollisionLogic.collidedRightWithBlock(getObjectData()) || CollisionLogic.collidedLeftWithBlock(getObjectData())) {
-                setyVel(getyVel() - PlayerLogic.getyAcceleration());
+                //setyVel(getyVel() - PlayerLogic.getyAcceleration());
+                if (jumping) {
+                    setyVel(getyVel() - PlayerLogic.getyAcceleration());
+                } else {
+                    setyVel(PlayerLogic.getyAcceleration());
+                }
                 timesJumped = 0;
             } else {
                 setyVel(getyVel() + PlayerLogic.getyAcceleration());
@@ -211,9 +217,13 @@ public class Player extends MovingDirectionalMapObject {
         return strafing;
     }
 
-    public void setStrafing(boolean strafing) {
-        System.out.println("strafing set: " + strafing);
-        this.strafing = strafing;
+    public void setStrafing(boolean s) {
+        System.out.println("strafing set: " + s);
+        strafing = s;
+    }
+
+    public void setJumping(boolean j) {
+        jumping = j;
     }
 
     private Player getOtherPlayer() {

@@ -26,7 +26,7 @@ public class KeyReleasedHandler implements EventHandler<KeyEvent> {
                 Player p1 = GAME.getPlayer1();
                 Player p2 = GAME.getPlayer2();
                 if /*player1 controls \/  */ (code == KeyCode.W) {
-
+                    p1.setJumping(false);
                 } else if (code == KeyCode.A) {
                     if (!p1.getDir()) { //if player 1 is moving left
                         //p1.setxVel((byte)0);
@@ -42,7 +42,7 @@ public class KeyReleasedHandler implements EventHandler<KeyEvent> {
                     p1.getGun().stopFiring();
                     p1.setHoldingShoot(false);
                 } else if /*player2 controls \/  */ (code == KeyCode.UP) {
-
+                    p2.setJumping(false);
                 } else if (code == KeyCode.LEFT) {
                     System.out.println("left released");
                     if (!p2.getDir()) { //if player 2 is moving left
