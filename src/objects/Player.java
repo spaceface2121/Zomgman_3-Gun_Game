@@ -107,32 +107,38 @@ public class Player extends MovingDirectionalMapObject {
     public void move() {
         final Game GAME = Main.getGame();
         if (player1or2) { //if player 1
-            if (GAME.isPressed(KeyCode.A)) {
-                if (getDir() || getxVel() > 0) { //if player 1 is moving right
+            if (GAME.isPressed(KeyCode.A) && !GAME.isPressed(KeyCode.D)) {
+                if (getDir()) { //if player 1 is moving right
                     changeDirection();
                 }
-                if (getxVel() != PlayerLogic.getxVel()) {
-                    if (getxVel() > -PlayerLogic.getMinXVel()) {
-                        setxVel(-PlayerLogic.getMinXVel());
-                    } else if (getxVel() > PlayerLogic.getxAcceleration() - PlayerLogic.getxVel()) {
-                        setxVel(getxVel() - PlayerLogic.getxAcceleration());
-                    } else {
-                        setxVel(-PlayerLogic.getxVel());
-                    }
+                if (getxVel() > -PlayerLogic.getMinXVel()) {
+                    setxVel(-PlayerLogic.getMinXVel());
+                } else if (getxVel() > PlayerLogic.getxAcceleration() - PlayerLogic.getxVel()) {
+                    setxVel(getxVel() - PlayerLogic.getxAcceleration());
+                } else {
+                    setxVel(-PlayerLogic.getxVel());
                 }
                 setStrafing(true);
-
-            } else if (GAME.isPressed(KeyCode.D)) {
-                if (!getDir() || getxVel() < 0) { //if player 1 is moving left
+            } else if (GAME.isPressed(KeyCode.D) && !GAME.isPressed(KeyCode.A)) {
+                if (!getDir()) { //if player 1 is moving left
                     changeDirection();
                 }
-                if (getxVel() != -PlayerLogic.getxVel()) {
-                    if (getxVel() < PlayerLogic.getMinXVel()) {
-                        setxVel(PlayerLogic.getMinXVel());
-                    } else if (getxVel() < PlayerLogic.getxVel() - PlayerLogic.getxAcceleration()) {
-                        setxVel(getxVel() + PlayerLogic.getxAcceleration());
-                    } else {
-                        setxVel(PlayerLogic.getxVel());
+                if (getxVel() < PlayerLogic.getMinXVel()) {
+                    setxVel(PlayerLogic.getMinXVel());
+                } else if (getxVel() < PlayerLogic.getxVel() - PlayerLogic.getxAcceleration()) {
+                    setxVel(getxVel() + PlayerLogic.getxAcceleration());
+                } else {
+                    setxVel(PlayerLogic.getxVel());
+                }
+                setStrafing(true);
+            } else if (GAME.isPressed(KeyCode.A) && GAME.isPressed(KeyCode.D)) {
+                if (getDir()) {
+                    if (getxVel() == PlayerLogic.getxVel()) {
+                        changeDirection();
+                    }
+                } else {
+                    if (getxVel() == -PlayerLogic.getxVel()) {
+                        changeDirection();
                     }
                 }
                 setStrafing(true);
@@ -141,31 +147,38 @@ public class Player extends MovingDirectionalMapObject {
 //                getGun().fire();
             }
         } else { //if player 2
-            if (GAME.isPressed(KeyCode.LEFT)) {
-                if (getDir() || getxVel() > 0) { //if player 1 is moving right
+            if (GAME.isPressed(KeyCode.LEFT) && !GAME.isPressed(KeyCode.RIGHT)) {
+                if (getDir()) { //if player 2 is moving right
                     changeDirection();
                 }
-                if (getxVel() != PlayerLogic.getxVel()) {
-                    if (getxVel() > -PlayerLogic.getMinXVel()) {
-                        setxVel(-PlayerLogic.getMinXVel());
-                    } else if (getxVel() > PlayerLogic.getxAcceleration() - PlayerLogic.getxVel()) {
-                        setxVel(getxVel() - PlayerLogic.getxAcceleration());
-                    } else {
-                        setxVel(-PlayerLogic.getxVel());
-                    }
+                if (getxVel() > -PlayerLogic.getMinXVel()) {
+                    setxVel(-PlayerLogic.getMinXVel());
+                } else if (getxVel() > PlayerLogic.getxAcceleration() - PlayerLogic.getxVel()) {
+                    setxVel(getxVel() - PlayerLogic.getxAcceleration());
+                } else {
+                    setxVel(-PlayerLogic.getxVel());
                 }
                 setStrafing(true);
-            } else if (GAME.isPressed(KeyCode.RIGHT)) {
-                if (!getDir() || getxVel() < 0) { //if player 1 is moving left
+            } else if (GAME.isPressed(KeyCode.RIGHT) && !GAME.isPressed(KeyCode.LEFT)) {
+                if (!getDir()) { //if player 2 is moving left
                     changeDirection();
                 }
-                if (getxVel() != -PlayerLogic.getxVel()) {
-                    if (getxVel() < PlayerLogic.getMinXVel()) {
-                        setxVel(PlayerLogic.getMinXVel());
-                    } else if (getxVel() < PlayerLogic.getxVel() - PlayerLogic.getxAcceleration()) {
-                        setxVel(getxVel() + PlayerLogic.getxAcceleration());
-                    } else {
-                        setxVel(PlayerLogic.getxVel());
+                if (getxVel() < PlayerLogic.getMinXVel()) {
+                    setxVel(PlayerLogic.getMinXVel());
+                } else if (getxVel() < PlayerLogic.getxVel() - PlayerLogic.getxAcceleration()) {
+                    setxVel(getxVel() + PlayerLogic.getxAcceleration());
+                } else {
+                    setxVel(PlayerLogic.getxVel());
+                }
+                setStrafing(true);
+            } else if (GAME.isPressed(KeyCode.LEFT) && GAME.isPressed(KeyCode.RIGHT)) {
+                if (getDir()) {
+                    if (getxVel() == PlayerLogic.getxVel()) {
+                        changeDirection();
+                    }
+                } else {
+                    if (getxVel() == -PlayerLogic.getxVel()) {
+                        changeDirection();
                     }
                 }
                 setStrafing(true);

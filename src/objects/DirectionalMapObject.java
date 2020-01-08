@@ -14,6 +14,10 @@ public class DirectionalMapObject extends MapObject {
         this.dir = dir;
     }
 
+    public void setDir(boolean d) {
+        dir = d;
+    }
+
     public void changeDirection() { //this is for changing the image from left to right orientation
         Image temp = otherImage;
         otherImage = super.getObjectData().image;

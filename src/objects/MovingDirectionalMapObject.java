@@ -52,7 +52,7 @@ public class MovingDirectionalMapObject extends DirectionalMapObject {
 
     public void changeDirection() {
         super.changeDirection();
-        xVel = -xVel;
+        //xVel = -xVel;
     }
 
     public float getxVel() {
