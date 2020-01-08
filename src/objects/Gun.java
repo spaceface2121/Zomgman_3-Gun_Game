@@ -159,8 +159,8 @@ public class Gun extends DirectionalMapObject {
                 playerToTakeDamage = Main.getGame().getPlayer1();
             }
 
-            if (Math.abs(bullet.getDistanceTraveled()) > bullet.getRange() || bullet.isOutOfBounds() || CollisionLogic.collidedWithBlock(bullet.getObjectData()) || CollisionLogic.collided(playerToTakeDamage.getObjectData(), bullet.getObjectData())) {
-                if (CollisionLogic.collided(playerToTakeDamage.getObjectData(), bullet.getObjectData())) {
+            if (Math.abs(bullet.getDistanceTraveled()) > bullet.getRange() || bullet.isOutOfBounds() || CollisionLogic.collidedWithBlock(bullet.getObjectData()) || Math.abs(CollisionLogic.willCollideHorizontallyWithPlayer(bullet)) < Math.abs(bullet.getxVel()) || CollisionLogic.collided(playerToTakeDamage.getObjectData(), bullet.getObjectData())) {
+                if (Math.abs(CollisionLogic.willCollideHorizontallyWithPlayer(bullet)) < Math.abs(bullet.getxVel()) || CollisionLogic.collided(playerToTakeDamage.getObjectData(), bullet.getObjectData())) {
                     if (playerToTakeDamage.getHealth() - bullet.getDamage() <= 0) {
                         upgrade();
                         System.out.println("upgrading in moving bullets");

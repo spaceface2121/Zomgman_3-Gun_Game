@@ -135,7 +135,11 @@ public class CollisionLogic {
 
 
 
-    public static float willCollideHorizontallyWithObject(MovingDirectionalMapObject object, float xVel) { //returns the maximum displacement without clipping into a block
+
+
+
+    public static float willCollideHorizontallyWithBlock(MovingDirectionalMapObject object) {
+        float xVel = object.getxVel();
         ObjectData objectData = object.getObjectData();
         ObjectData changedObjectData = new ObjectData(objectData.x + xVel, objectData.y, objectData.image);
 
@@ -152,38 +156,46 @@ public class CollisionLogic {
                 }
             }
         }
+        return xVel;
+    }
+
+    public static float willCollideHorizontallyWithPlayer(MovingDirectionalMapObject object) {
+        float xVel = object.getxVel();
+        ObjectData originalObjectData = object.getObjectData();
+        ObjectData changedObjectData = new ObjectData(originalObjectData.x + xVel, originalObjectData.y, originalObjectData.image);
 
         for (Player player : players) {
-
             if (object instanceof Bullet && ((Bullet)object).isPlayer1or2() == player.isPlayer1or2()) {
                 continue;
             }
 
+            ObjectData changedPlayerData = new ObjectData(player.getObjectData().x + player.getxVel(), player.getObjectData().y + player.getyVel(), player.getObjectData().image);
+
             if (Math.abs(xVel) > Main.getGame().getPlayer1().getObjectData().image.getWidth()) {
-                for (int i = (int)Main.getGame().getPlayer1().getObjectData().image.getWidth() - 5; i < Math.abs(xVel); i += Main.getGame().getPlayer1().getObjectData().image.getWidth() - 2) {
-                    changedObjectData = new ObjectData(objectData.x + i, objectData.y, objectData.image);
+                for (int i = 1; i < Math.abs(xVel); i += 2) {
+                    changedObjectData = new ObjectData(originalObjectData.x + i, originalObjectData.y, originalObjectData.image);
                     if (xVel > 0) { // if moving right
-                        if (collidedRight(changedObjectData, player.getObjectData())) {
-                            System.out.println("returned xVel: " + (player.getObjectData().x - objectData.x - objectData.w));
-                            return player.getObjectData().x - objectData.x - objectData.w;
+                        if (collidedRight(changedObjectData, changedPlayerData)) {
+                            System.out.println("returned xVel: " + (player.getObjectData().x - originalObjectData.x - originalObjectData.w));
+                            return player.getObjectData().x - originalObjectData.x - originalObjectData.w;
                         }
                     } else if (xVel < 0) { //if left
-                        if (collidedLeft(changedObjectData, player.getObjectData())) {
-                            System.out.println("returned xVel: " + (player.getObjectData().x - objectData.x + player.getObjectData().w));
-                            return player.getObjectData().x - objectData.x + player.getObjectData().w;
+                        if (collidedLeft(changedObjectData, changedPlayerData)) {
+                            System.out.println("returned xVel: " + (player.getObjectData().x - originalObjectData.x + player.getObjectData().w));
+                            return player.getObjectData().x - originalObjectData.x + player.getObjectData().w;
                         }
                     }
                 }
-            } else {
+            } else { //it breaks without the duplication of this code idk why
                 if (xVel > 0) { // if moving right
-                    if (collidedRight(changedObjectData, player.getObjectData())) {
-                        System.out.println("returned xVel: " + (player.getObjectData().x - objectData.x - objectData.w));
-                        return player.getObjectData().x - objectData.x - objectData.w;
+                    if (collidedRight(changedObjectData, changedPlayerData)) {
+                        System.out.println("returned xVel: " + (player.getObjectData().x - originalObjectData.x - originalObjectData.w));
+                        return player.getObjectData().x - originalObjectData.x - originalObjectData.w;
                     }
                 } else if (xVel < 0) { //if left
-                    if (collidedLeft(changedObjectData, player.getObjectData())) {
-                        System.out.println("returned xVel: " + (player.getObjectData().x - objectData.x + player.getObjectData().w));
-                        return player.getObjectData().x - objectData.x + player.getObjectData().w;
+                    if (collidedLeft(changedObjectData, changedPlayerData)) {
+                        System.out.println("returned xVel: " + (player.getObjectData().x - originalObjectData.x + player.getObjectData().w));
+                        return player.getObjectData().x - originalObjectData.x + player.getObjectData().w;
                     }
                 }
             }
@@ -191,7 +203,9 @@ public class CollisionLogic {
         return xVel;
     }
 
-    public static float willCollideVerticallyWithObject(ObjectData objectData, float yVel) {
+    public static float willCollideVerticallyWithBlock(MovingDirectionalMapObject object) {
+        float yVel = object.getyVel();
+        ObjectData objectData = object.getObjectData();
         ObjectData changedObjectData = new ObjectData(objectData.x, objectData.y + yVel, objectData.image);
         for (MapObject block : blocks) {
             if (yVel > 0) { //moving down
@@ -206,12 +220,17 @@ public class CollisionLogic {
                 }
             }
         }
+        return yVel;
+    }
 
+    public static float willCollideVerticallyWithPlayer(MovingDirectionalMapObject object) {
+        float yVel = object.getyVel();
+        ObjectData objectData = object.getObjectData();
+        ObjectData changedObjectData = new ObjectData(objectData.x, objectData.y + yVel, objectData.image);
         for (Player player : players) {
-            if (objectData.equals(player.getObjectData())) {
+            if (object instanceof Player && object.equals(player)) {
                 continue;
             }
-
             if (yVel > 0) { //moving down
                 if (collidedBottom(changedObjectData, player.getObjectData())) {
                     System.out.println("returned yVel: " + (player.getObjectData().y - objectData.y - player.getObjectData().h));
@@ -224,6 +243,40 @@ public class CollisionLogic {
                 }
             }
         }
+        return yVel;
+    }
+
+
+
+    public static float willCollideHorizontallyWithObject(MovingDirectionalMapObject object) { //returns the maximum displacement without clipping into a block
+        float xVel = object.getxVel();
+
+        float returnedXVel = willCollideHorizontallyWithBlock(object);
+        if (Math.abs(returnedXVel) < Math.abs(xVel)) {
+            return returnedXVel;
+        }
+
+        returnedXVel = willCollideHorizontallyWithPlayer(object);
+        if (Math.abs(returnedXVel) < Math.abs(xVel)) {
+            return returnedXVel;
+        }
+
+        return xVel;
+    }
+
+    public static float willCollideVerticallyWithObject(MovingDirectionalMapObject object) {
+        float yVel = object.getyVel();
+
+        float returnedYVel = willCollideVerticallyWithBlock(object);
+        if (Math.abs(returnedYVel) < Math.abs(yVel)) {
+            return returnedYVel;
+        }
+
+        returnedYVel = willCollideVerticallyWithPlayer(object);
+        if (Math.abs(returnedYVel) < Math.abs(yVel)) {
+            return returnedYVel;
+        }
+
         return yVel;
     }
 
