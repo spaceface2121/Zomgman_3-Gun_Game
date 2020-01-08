@@ -141,7 +141,6 @@ public class Player extends MovingDirectionalMapObject {
             }
         } else { //if player 2
             if (GAME.isPressed(KeyCode.LEFT)) {
-
                 if (getDir() || getxVel() > 0) { //if player 1 is moving right
                     changeDirection();
                 }
@@ -155,7 +154,6 @@ public class Player extends MovingDirectionalMapObject {
                     }
                 }
                 setStrafing(true);
-
             } else if (GAME.isPressed(KeyCode.RIGHT)) {
                 if (!getDir() || getxVel() < 0) { //if player 1 is moving left
                     changeDirection();

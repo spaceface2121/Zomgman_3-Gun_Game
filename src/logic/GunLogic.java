@@ -8,7 +8,7 @@ public class GunLogic {
     public static final byte SEMI = 0, BURST = 1, AUTO = 2, BUCKSHOT = 3;
     public static final byte GLOCK = 0, UZI = 1, MP5 = 2, REVOLVER = 3, AK = 4, SHOTGUN = 5, SNIPER = 6;
 
-    private static byte[] X_VELS = {18, 20, 22, 25, 25, 23, 30};
+    private static byte[] X_VELS = {18, 20, 22, 25, 25, 23, 70};
     private static final byte[] FIRE_MODES = {SEMI, BURST, AUTO, SEMI, AUTO, BUCKSHOT, SEMI};
     private static final int[] SHOT_DELAY_MILLIS = {100, 25, 75, 600, 120, 800, 1200};
     private static final int[] RELOAD_TIME_MILLIS = {1300, 1400, 1700, 2000, 2400, 2500, 3500};

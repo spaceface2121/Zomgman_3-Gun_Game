@@ -4,7 +4,9 @@ import main.Main;
 import main.data.Images;
 import main.data.Map;
 import main.data.ObjectData;
+import objects.Bullet;
 import objects.MapObject;
+import objects.MovingDirectionalMapObject;
 import objects.Player;
 
 import java.rmi.server.RemoteObjectInvocationHandler;
@@ -133,7 +135,8 @@ public class CollisionLogic {
 
 
 
-    public static float willCollideHorizontallyWithObject(ObjectData objectData, float xVel) { //returns the maximum displacement without clipping into a block
+    public static float willCollideHorizontallyWithObject(MovingDirectionalMapObject object, float xVel) { //returns the maximum displacement without clipping into a block
+        ObjectData objectData = object.getObjectData();
         ObjectData changedObjectData = new ObjectData(objectData.x + xVel, objectData.y, objectData.image);
 
         for (MapObject block : blocks) {
@@ -151,19 +154,37 @@ public class CollisionLogic {
         }
 
         for (Player player : players) {
-            if (objectData.equals(player.getObjectData())) {
+
+            if (object instanceof Bullet && ((Bullet)object).isPlayer1or2() == player.isPlayer1or2()) {
                 continue;
             }
 
-            if (xVel > 0) { //moving right
-                if (collidedRight(changedObjectData, player.getObjectData())) {
-                    System.out.println("returned xVel: " + (player.getObjectData().x - objectData.x - objectData.w));
-                    return player.getObjectData().x - objectData.x - objectData.w;
+            if (Math.abs(xVel) > Main.getGame().getPlayer1().getObjectData().image.getWidth()) {
+                for (int i = (int)Main.getGame().getPlayer1().getObjectData().image.getWidth() - 5; i < Math.abs(xVel); i += Main.getGame().getPlayer1().getObjectData().image.getWidth() - 2) {
+                    changedObjectData = new ObjectData(objectData.x + i, objectData.y, objectData.image);
+                    if (xVel > 0) { // if moving right
+                        if (collidedRight(changedObjectData, player.getObjectData())) {
+                            System.out.println("returned xVel: " + (player.getObjectData().x - objectData.x - objectData.w));
+                            return player.getObjectData().x - objectData.x - objectData.w;
+                        }
+                    } else if (xVel < 0) { //if left
+                        if (collidedLeft(changedObjectData, player.getObjectData())) {
+                            System.out.println("returned xVel: " + (player.getObjectData().x - objectData.x + player.getObjectData().w));
+                            return player.getObjectData().x - objectData.x + player.getObjectData().w;
+                        }
+                    }
                 }
-            } else if (xVel < 0) { //moving left
-                if (collidedLeft(changedObjectData, player.getObjectData())) {
-                    System.out.println("returned xVel: " + (player.getObjectData().x - objectData.x + player.getObjectData().w));
-                    return player.getObjectData().x - objectData.x + player.getObjectData().w;
+            } else {
+                if (xVel > 0) { // if moving right
+                    if (collidedRight(changedObjectData, player.getObjectData())) {
+                        System.out.println("returned xVel: " + (player.getObjectData().x - objectData.x - objectData.w));
+                        return player.getObjectData().x - objectData.x - objectData.w;
+                    }
+                } else if (xVel < 0) { //if left
+                    if (collidedLeft(changedObjectData, player.getObjectData())) {
+                        System.out.println("returned xVel: " + (player.getObjectData().x - objectData.x + player.getObjectData().w));
+                        return player.getObjectData().x - objectData.x + player.getObjectData().w;
+                    }
                 }
             }
         }

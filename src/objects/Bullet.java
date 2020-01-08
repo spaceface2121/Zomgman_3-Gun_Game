@@ -9,12 +9,14 @@ public class Bullet extends MovingDirectionalMapObject {
     private byte damage;
     private int range;
     private float distanceTraveled;
+    private boolean player1or2;
 
     public Bullet(Gun gun) {
         super(getInitialBulletData(gun), getOtherImage(gun), gun.getDir(), GunLogic.getxVel(gun.getType(), gun.getDir()), GunLogic.getyVel(gun.getType(), gun.getDir()));
         distanceTraveled = 0;
         range = GunLogic.getRange(gun.getType());
         damage = GunLogic.getDamagePerHit(gun.getType());
+        player1or2 = gun.isPlayer1or2();
     }
 
     private static ObjectData getInitialBulletData(Gun gun) {
@@ -60,6 +62,10 @@ public class Bullet extends MovingDirectionalMapObject {
 
     public int getRange() {
         return range;
+    }
+
+    public boolean isPlayer1or2() {
+        return player1or2;
     }
 
     public byte getDamage() {

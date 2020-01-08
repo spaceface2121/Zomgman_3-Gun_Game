@@ -241,6 +241,10 @@ public class Gun extends DirectionalMapObject {
         return reloading;
     }
 
+    public boolean isPlayer1or2() {
+        return player1or2;
+    }
+
     private void reset() {
         numSuccessiveRoundsFired = 0;
         timeAtLastShot = 0;
