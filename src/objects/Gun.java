@@ -156,7 +156,7 @@ public class Gun extends DirectionalMapObject {
                 playerToTakeDamage = Main.getGame().getPlayer2();
             } else { //if player 2
                 thisPlayer = Main.getGame().getPlayer2();
-                playerToTakeDamage = Main.getGame().getPlayer1(); //you may notice that im getting the "wrong" player here but this is actually the player i wanna check for collision with the bullets
+                playerToTakeDamage = Main.getGame().getPlayer1();
             }
 
             if (Math.abs(bullet.getDistanceTraveled()) > bullet.getRange() || bullet.isOutOfBounds() || CollisionLogic.collidedWithBlock(bullet.getObjectData()) || CollisionLogic.collided(playerToTakeDamage.getObjectData(), bullet.getObjectData())) {
@@ -226,10 +226,6 @@ public class Gun extends DirectionalMapObject {
             getObjectData().image = Images.leftGunImages.get(type);
             setOtherImage(Images.rightGunImages.get(type));
         }
-    }
-
-    public boolean isPlayer1or2() {
-        return player1or2;
     }
 
     public void updateCoordinates(Player player) {

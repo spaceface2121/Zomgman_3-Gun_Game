@@ -25,7 +25,9 @@ public class MovingDirectionalMapObject extends DirectionalMapObject {
 //        }
 
         data.x += CollisionLogic.willCollideHorizontallyWithObject(data, xVel);
+        //System.out.println("in dirMapObj move data.x moved");
         data.y += CollisionLogic.willCollideVerticallyWithObject(data, yVel);
+        //System.out.println("in dirMapObj move data.y moved");
 
         if (!allowOutOfBounds) {
             if (data.x < 0) {

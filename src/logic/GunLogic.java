@@ -8,13 +8,13 @@ public class GunLogic {
     public static final byte SEMI = 0, BURST = 1, AUTO = 2, BUCKSHOT = 3;
     public static final byte GLOCK = 0, UZI = 1, MP5 = 2, REVOLVER = 3, AK = 4, SHOTGUN = 5, SNIPER = 6;
 
-    private static byte[] X_VELS = {13, 15, 17, 20, 20, 18, 25};
+    private static byte[] X_VELS = {18, 20, 22, 25, 25, 23, 30};
     private static final byte[] FIRE_MODES = {SEMI, BURST, AUTO, SEMI, AUTO, BUCKSHOT, SEMI};
-    private static final int[] SHOT_DELAY_MILLIS = {100, 25, 75, 600, 120, 800, 1500};
+    private static final int[] SHOT_DELAY_MILLIS = {100, 25, 75, 600, 120, 800, 1200};
     private static final int[] RELOAD_TIME_MILLIS = {1300, 1400, 1700, 2000, 2400, 2500, 3500};
-    private static final byte[] DAMAGE_PER_HIT = {15, 12, 12, 40, 20, 20, 50};
+    private static final byte[] DAMAGE_PER_HIT = {15, 15, 13, 40, 20, 20, 50};
     private static final byte[] MAG_CAPACITY = {16, 20, 25, 6, 30, 5, 5};
-    private static int[] RANGE = {640, 600, 700, 800, 900, 400, 9999999}; //not "final" because these will have to be scaled based on screen resolution
+    private static int[] RANGE = {680, 720, 760, 1000, 950, 500, 9999999}; //not "final" because these will have to be scaled based on screen resolution
 
     public static final int BURST_DELAY = 150;
 

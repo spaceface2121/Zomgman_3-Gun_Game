@@ -1,6 +1,7 @@
 package logic;
 
 import main.Main;
+import main.data.Images;
 import main.data.Map;
 import main.data.ObjectData;
 import objects.MapObject;
@@ -25,7 +26,7 @@ public class CollisionLogic {
 
     public static boolean collidedLeft(ObjectData object1Data, ObjectData object2Data) { //checks whether or not the reference object (object1) has collided on its left with object 2
         if (object1Data.x - object2Data.x <= object2Data.w && object1Data.x - object2Data.x > 0 && intersectsOnHorizontalPlane(object1Data, object2Data)) {
-            object1Data.x = object2Data.x + object2Data.w;
+            //object1Data.x = object2Data.x + object2Data.w;
             System.out.println("obj1 @ " + (int)object1Data.x + "," + (int)object1Data.y + " w: " + object1Data.w + " h: " + object1Data.h + " collided left with obj2 @ " + (int)object2Data.x + "," + (int)object2Data.y + " w: " + object2Data.w + " h: " + object2Data.h);
             return true;
         }
@@ -34,7 +35,7 @@ public class CollisionLogic {
 
     public static boolean collidedRight(ObjectData object1Data, ObjectData object2Data) {
         if (object2Data.x - object1Data.x <= object1Data.w && object2Data.x - object1Data.x > 0 && intersectsOnHorizontalPlane(object1Data, object2Data)) {
-            object1Data.x = object2Data.x - object1Data.w;
+            //object1Data.x = object2Data.x - object1Data.w;
             System.out.println("obj1 @ " + (int)object1Data.x + "," + (int)object1Data.y + " w: " + object1Data.w + " h: " + object1Data.h + " collided right with obj2 @ " + (int)object2Data.x + "," + (int)object2Data.y + " w: " + object2Data.w + " h: " + object2Data.h);
             return true;
         }
@@ -43,7 +44,7 @@ public class CollisionLogic {
 
     public static boolean collidedTop(ObjectData object1Data, ObjectData object2Data) {
         if (object1Data.y - object2Data.y <= object2Data.h && object1Data.y - object2Data.y > 0 && intersectsOnVerticalPlane(object1Data, object2Data)) {
-            object1Data.y = object2Data.y + object2Data.h;
+            //object1Data.y = object2Data.y + object2Data.h;
             System.out.println("obj1 @ " + (int)object1Data.x + "," + (int)object1Data.y + " w: " + object1Data.w + " h: " + object1Data.h + " collided top with obj2 @ " + (int)object2Data.x + "," + (int)object2Data.y + " w: " + object2Data.w + " h: " + object2Data.h);
             return true;
         }
@@ -52,7 +53,7 @@ public class CollisionLogic {
 
     public static boolean collidedBottom(ObjectData object1Data, ObjectData object2Data) {
         if (object2Data.y - object1Data.y <= object1Data.h && object2Data.y - object1Data.y > 0 && intersectsOnVerticalPlane(object1Data, object2Data)) {
-            object1Data.y = object2Data.y - object1Data.h; //kicks the player out of glitching into the bottom blocks
+            //object1Data.y = object2Data.y - object1Data.h; //kicks the player out of glitching into the bottom blocks
             return true;
         }
         return false;
@@ -134,15 +135,16 @@ public class CollisionLogic {
 
     public static float willCollideHorizontallyWithObject(ObjectData objectData, float xVel) { //returns the maximum displacement without clipping into a block
         ObjectData changedObjectData = new ObjectData(objectData.x + xVel, objectData.y, objectData.image);
+
         for (MapObject block : blocks) {
             if (xVel > 0) { //moving right
                 if (collidedRight(changedObjectData, block.getObjectData())) {
                     System.out.println("returned xVel: " + (block.getObjectData().x - objectData.x - objectData.w));
                     return block.getObjectData().x - objectData.x - objectData.w;
                 }
-            } else { //moving left
+            } else if (xVel < 0){ //moving left
                 if (collidedLeft(changedObjectData, block.getObjectData())) {
-                    System.out.println("returned xVel: " + (block.getObjectData().x - objectData.x - block.getObjectData().w));
+                    System.out.println("returned xVel: " + (block.getObjectData().x - objectData.x + block.getObjectData().w));
                     return block.getObjectData().x - objectData.x + block.getObjectData().w;
                 }
             }
@@ -155,12 +157,12 @@ public class CollisionLogic {
 
             if (xVel > 0) { //moving right
                 if (collidedRight(changedObjectData, player.getObjectData())) {
-                    System.out.println("returned yVel: " + (player.getObjectData().x - objectData.x - objectData.w));
+                    System.out.println("returned xVel: " + (player.getObjectData().x - objectData.x - objectData.w));
                     return player.getObjectData().x - objectData.x - objectData.w;
                 }
-            } else { //moving left
+            } else if (xVel < 0) { //moving left
                 if (collidedLeft(changedObjectData, player.getObjectData())) {
-                    System.out.println("returned yVel: " + (player.getObjectData().x - objectData.x + player.getObjectData().w));
+                    System.out.println("returned xVel: " + (player.getObjectData().x - objectData.x + player.getObjectData().w));
                     return player.getObjectData().x - objectData.x + player.getObjectData().w;
                 }
             }
@@ -176,9 +178,9 @@ public class CollisionLogic {
                     System.out.println("returned yVel: " + (block.getObjectData().y - objectData.y - objectData.h));
                     return block.getObjectData().y - objectData.y - objectData.h;
                 }
-            } else { //moving up
+            } else if (yVel < 0){ //moving up
                 if (collidedTop(changedObjectData, block.getObjectData())) {
-                    System.out.println("returned yVel: " + (block.getObjectData().y - objectData.y - block.getObjectData().h));
+                    System.out.println("returned yVel: " + (block.getObjectData().y - objectData.y + block.getObjectData().h));
                     return block.getObjectData().y - objectData.y + block.getObjectData().h;
                 }
             }
@@ -194,9 +196,9 @@ public class CollisionLogic {
                     System.out.println("returned yVel: " + (player.getObjectData().y - objectData.y - player.getObjectData().h));
                     return player.getObjectData().y - objectData.y - player.getObjectData().h;
                 }
-            } else { //moving up
+            } else if (yVel < 0){ //moving up
                 if (collidedTop(changedObjectData, player.getObjectData())) {
-                    System.out.println("returned yVel: " + (player.getObjectData().y - objectData.y - player.getObjectData().h));
+                    System.out.println("returned yVel: " + (player.getObjectData().y - objectData.y + player.getObjectData().h));
                     return player.getObjectData().y - objectData.y + player.getObjectData().h;
                 }
             }

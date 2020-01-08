@@ -193,12 +193,12 @@ public class Player extends MovingDirectionalMapObject {
                 setyVel(0);
                 timesJumped = 0;
             } else if (CollisionLogic.collidedTopWithBlock(getObjectData()) || CollisionLogic.collidedTopWithPlayer(getObjectData(), player1or2) || getObjectData().y <= 0) {
-                setyVel((float) (-0.5 * getyVel() + 0.01)); //glue on ceiling
+                setyVel((float) (-0.5 * getyVel() + 0.01)); //so you bounce off when you jump and hit ur head
             } else if (CollisionLogic.collidedRightWithBlock(getObjectData()) || CollisionLogic.collidedLeftWithBlock(getObjectData())) {
                 setyVel(getyVel() - PlayerLogic.getyAcceleration());
                 timesJumped = 0;
             } else {
-                setyVel(getyVel() + PlayerLogic.getyAcceleration()); //blah
+                setyVel(getyVel() + PlayerLogic.getyAcceleration());
             }
         } else if (!(CollisionLogic.collidedBottomWithBlock(getObjectData()) && !CollisionLogic.collidedBottom(getObjectData(), getOtherPlayer().getObjectData()))) {
             falling = true;
