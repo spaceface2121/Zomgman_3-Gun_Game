@@ -1,7 +1,5 @@
 package main.data;
 
-import main.data.Images;
-import main.data.ObjectData;
 import objects.MapObject;
 
 import java.io.File;
@@ -10,16 +8,21 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Map {
-    private final String PATHNAME = "resources/map.txt";
-    private final File MAP = new File(PATHNAME);
+    private String pathname;
+    private File map;
+    private final byte NUM_MAPS = 2;
     private static ArrayList<MapObject> blocks = new ArrayList<>();
 
-    public Map(double scaleX, double scaleY) {
+    public Map(float scaleX, float scaleY) {
+        pathname = "resources/map" + (int)(Math.random() * NUM_MAPS + 1) + ".txt";
+        map = new File(pathname);
+
+
         Scanner input = null;
 
         boolean fileExists = true;
         try {
-            input = new Scanner(MAP);
+            input = new Scanner(map);
         } catch (FileNotFoundException e) {
             fileExists = false;
             System.out.println("File not found");
