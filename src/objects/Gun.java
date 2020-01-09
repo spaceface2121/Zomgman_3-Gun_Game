@@ -71,15 +71,7 @@ public class Gun extends DirectionalMapObject {
             reloading = false;
             ammoRemaining = GunLogic.getMagCapacity(type);
         } else if (ammoRemaining <= 0) {
-            reloading = true;
-            timeAtReloadStart = currTime;
-            numSuccessiveRoundsFired = 0;
-            firing = false;
-            if (player1or2) {
-                Main.getGame().getPlayer1().setHoldingShoot(false);
-            } else {
-                Main.getGame().getPlayer2().setHoldingShoot(false);
-            }
+            reload(currTime);
         }
 
         if (!reloading) {
@@ -131,6 +123,18 @@ public class Gun extends DirectionalMapObject {
                     }
                     break;
             }
+        }
+    }
+
+    public void reload(long currTime) {
+        reloading = true;
+        timeAtReloadStart = currTime;
+        numSuccessiveRoundsFired = 0;
+        firing = false;
+        if (player1or2) {
+            Main.getGame().getPlayer1().setHoldingShoot(false);
+        } else {
+            Main.getGame().getPlayer2().setHoldingShoot(false);
         }
     }
 

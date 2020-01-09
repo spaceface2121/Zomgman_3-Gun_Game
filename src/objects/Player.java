@@ -199,6 +199,16 @@ public class Player extends MovingDirectionalMapObject {
         rightHand.updateCoordinates(this, false);
         leftHand.updateCoordinates(this, true);
 
+        if (CollisionLogic.collidedRightWithBlock(getObjectData()) || CollisionLogic.collidedLeftWithBlock(getObjectData())) {
+            setxVel(0);
+            if (jumping) {
+                setyVel(getyVel() - PlayerLogic.getyAcceleration());
+            } else {
+                setyVel(PlayerLogic.getyAcceleration());
+            }
+            timesJumped = 0;
+        }
+
         if (falling) {
             if (CollisionLogic.collidedBottomWithBlock(getObjectData()) || CollisionLogic.collidedBottomWithPlayer(getObjectData(), player1or2)) {
                 falling = false;
@@ -206,15 +216,16 @@ public class Player extends MovingDirectionalMapObject {
                 timesJumped = 0;
             } else if (CollisionLogic.collidedTopWithBlock(getObjectData()) || CollisionLogic.collidedTopWithPlayer(getObjectData(), player1or2) || getObjectData().y <= 0) {
                 setyVel((float) (-0.5 * getyVel() + 0.01)); //so you bounce off when you jump and hit ur head
-            } else if (CollisionLogic.collidedRightWithBlock(getObjectData()) || CollisionLogic.collidedLeftWithBlock(getObjectData())) {
+            } /*else if (CollisionLogic.collidedRightWithBlock(getObjectData()) || CollisionLogic.collidedLeftWithBlock(getObjectData())) {
                 //setyVel(getyVel() - PlayerLogic.getyAcceleration());
+                setxVel(0);
                 if (jumping) {
                     setyVel(getyVel() - PlayerLogic.getyAcceleration());
                 } else {
                     setyVel(PlayerLogic.getyAcceleration());
                 }
                 timesJumped = 0;
-            } else {
+            }*/ else {
                 setyVel(getyVel() + PlayerLogic.getyAcceleration());
             }
         } else if (!(CollisionLogic.collidedBottomWithBlock(getObjectData()) && !CollisionLogic.collidedBottom(getObjectData(), getOtherPlayer().getObjectData()))) {

@@ -46,7 +46,7 @@ public class CollisionLogic {
 
     public static boolean collidedTop(ObjectData object1Data, ObjectData object2Data) {
         if (object1Data.y - object2Data.y <= object2Data.h && object1Data.y - object2Data.y > 0 && intersectsOnVerticalPlane(object1Data, object2Data)) {
-            //object1Data.y = object2Data.y + object2Data.h;
+            object1Data.y = object2Data.y + object2Data.h;
             System.out.println("obj1 @ " + (int)object1Data.x + "," + (int)object1Data.y + " w: " + object1Data.w + " h: " + object1Data.h + " collided top with obj2 @ " + (int)object2Data.x + "," + (int)object2Data.y + " w: " + object2Data.w + " h: " + object2Data.h);
             return true;
         }
@@ -55,7 +55,7 @@ public class CollisionLogic {
 
     public static boolean collidedBottom(ObjectData object1Data, ObjectData object2Data) {
         if (object2Data.y - object1Data.y <= object1Data.h && object2Data.y - object1Data.y > 0 && intersectsOnVerticalPlane(object1Data, object2Data)) {
-            //object1Data.y = object2Data.y - object1Data.h; //kicks the player out of glitching into the bottom blocks
+            object1Data.y = object2Data.y - object1Data.h; //kicks the player out of glitching into the bottom blocks
             return true;
         }
         return false;
