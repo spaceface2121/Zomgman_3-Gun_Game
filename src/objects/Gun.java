@@ -35,9 +35,9 @@ public class Gun extends DirectionalMapObject {
         float x;
         Image image = Images.getImageFromList(Images.getGunImages(), (byte)0, player.getDir());
         if (player.getDir()) { //if the player is facing right
-            x = playerData.x + playerData.w - 2;
+            x = playerData.x + playerData.w + 2;
         } else { //if facing left
-            x = (float)(playerData.x - image.getWidth() + 2);
+            x = (float)(playerData.x - image.getWidth() - 2);
         }
         return new ObjectData(x, (float)(playerData.y + 1.0 / 3 * playerData.h), image);
     }
@@ -218,16 +218,44 @@ public class Gun extends DirectionalMapObject {
 
     public void setImages() {
         getObjectData().image = Images.getImageFromList(Images.getGunImages(), type, getDir());
+        getObjectData().w = (byte) getObjectData().image.getWidth();
+        getObjectData().h = (byte) getObjectData().image.getHeight();
         setOtherImage(Images.getImageFromList(Images.getGunImages(), type, !getDir()));
     }
 
-    public void updateCoordinates(Player player) {
+    /*public void updateCoordinates(Player player) {
         if (player.getDir()) { //if facing right
             getObjectData().x = player.getObjectData().x + player.getObjectData().w - 2;
         } else { //if facing left
             getObjectData().x = (float)(player.getObjectData().x - getObjectData().image.getWidth() + 2);
         }
         getObjectData().y = (int)(player.getObjectData().y + 1.0 / 3 * player.getObjectData().h);
+    }
+*/
+    public void updateCoordinates(Player player) {
+        switch (type) {
+            case GunLogic.GLOCK:
+            case GunLogic.UZI:
+            case GunLogic.MP5:
+            case GunLogic.REVOLVER:
+                if (player.getDir()) { //if facing right
+                    getObjectData().x = player.getObjectData().x + player.getObjectData().w + 2;
+                } else { //if facing left
+                    getObjectData().x = (float)(player.getObjectData().x - getObjectData().image.getWidth() - 2);
+                }
+                break;
+            case GunLogic.AK:
+            case GunLogic.SHOTGUN:
+            case GunLogic.SNIPER:
+                if (player.getDir()) { //if facing right
+                    getObjectData().x = player.getObjectData().x + player.getObjectData().w - 15;
+                } else { //if facing left
+                    getObjectData().x = (float)(player.getObjectData().x - getObjectData().image.getWidth() + 15);
+                }
+                break;
+        }
+
+        getObjectData().y = (int)(player.getObjectData().y + 1.0 / 4 * player.getObjectData().h);
     }
 
     public boolean isReloading() {
