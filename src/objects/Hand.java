@@ -21,9 +21,9 @@ public class Hand extends MapObject {
         ObjectData playerData = player.getObjectData();
         float x;
         if (player.getDir() && dir || !(player.getDir() || dir)) { //if the player is facing right and hand is right or player faces left and hand is left
-            x = playerData.x + (playerData.w / 2) + 20;
+            x = (float)(playerData.x + (playerData.w / 2.0) + 10);
         } else { //if facing right and hand is left or facing left and hand is right
-            x = playerData.x + (playerData.w / 2) - 20;
+            x = (float)(playerData.x + (playerData.w / 2.0) - 10);
         }
         return new ObjectData(x, (float)(playerData.y + 1.0 / 3 * playerData.h), getHandImage(player));
     }
@@ -31,15 +31,15 @@ public class Hand extends MapObject {
     public void updateCoordinates(Player player, boolean dir) {
         if (player.getDir()) { //if the player is facing right
             if (dir) {
-                getObjectData().x = player.getObjectData().x + (player.getObjectData().w - this.getObjectData().w) / 2  + PlayerLogic.getRelativeRightHandX(player.getGun().getType());
+                getObjectData().x = (float)(player.getObjectData().x + (player.getObjectData().w - this.getObjectData().w) / 2.0)  + PlayerLogic.getRelativeRightHandX(player.getGun().getType());
             } else {
-                getObjectData().x = player.getObjectData().x + (player.getObjectData().w - this.getObjectData().w) / 2 - PlayerLogic.getRelativeLeftHandX(player.getGun().getType());
+                getObjectData().x = (float)(player.getObjectData().x + (player.getObjectData().w - this.getObjectData().w) / 2.0) - PlayerLogic.getRelativeLeftHandX(player.getGun().getType());
             }
         } else { //if facing right and hand is left or facing left and hand is right
             if (dir) {
-                getObjectData().x = player.getObjectData().x + (player.getObjectData().w - this.getObjectData().w) / 2 - PlayerLogic.getRelativeRightHandX(player.getGun().getType());
+                getObjectData().x = (float)(player.getObjectData().x + (player.getObjectData().w - this.getObjectData().w) / 2.0) - PlayerLogic.getRelativeRightHandX(player.getGun().getType());
             } else {
-                getObjectData().x = player.getObjectData().x + (player.getObjectData().w - this.getObjectData().w) / 2 + PlayerLogic.getRelativeLeftHandX(player.getGun().getType());
+                getObjectData().x = (float)(player.getObjectData().x + (player.getObjectData().w - this.getObjectData().w) / 2.0) + PlayerLogic.getRelativeLeftHandX(player.getGun().getType());
             }
         }
         getObjectData().y = (int)(player.getObjectData().y + 1.0 / 3 * player.getObjectData().h);
