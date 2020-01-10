@@ -121,7 +121,7 @@ public class Game extends Application {
                     }
             );
             Images.generateScaledImages(scaleFullX, scaleFullY);
-            GunLogic.generateScaledProperties(scaleFullX);
+            GunLogic.generateScaledProperties(scaleFullX, scaleFullY);
             PlayerLogic.generateScaledProperties(scaleFullX, scaleFullY);
 
             player1 = new Player(true);

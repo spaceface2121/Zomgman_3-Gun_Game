@@ -34,12 +34,12 @@ public class Images {
             AK_RIGHT_IMAGE_PATH, SHOTGUN_RIGHT_IMAGE_PATH, SNIPER_RIGHT_IMAGE_PATH, GLOCK_LEFT_IMAGE_PATH, UZI_LEFT_IMAGE_PATH, MP5_LEFT_IMAGE_PATH, REVOLVER_LEFT_IMAGE_PATH,
             AK_LEFT_IMAGE_PATH, SHOTGUN_LEFT_IMAGE_PATH, SNIPER_LEFT_IMAGE_PATH));
 
-    private static final String LIGHT_BULLET_RIGHT_IMAGE_PATH = "file:resources/bullet.jpg";
-    private static final String STANDARD_BULLET_RIGHT_IMAGE_PATH = "file:resources/bullet.jpg";
-    private static final String HEAVY_BULLET_RIGHT_IMAGE_PATH = "file:resources/bullet.jpg";
-    private static final String LIGHT_BULLET_LEFT_IMAGE_PATH = "file:resources/bullet.jpg";
-    private static final String STANDARD_BULLET_LEFT_IMAGE_PATH = "file:resources/bullet.jpg";
-    private static final String HEAVY_BULLET_LEFT_IMAGE_PATH = "file:resources/bullet.jpg";
+    private static final String LIGHT_BULLET_RIGHT_IMAGE_PATH = "file:resources/bullet_light_right.jpg";
+    private static final String STANDARD_BULLET_RIGHT_IMAGE_PATH = "file:resources/bullet_standard_right.png";
+    private static final String HEAVY_BULLET_RIGHT_IMAGE_PATH = "file:resources/bullet_heavy_right.png";
+    private static final String LIGHT_BULLET_LEFT_IMAGE_PATH = "file:resources/bullet_light_left.jpg";
+    private static final String STANDARD_BULLET_LEFT_IMAGE_PATH = "file:resources/bullet_standard_left.png";
+    private static final String HEAVY_BULLET_LEFT_IMAGE_PATH = "file:resources/bullet_heavy_left.png";
     private static final ArrayList<String> BULLET_PATHS = new ArrayList<>(Arrays.asList(LIGHT_BULLET_RIGHT_IMAGE_PATH, STANDARD_BULLET_RIGHT_IMAGE_PATH, HEAVY_BULLET_RIGHT_IMAGE_PATH,
             LIGHT_BULLET_LEFT_IMAGE_PATH, STANDARD_BULLET_LEFT_IMAGE_PATH, HEAVY_BULLET_LEFT_IMAGE_PATH));
 

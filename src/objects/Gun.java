@@ -74,7 +74,7 @@ public class Gun extends DirectionalMapObject {
                     case GunLogic.SEMI:
                     case GunLogic.BUCKSHOT: return;
                 }
-            } else if (currTime - timeAtLastPress >= GunLogic.BURST_DELAY){
+            } else if (currTime - timeAtLastPress >= GunLogic.getBurstDelay()){
                 firing = true;
             }
 
@@ -102,7 +102,7 @@ public class Gun extends DirectionalMapObject {
                             stopFiring();
                             break;
                         }
-                    } else if (numSuccessiveRoundsFired == 0 && currTime - timeAtLastPress < GunLogic.BURST_DELAY) {
+                    } else if (numSuccessiveRoundsFired == 0 && currTime - timeAtLastPress < GunLogic.getBurstDelay()) {
                         return;
                     }
 

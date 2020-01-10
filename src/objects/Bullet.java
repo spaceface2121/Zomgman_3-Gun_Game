@@ -24,13 +24,13 @@ public class Bullet extends MovingDirectionalMapObject {
     private static ObjectData getInitialBulletData(Gun gun) {
         ObjectData gunData = gun.getObjectData();
 
-        float x, y;
+        float x, y; //where the bullet spawns
         if (gun.getDir()) { //if facing right
             x = gunData.x + gunData.w;
         } else { //if facing left
             x = gunData.x;
         }
-        y = (float)(gunData.y + gunData.h / 2.0);
+        y = gunData.y + GunLogic.getRelativeBulletExitPointY(gun.getType());
 
         switch(gun.getType()) { //DONT FORGET TO ACTUALLY DO THIS
             case GunLogic.GLOCK:
