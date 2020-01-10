@@ -14,8 +14,6 @@ public class Images {
 
     private static final String BLOCK_IMAGE_PATH = "file:resources/block.jpg";
 
-    private static final String BACKGROUND_IMAGE_PATH = "file:resources/background.jpg";
-
     private static final String GLOCK_RIGHT_IMAGE_PATH = "file:resources/glock_right.png";
     private static final String UZI_RIGHT_IMAGE_PATH = "file:resources/uzi_right.jpg";
     private static final String MP5_RIGHT_IMAGE_PATH = "file:resources/mp5_right.jpg";
@@ -48,7 +46,7 @@ public class Images {
 
     private static ArrayList<Image> playerImages = new ArrayList<>();
     private static Image block = new Image(BLOCK_IMAGE_PATH);
-    private static Image background = new Image(BACKGROUND_IMAGE_PATH);
+    private static Image background, mainMenuImage = new Image("file:resources/menu_image.jpg");
     private static ArrayList<Image> gunImages = new ArrayList<>();
     private static ArrayList<Image> bulletImages = new ArrayList<>();
     private static Image hand1 = new Image(HAND1_IMAGE_PATH);
@@ -57,7 +55,6 @@ public class Images {
     public static void generateScaledImages(float scaleX, float scaleY) {
         fillArrayListWithScaledImages(scaleX, scaleY, PLAYER_PATHS, playerImages);
         block = getScaledImage(scaleX, scaleY, block);
-        background = getScaledImage(scaleX, scaleY, background);
         fillArrayListWithScaledImages(scaleX, scaleY, GUN_PATHS, gunImages);
         fillArrayListWithScaledImages(scaleX, scaleY, BULLET_PATHS, bulletImages);
         hand1 = getScaledImage(scaleX, scaleY, hand1);
@@ -88,6 +85,9 @@ public class Images {
     public static Image getBackgroundImage() {
         return background;
     }
+    public static Image getMainMenuImage() {
+        return mainMenuImage;
+    }
     public static ArrayList<Image> getPlayerImages() {
         return playerImages;
     }
@@ -96,6 +96,10 @@ public class Images {
     }
     public static ArrayList<Image> getBulletImages() {
         return bulletImages;
+    }
+
+    public static void setBackgroundImage(float scaleX, float scaleY, Image backgroundImage) {
+        background = getScaledImage(scaleX, scaleY, backgroundImage);
     }
 
     public static Image getHandImage(boolean player1or2) {

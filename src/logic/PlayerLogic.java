@@ -8,8 +8,8 @@ import objects.Player;
 public class PlayerLogic {
     public static byte HAND1 = 0, HAND2 = 1, PLAYER1 = 0, PLAYER2 = 1;
     private static float MAX_X_VEL = 7, MIN_X_VEL = 3, Y_VEL = -12, Y_ACCELERATION = (float)0.5, X_ACCELERATION = (float)0.4;
-    private static float[] relativeRightHandX = {15, 20, 25, 40, 25, 30, 50}; //absolute value of where the right hand would be relative to the gun (x)
-    private static float[] relativeLeftHandX = {10, 20, 15, 40, 55, 30, 50}; //same thing but left hand
+    private static float[] relativeRightHandX = {15, 20, 25, 40, 25, 30, 15}; //absolute value of where the right hand would be relative to the gun (x)
+    private static float[] relativeLeftHandX = {10, 20, 15, 40, 55, 30, 20}; //same thing but left hand
     private static float[] relativeRightHandY = {5, 5, 5, 5, 5, 5, 5}; //absolute value of where the right hand would be relative to the gun (y)
     private static float[] relativeLeftHandY = {5, 5, 5, 5, 5, 5, 5}; //same thing but left hand
     //actually fill in these values nig

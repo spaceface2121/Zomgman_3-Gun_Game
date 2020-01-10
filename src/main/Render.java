@@ -17,7 +17,7 @@ public class Render {
     private static GraphicsContext graphicsContext = GAME.getGraphicsContext();
 
     public static void drawMainMenu() {
-
+        graphicsContext.drawImage(Images.getMainMenuImage(), 0, 0);
     }
 
     public static void drawGame() {

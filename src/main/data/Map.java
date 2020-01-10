@@ -1,5 +1,7 @@
 package main.data;
 
+import javafx.scene.image.Image;
+import main.Game;
 import objects.MapObject;
 
 import java.io.File;
@@ -8,14 +10,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Map {
-    private String pathname;
+    private String mapPath, backgroundPath;
     private File map;
-    private final byte NUM_MAPS = 2;
+    private final byte NUM_MAPS = 2, NUM_BACKGROUNDS = 8;
     private static ArrayList<MapObject> blocks = new ArrayList<>();
 
     public Map(float scaleX, float scaleY) {
-        pathname = "resources/map" + (int)(Math.random() * NUM_MAPS + 1) + ".txt";
-        map = new File(pathname);
+        //mapPath = "resources/map2.txt";
+        mapPath = "resources/map" + (int)(Math.random() * NUM_MAPS + 1) + ".txt";
+        map = new File(mapPath);
+        //backgroundPath = "file:resources/background1.jpg";
+        backgroundPath = "file:resources/background" + (int)(Math.random() * NUM_BACKGROUNDS + 1) + ".jpg";
+        Images.setBackgroundImage(scaleX, scaleY, new Image(backgroundPath));
+        Images.generateScaledImages(scaleX, scaleY);
 
 
         Scanner input = null;

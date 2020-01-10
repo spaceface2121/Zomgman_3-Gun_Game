@@ -31,7 +31,7 @@ public class Game extends Application {
     private Stage stage;
     public int w, h, fullW, fullH;
 
-    public static float scaleX, scaleY;
+    private static float scaleX, scaleY;
     public static float scaleFullX, scaleFullY;
 
     private byte screen;
@@ -53,12 +53,14 @@ public class Game extends Application {
             this.stage = stage;
             screen = 0;
 
-            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-            w = (int)primaryScreenBounds.getWidth();
-            h = (int)primaryScreenBounds.getHeight();
-            System.out.println("w: " + w + " h: " + h);
+            w = 1280;
+            h = 720;
+//            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+//            w = (int)primaryScreenBounds.getWidth();
+//            h = (int)primaryScreenBounds.getHeight();
+//            System.out.println("w: " + w + " h: " + h);
 
-            primaryScreenBounds = Screen.getPrimary().getBounds();
+            Rectangle2D primaryScreenBounds = Screen.getPrimary().getBounds();
             fullW = (int)primaryScreenBounds.getWidth();
             fullH = (int)primaryScreenBounds.getHeight();
             System.out.println("fullW: " + fullW + " fullH: " + fullH);
@@ -103,6 +105,7 @@ public class Game extends Application {
                             */
                             switch (screen) {
                                 case 0:
+                                    Render.drawMainMenu();
                                     break;
                                 case 1:
                                     player1.update();
@@ -120,14 +123,12 @@ public class Game extends Application {
                         }
                     }
             );
-            Images.generateScaledImages(scaleFullX, scaleFullY);
+            map = new Map(scaleFullX, scaleFullY);
             GunLogic.generateScaledProperties(scaleFullX, scaleFullY);
             PlayerLogic.generateScaledProperties(scaleFullX, scaleFullY);
 
             player1 = new Player(true);
             player2 = new Player(false);
-
-            map = new Map(scaleFullX, scaleFullY);
 
 
             loop.getKeyFrames().add(keyFrame);
@@ -172,5 +173,4 @@ public class Game extends Application {
     public Player getPlayer2() {
         return player2;
     }
-
 }
