@@ -1,12 +1,11 @@
 package objects;
 
 import javafx.scene.image.Image;
+import logic.PlayerLogic;
 import main.data.Images;
 import main.data.ObjectData;
 
 public class Hand extends MapObject {
-    private Image hand1 = Images.getImages().get(Images.HAND1);
-    private Image hand2 = Images.getImages().get(Images.HAND2);
     private boolean player1or2;
 
     public Hand(Player player, boolean dir) {
@@ -15,11 +14,7 @@ public class Hand extends MapObject {
     }
 
     private static Image getHandImage(Player player) {
-        if (player.isPlayer1or2()) { //if 1
-            return Images.getImages().get(Images.HAND1);
-        } else { //if 2
-            return Images.getImages().get(Images.HAND2);
-        }
+        return Images.getHandImage(player.isPlayer1or2());
     }
 
     private static ObjectData getInitialHandData(Player player, boolean dir) {

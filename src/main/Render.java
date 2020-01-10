@@ -22,7 +22,7 @@ public class Render {
 
     public static void drawGame() {
         // draws background
-        graphicsContext.drawImage(Images.getImages().get(Images.BACKGROUND), 0, 0);
+        graphicsContext.drawImage(Images.getBackgroundImage(), 0, 0);
 
         // draws blocks
         for (MapObject block : Map.getBlocks()) {

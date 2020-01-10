@@ -40,17 +40,17 @@ public class Player extends MovingDirectionalMapObject {
     //gets initial player data based on which player it is
     private static ObjectData getInitialPlayerData(boolean player1or2) {
         if (player1or2)  { //if player 1
-            return new ObjectData(0, 0, Images.getImages().get(Images.P1_R)); //player 1's "default" image is facing right
+            return new ObjectData(0, 0, Images.getImageFromList(Images.getPlayerImages(), PlayerLogic.PLAYER1, true)); //player 1's "default" image is facing right
         } else { //if player 2
-            return new ObjectData((int)(1890 * Game.scaleFullX), 0, Images.getImages().get(Images.P2_L)); //players 2's is facing left
+            return new ObjectData((int)(1890 * Game.scaleFullX), 0, Images.getImageFromList(Images.getPlayerImages(), PlayerLogic.PLAYER2, false)); //players 2's is facing left
         }
     }
     //gets the initial "other" image
     private static Image getOtherImage(boolean player1or2) {
         if (player1or2) {
-            return Images.getImages().get(Images.P1_L);
+            return Images.getImageFromList(Images.getPlayerImages(), PlayerLogic.PLAYER1, false);
         } else {
-            return Images.getImages().get(Images.P2_R);
+            return Images.getImageFromList(Images.getPlayerImages(), PlayerLogic.PLAYER2, true);
         }
     }
 

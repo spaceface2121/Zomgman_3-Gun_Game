@@ -35,7 +35,7 @@ public class Map {
                 float y = Float.parseFloat(block.substring(block.indexOf(',') + 1));
                 x *= scaleX;
                 y *= scaleY;
-                blocks.add(new MapObject(new ObjectData(x, y, Images.getImages().get(Images.BLOCK))));
+                blocks.add(new MapObject(new ObjectData(x, y, Images.getBlockImage())));
             }
         }
     }

@@ -12,7 +12,7 @@ import main.data.ObjectData;
 import java.util.ArrayList;
 
 public class Gun extends DirectionalMapObject {
-    private byte type, fireMode, ammoRemaining, numSuccessiveRoundsFired;
+    private byte type = 0, fireMode, ammoRemaining, numSuccessiveRoundsFired;
     private int delayBetweenShots, reloadTime;
     private long timeAtLastShot = 0;
     private long timeAtLastPress = 0;
@@ -33,23 +33,17 @@ public class Gun extends DirectionalMapObject {
     private static ObjectData getInitialGunData(Player player) {
         ObjectData playerData = player.getObjectData();
         float x;
-        Image image;
+        Image image = Images.getImageFromList(Images.getGunImages(), (byte)0, player.getDir());
         if (player.getDir()) { //if the player is facing right
-            image = Images.getImages().get(Images.GLOCK_R);
             x = playerData.x + playerData.w - 2;
         } else { //if facing left
-            image = Images.getImages().get(Images.GLOCK_L);
             x = (float)(playerData.x - image.getWidth() + 2);
         }
         return new ObjectData(x, (float)(playerData.y + 1.0 / 3 * playerData.h), image);
     }
     //get the initial "other" image of the gun
     private static Image getOtherImage(Player player) {
-        if (player.getDir()) { //if right
-            return Images.getImages().get(Images.GLOCK_L);
-        } else { //if left
-            return Images.getImages().get(Images.GLOCK_R);
-        }
+        return Images.getImageFromList(Images.getGunImages(), (byte)0, !player.getDir());
     }
 
 
@@ -223,13 +217,8 @@ public class Gun extends DirectionalMapObject {
     }
 
     public void setImages() {
-        if (getDir()) {
-            getObjectData().image = Images.rightGunImages.get(type);
-            setOtherImage(Images.leftGunImages.get(type));
-        } else {
-            getObjectData().image = Images.leftGunImages.get(type);
-            setOtherImage(Images.rightGunImages.get(type));
-        }
+        getObjectData().image = Images.getImageFromList(Images.getGunImages(), type, getDir());
+        setOtherImage(Images.getImageFromList(Images.getGunImages(), type, !getDir()));
     }
 
     public void updateCoordinates(Player player) {

@@ -10,6 +10,7 @@ public class Bullet extends MovingDirectionalMapObject {
     private int range;
     private float distanceTraveled;
     private boolean player1or2;
+    private byte bulletType;
 
     public Bullet(Gun gun) {
         super(getInitialBulletData(gun), getOtherImage(gun), gun.getDir(), GunLogic.getxVel(gun.getType(), gun.getDir()), GunLogic.getyVel(gun.getType(), gun.getDir()));
@@ -17,20 +18,23 @@ public class Bullet extends MovingDirectionalMapObject {
         range = GunLogic.getRange(gun.getType());
         damage = GunLogic.getDamagePerHit(gun.getType());
         player1or2 = gun.isPlayer1or2();
+        bulletType = GunLogic.getBulletTypes(gun.getType());
     }
 
     private static ObjectData getInitialBulletData(Gun gun) {
         ObjectData gunData = gun.getObjectData();
 
-        float x;
+        float x, y;
         if (gun.getDir()) { //if facing right
             x = gunData.x + gunData.w;
         } else { //if facing left
             x = gunData.x;
         }
+        y = (float)(gunData.y + gunData.h / 2.0);
+
         switch(gun.getType()) { //DONT FORGET TO ACTUALLY DO THIS
             case GunLogic.GLOCK:
-                return new ObjectData(x, (int)(gunData.y + gunData.h / 2.0), getOtherImage(gun));
+
             case GunLogic.UZI:
 
             case GunLogic.MP5:
@@ -44,11 +48,12 @@ public class Bullet extends MovingDirectionalMapObject {
             case GunLogic.SNIPER:
 
         }
-        return new ObjectData(x, (int)(gunData.y + gunData.h / 2.0), getOtherImage(gun));
+
+        return new ObjectData(x, y, Images.getImageFromList(Images.getBulletImages(), GunLogic.getBulletTypes(gun.getType()), gun.getDir()));
     }
 
     private static Image getOtherImage(Gun gun) {
-        return Images.getImages().get(Images.LIGHT_BULLET_L);
+        return Images.getImageFromList(Images.getBulletImages(), GunLogic.getBulletTypes(gun.getType()), !gun.getDir());
     }
 
     public void move() {

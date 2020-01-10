@@ -6,6 +6,7 @@ import objects.Hand;
 import objects.Player;
 
 public class PlayerLogic {
+    public static byte HAND1 = 0, HAND2 = 1, PLAYER1 = 0, PLAYER2 = 1;
     private static float MAX_X_VEL = 7, MIN_X_VEL = 3, Y_VEL = -12, Y_ACCELERATION = (float)0.5, X_ACCELERATION = (float)0.4;
     private static float[] relativeRightHandX = {5, 5, 5, 5, 5, 5, 5}; //absolute value of where the right hand would be relative to the gun (x)
     private static float[] relativeLeftHandX = {10, 10, 10, 10, 10, 10, 10}; //same thing but left hand
