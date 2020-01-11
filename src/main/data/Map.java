@@ -16,8 +16,8 @@ public class Map {
     private static ArrayList<MapObject> blocks = new ArrayList<>();
 
     public Map(float scaleX, float scaleY) {
-        mapPath = "resources/map2.txt";
-        //mapPath = "resources/map" + (int)(Math.random() * NUM_MAPS + 1) + ".txt";
+        //mapPath = "resources/map3.txt";
+        mapPath = "resources/map" + (int)(Math.random() * NUM_MAPS + 1) + ".txt";
         map = new File(mapPath);
         //backgroundPath = "file:resources/background1.jpg";
         backgroundPath = "file:resources/background" + (int)(Math.random() * NUM_BACKGROUNDS + 1) + ".jpg";
