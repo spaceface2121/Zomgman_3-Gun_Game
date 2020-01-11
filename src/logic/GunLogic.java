@@ -1,53 +1,23 @@
 package logic;
 
-import objects.Gun;
-
-import java.util.Random;
-
 public class GunLogic {
     public static final byte SEMI = 0, BURST = 1, AUTO = 2, BUCKSHOT = 3;
     public static final byte GLOCK = 0, UZI = 1, MP5 = 2, REVOLVER = 3, AK = 4, SHOTGUN = 5, SNIPER = 6;
     public static final byte LIGHT_BULLET = 0, STANDARD_BULLET = 1, HEAVY_BULLET = 2;
 
-    private static float[] X_VELS = {19, 21, 23, 26, 26, 24, 40};
+    private static float[] X_VELS = {19, 21, 23, 29, 24, 24, 40};
     private static final byte[] FIRE_MODES = {SEMI, BURST, AUTO, SEMI, AUTO, BUCKSHOT, SEMI};
     private static final byte[] BULLET_TYPES = {LIGHT_BULLET, LIGHT_BULLET, STANDARD_BULLET, HEAVY_BULLET, STANDARD_BULLET, STANDARD_BULLET, HEAVY_BULLET};
     private static final int[] SHOT_DELAY_MILLIS = {100, 25, 100, 600, 120, 800, 1200};
     private static final int[] RELOAD_TIME_MILLIS = {1300, 1400, 1700, 2000, 2400, 2500, 3500};
     private static final byte[] DAMAGE_PER_HIT = {15, 15, 12, 35, 17, 17, 50};
     private static final byte[] MAG_CAPACITY = {10, 25, 30, 6, 30, 5, 5};
-    private static int[] RANGE = {680, 720, 760, 1100, 950, 500, 9999999}; //not "final" because these will have to be scaled based on screen resolution
+    private static int[] RANGE = {680, 720, 760, 1000, 900, 500, 9999999}; //not "final" because these will have to be scaled based on screen resolution
     private static float[] RELATIVE_BULLET_EXIT_POINT_Y = {1, 5, 5, 5, 5, 5, 5}; //CHANGE THESE AFTER MAKING GUN MODELS
 
     private static final int BURST_DELAY = 150;
 
-//    public static byte[] getVelocities(byte type, boolean dir) {
-//        if (type > X_VELS.length - 1 || type < 0) { //i just use xVels as the reference for how many types of guns there are
-//            throwWrongTypeException(type);
-//        }
-//        byte[] velocities = new byte[2];
-//        if (dir) { //facing right
-//            velocities[0] = X_VELS[type];
-//        } else { //facing left
-//            velocities[0] = (byte)-X_VELS[type];
-//        }
-//
-//        switch (type) {
-//            case GLOCK:
-//            case MP5:
-//            case AK: velocities[1] = (byte)(Math.random() * 3); break;
-//            case UZI: velocities[1] = (byte)(Math.random() * 5); break;
-//            case REVOLVER:
-//            case SNIPER:
-//            //case SHOTGUN: velocities[1] = 0; break;
-//        }
-//        return velocities;
-//    }
-
     public static float getxVel(byte type, boolean dir) {
-        if (type < 0 || type >= X_VELS.length) {
-            throwWrongTypeException(type);
-        }
         if (dir) { //facing right
             return X_VELS[type];
         } else { //facing left
@@ -64,7 +34,7 @@ public class GunLogic {
             case REVOLVER:
             case SNIPER:
             case SHOTGUN: return 0;
-            default: throwWrongTypeException(type); return 100; //it forces me to provide a return statement what the gay
+            default: return 100; //it forces me to provide a return statement what the gay
         }
     }
 
@@ -102,10 +72,6 @@ public class GunLogic {
 
     public static float getRelativeBulletExitPointY(byte type) {
         return RELATIVE_BULLET_EXIT_POINT_Y[type];
-    }
-
-    private static void throwWrongTypeException(byte type) {
-        throw new IllegalArgumentException("Invalid gun type: type = " + type);
     }
 
     public static void generateScaledProperties(float scaleX, float scaleY) {
