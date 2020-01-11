@@ -25,12 +25,12 @@ public class GunLogic {
         }
     }
 
-    public static float getyVel(byte type, boolean dir) {
+    public static float getyVel(byte type) {
         switch (type) {
             case GLOCK:
             case MP5:
-            case UZI: return (float)(Math.random() * 2 - 1);
-            case AK: return (float)(Math.random() - 0.5);
+            case UZI: return (float)(Math.random() * 3 - 1.5);
+            case AK: return (float)(Math.random() * 2 - 1);
             case REVOLVER:
             case SNIPER:
             case SHOTGUN: return 0;
