@@ -12,7 +12,7 @@ public class Images {
     private static final String P2_LEFT_IMAGE_PATH = "file:resources/p2WIP3L.png";
     private static final ArrayList<String> PLAYER_PATHS = new ArrayList<>(Arrays.asList(P1_RIGHT_IMAGE_PATH, P2_RIGHT_IMAGE_PATH, P1_LEFT_IMAGE_PATH, P2_LEFT_IMAGE_PATH));
 
-    private static final String BLOCK_IMAGE_PATH = "file:resources/block3.jpg";
+    private static final String BLOCK_IMAGE_PATH = "file:resources/block4.jpg";
 
     private static final String GLOCK_RIGHT_IMAGE_PATH = "file:resources/glock_right.png";
     private static final String UZI_RIGHT_IMAGE_PATH = "file:resources/uzi_right.png";

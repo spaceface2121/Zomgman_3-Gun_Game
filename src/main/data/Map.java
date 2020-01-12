@@ -19,9 +19,10 @@ public class Map {
         //mapPath = "resources/map4.txt";
         mapPath = "resources/map" + (int)(Math.random() * NUM_MAPS + 1) + ".txt";
         map = new File(mapPath);
-        //backgroundPath = "file:resources/background1.jpg";
-        backgroundPath = "file:resources/background" + (int)(Math.random() * NUM_BACKGROUNDS + 9) + ".jpg";
-        Images.setBackgroundImage(scaleX, scaleY, new Image(backgroundPath));
+        //backgroundPath = "file:resources/background9L.jpg";
+
+        backgroundPath = "file:resources/backgroundL" + (int)(Math.random() * NUM_BACKGROUNDS + 9) + ".jpg";
+        Images.setBackgroundImage(scaleX, scaleY, new Image(backgroundPath, 1920, 1080, false, false));
         Images.generateScaledImages(scaleX, scaleY);
 
 
