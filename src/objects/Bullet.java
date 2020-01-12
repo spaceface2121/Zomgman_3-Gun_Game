@@ -24,11 +24,13 @@ public class Bullet extends MovingDirectionalMapObject {
     private static ObjectData getInitialBulletData(Gun gun) {
         ObjectData gunData = gun.getObjectData();
 
+        Image image = Images.getImageFromList(Images.getBulletImages(), GunLogic.getBulletTypes(gun.getType()), gun.getDir());
+
         float x, y; //where the bullet spawns
         if (gun.getDir()) { //if facing right
             x = gunData.x + gunData.w;
         } else { //if facing left
-            x = gunData.x;
+            x = gunData.x - (float)image.getWidth();
         }
         y = gunData.y + GunLogic.getRelativeBulletExitPointY(gun.getType());
 
@@ -49,7 +51,7 @@ public class Bullet extends MovingDirectionalMapObject {
 
         }
 
-        return new ObjectData(x, y, Images.getImageFromList(Images.getBulletImages(), GunLogic.getBulletTypes(gun.getType()), gun.getDir()));
+        return new ObjectData(x, y, image);
     }
 
     private static Image getOtherImage(Gun gun) {

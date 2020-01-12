@@ -5,6 +5,7 @@ public class GunLogic {
     public static final byte GLOCK = 0, UZI = 1, MP5 = 2, REVOLVER = 3, AK = 4, SHOTGUN = 5, SNIPER = 6;
     public static final byte LIGHT_BULLET = 0, STANDARD_BULLET = 1, HEAVY_BULLET = 2;
 
+    //private static float[] X_VELS = {1, 1, 1, 1, 1, 1, 1};
     private static float[] X_VELS = {19, 23, 23, 28, 24, 24, 40};
     private static final byte[] FIRE_MODES = {SEMI, BURST, AUTO, SEMI, AUTO, BUCKSHOT, SEMI};
     private static final byte[] BULLET_TYPES = {LIGHT_BULLET, LIGHT_BULLET, STANDARD_BULLET, HEAVY_BULLET, STANDARD_BULLET, STANDARD_BULLET, HEAVY_BULLET};
@@ -13,7 +14,8 @@ public class GunLogic {
     private static final byte[] DAMAGE_PER_HIT = {15, 15, 12, 35, 17, 17, 50};
     private static final byte[] MAG_CAPACITY = {10, 25, 30, 6, 30, 5, 5};
     private static int[] RANGE = {680, 720, 760, 1000, 900, 500, 9999999}; //not "final" because these will have to be scaled based on screen resolution
-    private static float[] RELATIVE_BULLET_EXIT_POINT_Y = {1, 5, 5, 5, 5, 5, 5}; //CHANGE THESE AFTER MAKING GUN MODELS
+    private static float[] RELATIVE_BULLET_EXIT_POINT_Y = {-2, 0, 0, -4, -3, -2, -2}; //CHANGE THESE AFTER MAKING GUN MODELS
+    private static float[] RELATIVE_X_POSITION = {12, 12, 0, 12, 0, 0, 0};
 
     private static final int BURST_DELAY = 150;
 
@@ -26,6 +28,7 @@ public class GunLogic {
     }
 
     public static float getyVel(byte type) {
+        //return 0;
         switch (type) {
             case GLOCK:
             case MP5: return (float)(Math.random() * 3 - 1.5);
@@ -74,10 +77,15 @@ public class GunLogic {
         return RELATIVE_BULLET_EXIT_POINT_Y[type];
     }
 
+    public static float getRelativeXPosition(byte type) {
+        return RELATIVE_X_POSITION[type];
+    }
+
     public static void generateScaledProperties(float scaleX, float scaleY) {
         for (int i = 0; i < RANGE.length; i++) { //all the arrays are the same length
             RANGE[i] = (int)(RANGE[i] * scaleX);
             X_VELS[i] = (byte)(X_VELS[i] * scaleX);
+            RELATIVE_X_POSITION[i] = RELATIVE_X_POSITION[i] * scaleX;
             RELATIVE_BULLET_EXIT_POINT_Y[i] = RELATIVE_BULLET_EXIT_POINT_Y[i] * scaleY;
         }
     }
