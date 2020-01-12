@@ -39,7 +39,7 @@ public class Gun extends DirectionalMapObject {
         } else { //if facing left
             x = (float)(playerData.x - image.getWidth() - 2);
         }
-        return new ObjectData(x, (float)(playerData.y + 1.0 / 3 * playerData.h), image);
+        return new ObjectData(x, (float)(playerData.y + 1.0 / 4 * playerData.h), image);
     }
     //get the initial "other" image of the gun
     private static Image getOtherImage(Player player) {
@@ -204,14 +204,12 @@ public class Gun extends DirectionalMapObject {
     public void upgrade() {
         if (type < GunLogic.SNIPER) {
             type++;
-            System.out.println("gun upgraded " + type);
             reset();
         }
     }
     public void downgrade() {
         if (type > 0) {
             type--;
-            System.out.println("gun downgraded " + type);
             reset();
         }
     }
@@ -233,29 +231,12 @@ public class Gun extends DirectionalMapObject {
     }
 */
     public void updateCoordinates(Player player) {
-        switch (type) {
-            case GunLogic.GLOCK:
-            case GunLogic.UZI:
-            case GunLogic.MP5:
-            case GunLogic.REVOLVER:
-                if (player.getDir()) { //if facing right
-                    getObjectData().x = player.getObjectData().x + player.getObjectData().w + 2;
-                } else { //if facing left
-                    getObjectData().x = (float)(player.getObjectData().x - getObjectData().image.getWidth() - 2);
-                }
-                break;
-            case GunLogic.AK:
-            case GunLogic.SHOTGUN:
-            case GunLogic.SNIPER:
-                if (player.getDir()) { //if facing right
-                    getObjectData().x = player.getObjectData().x + player.getObjectData().w - 15;
-                } else { //if facing left
-                    getObjectData().x = (float)(player.getObjectData().x - getObjectData().image.getWidth() + 15);
-                }
-                break;
+        if (getDir()) { //if facing right
+            getObjectData().x = player.getObjectData().x + GunLogic.getRelativeXPosition(type);
+        } else { //if left
+            getObjectData().x = player.getObjectData().x + player.getObjectData().w - getObjectData().w - GunLogic.getRelativeXPosition(type);
         }
-
-        getObjectData().y = (int)(player.getObjectData().y + 1.0 / 4 * player.getObjectData().h);
+        getObjectData().y = (float)(player.getObjectData().y + 1.0 / 4 * player.getObjectData().h);
     }
 
     public boolean isReloading() {

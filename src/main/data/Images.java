@@ -15,17 +15,17 @@ public class Images {
     private static final String BLOCK_IMAGE_PATH = "file:resources/block3.jpg";
 
     private static final String GLOCK_RIGHT_IMAGE_PATH = "file:resources/glock_right.png";
-    private static final String UZI_RIGHT_IMAGE_PATH = "file:resources/uzi_right.jpg";
-    private static final String MP5_RIGHT_IMAGE_PATH = "file:resources/mp5_right.jpg";
-    private static final String REVOLVER_RIGHT_IMAGE_PATH = "file:resources/revolver_right.jpg";
-    private static final String AK_RIGHT_IMAGE_PATH = "file:resources/ak_right.jpeg";
+    private static final String UZI_RIGHT_IMAGE_PATH = "file:resources/uzi_right.png";
+    private static final String MP5_RIGHT_IMAGE_PATH = "file:resources/mp5_right.png";
+    private static final String REVOLVER_RIGHT_IMAGE_PATH = "file:resources/revolver_right.png";
+    private static final String AK_RIGHT_IMAGE_PATH = "file:resources/ak_right.png";
     private static final String SHOTGUN_RIGHT_IMAGE_PATH = "file:resources/shotgun_right.png";
     private static final String SNIPER_RIGHT_IMAGE_PATH = "file:resources/sniper_right.png";
     private static final String GLOCK_LEFT_IMAGE_PATH = "file:resources/glock_left.png";
-    private static final String UZI_LEFT_IMAGE_PATH = "file:resources/uzi_left.jpg";
-    private static final String MP5_LEFT_IMAGE_PATH = "file:resources/mp5_left.jpg";
-    private static final String REVOLVER_LEFT_IMAGE_PATH = "file:resources/revolver_left.jpg";
-    private static final String AK_LEFT_IMAGE_PATH = "file:resources/ak_left.jpeg";
+    private static final String UZI_LEFT_IMAGE_PATH = "file:resources/uzi_left.png";
+    private static final String MP5_LEFT_IMAGE_PATH = "file:resources/mp5_left.png";
+    private static final String REVOLVER_LEFT_IMAGE_PATH = "file:resources/revolver_left.png";
+    private static final String AK_LEFT_IMAGE_PATH = "file:resources/ak_left.png";
     private static final String SHOTGUN_LEFT_IMAGE_PATH = "file:resources/shotgun_left.png";
     private static final String SNIPER_LEFT_IMAGE_PATH = "file:resources/sniper_left.png";
     private static final ArrayList<String> GUN_PATHS = new ArrayList<>(Arrays.asList(GLOCK_RIGHT_IMAGE_PATH, UZI_RIGHT_IMAGE_PATH, MP5_RIGHT_IMAGE_PATH, REVOLVER_RIGHT_IMAGE_PATH,

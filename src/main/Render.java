@@ -67,10 +67,4 @@ public class Render {
     public static void drawPaused() {
 
     }
-
-    public static void drawTournamentScreen() {
-
-    }
-
-
 }
