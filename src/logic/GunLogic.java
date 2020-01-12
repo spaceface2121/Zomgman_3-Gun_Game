@@ -5,7 +5,7 @@ public class GunLogic {
     public static final byte GLOCK = 0, UZI = 1, MP5 = 2, REVOLVER = 3, AK = 4, SHOTGUN = 5, SNIPER = 6;
     public static final byte LIGHT_BULLET = 0, STANDARD_BULLET = 1, HEAVY_BULLET = 2;
 
-    private static float[] X_VELS = {19, 21, 23, 29, 24, 24, 40};
+    private static float[] X_VELS = {19, 23, 23, 28, 24, 24, 40};
     private static final byte[] FIRE_MODES = {SEMI, BURST, AUTO, SEMI, AUTO, BUCKSHOT, SEMI};
     private static final byte[] BULLET_TYPES = {LIGHT_BULLET, LIGHT_BULLET, STANDARD_BULLET, HEAVY_BULLET, STANDARD_BULLET, STANDARD_BULLET, HEAVY_BULLET};
     private static final int[] SHOT_DELAY_MILLIS = {100, 25, 100, 600, 120, 800, 1200};
@@ -28,8 +28,8 @@ public class GunLogic {
     public static float getyVel(byte type) {
         switch (type) {
             case GLOCK:
-            case MP5:
-            case UZI: return (float)(Math.random() * 3 - 1.5);
+            case MP5: return (float)(Math.random() * 3 - 1.5);
+            case UZI:
             case AK: return (float)(Math.random() * 2 - 1);
             case REVOLVER:
             case SNIPER:

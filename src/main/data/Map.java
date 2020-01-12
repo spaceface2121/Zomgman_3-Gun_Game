@@ -12,11 +12,11 @@ import java.util.Scanner;
 public class Map {
     private String mapPath, backgroundPath;
     private File map;
-    private final byte NUM_MAPS = 2, NUM_BACKGROUNDS = 8;
+    private final byte NUM_MAPS = 4, NUM_BACKGROUNDS = 8;
     private static ArrayList<MapObject> blocks = new ArrayList<>();
 
     public Map(float scaleX, float scaleY) {
-        //mapPath = "resources/map3.txt";
+        //mapPath = "resources/map4.txt";
         mapPath = "resources/map" + (int)(Math.random() * NUM_MAPS + 1) + ".txt";
         map = new File(mapPath);
         //backgroundPath = "file:resources/background1.jpg";
