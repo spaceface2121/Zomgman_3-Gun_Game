@@ -196,8 +196,8 @@ public class Player extends MovingDirectionalMapObject {
 
         super.move(false);
         gun.updateCoordinates(this);
-        rightHand.updateCoordinates(this, false);
-        leftHand.updateCoordinates(this, true);
+        rightHand.updateCoordinates(this, true);
+        leftHand.updateCoordinates(this, false);
 
         if (CollisionLogic.collidedRightWithBlock(getObjectData()) || CollisionLogic.collidedLeftWithBlock(getObjectData())) {
             setxVel(0);
@@ -242,7 +242,6 @@ public class Player extends MovingDirectionalMapObject {
     }
 
     public void setStrafing(boolean s) {
-        System.out.println("strafing set: " + s);
         strafing = s;
     }
 

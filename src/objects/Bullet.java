@@ -29,8 +29,14 @@ public class Bullet extends MovingDirectionalMapObject {
         float x, y; //where the bullet spawns
         if (gun.getDir()) { //if facing right
             x = gunData.x + gunData.w;
+            if (gun.getFireMode() == GunLogic.SEMI) {
+                x -= image.getWidth();
+            }
         } else { //if facing left
-            x = gunData.x - (float)image.getWidth();
+            x = gunData.x;
+            if (gun.getFireMode() != GunLogic.SEMI) {
+                x -= image.getWidth();
+            }
         }
         y = gunData.y + GunLogic.getRelativeBulletExitPointY(gun.getType());
 

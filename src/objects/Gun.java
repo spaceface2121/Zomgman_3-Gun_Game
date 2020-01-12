@@ -236,7 +236,7 @@ public class Gun extends DirectionalMapObject {
         } else { //if left
             getObjectData().x = player.getObjectData().x + player.getObjectData().w - getObjectData().w - GunLogic.getRelativeXPosition(type);
         }
-        getObjectData().y = (float)(player.getObjectData().y + 1.0 / 4 * player.getObjectData().h);
+        getObjectData().y = (float)(player.getObjectData().y + 1.0 / 6 * player.getObjectData().h);
     }
 
     public boolean isReloading() {

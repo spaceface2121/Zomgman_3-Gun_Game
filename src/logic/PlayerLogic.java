@@ -8,18 +8,26 @@ import objects.Player;
 public class PlayerLogic {
     public static byte HAND1 = 0, HAND2 = 1, PLAYER1 = 0, PLAYER2 = 1;
     private static float MAX_X_VEL = 7, MIN_X_VEL = 3, Y_VEL = -12, Y_ACCELERATION = (float)0.5, X_ACCELERATION = (float)0.4;
-    private static float[] relativeRightHandX = {15, 20, 25, 40, 25, 30, 15}; //absolute value of where the right hand would be relative to the gun (x)
-    private static float[] relativeLeftHandX = {10, 20, 15, 40, 55, 30, 20}; //same thing but left hand
-    private static float[] relativeRightHandY = {5, 5, 5, 5, 5, 5, 5}; //absolute value of where the right hand would be relative to the gun (y)
-    private static float[] relativeLeftHandY = {5, 5, 5, 5, 5, 5, 5}; //same thing but left hand
+    private static float[] relativeRightHandX = {15, 20, 28, 20, 25, 40, 43}; //absolute value of where the right hand would be relative to the gun (x)
+    private static float[] relativeLeftHandX = {-6, -6, -13, -8, -7, -11, -11}; //same thing but left hand
+    private static float[] relativeRightHandY = {16, 18, 19, 17, 16, 16, 16}; //absolute value of where the right hand would be relative to the gun (y)
+    private static float[] relativeLeftHandY = {22, 16, 23, 27, 18, 18, 20}; //same thing but left hand
     //actually fill in these values nig
 
-    public static float getRelativeRightHandX(int i) {
-        return relativeRightHandX[i];
+    public static float getRelativeRightHandX(byte gunType) {
+        return relativeRightHandX[gunType];
     }
 
-    public static float getRelativeLeftHandX(int i) {
-        return relativeLeftHandX[i];
+    public static float getRelativeLeftHandX(byte gunType) {
+        return relativeLeftHandX[gunType];
+    }
+
+    public static float getRelativeRightHandY(byte gunType) {
+        return relativeRightHandY[gunType];
+    }
+
+    public static float getRelativeLeftHandY(byte gunType) {
+        return relativeLeftHandY[gunType];
     }
 
     public static void generateScaledProperties(float scaleX, float scaleY) {

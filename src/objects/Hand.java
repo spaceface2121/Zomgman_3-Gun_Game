@@ -42,6 +42,10 @@ public class Hand extends MapObject {
                 getObjectData().x = (float)(player.getObjectData().x + (player.getObjectData().w - this.getObjectData().w) / 2.0) + PlayerLogic.getRelativeLeftHandX(player.getGun().getType());
             }
         }
-        getObjectData().y = (int)(player.getObjectData().y + 1.0 / 3 * player.getObjectData().h);
+        if (dir) {
+            getObjectData().y = player.getObjectData().y + PlayerLogic.getRelativeRightHandY(player.getGun().getType());
+        } else {
+            getObjectData().y = player.getObjectData().y + PlayerLogic.getRelativeLeftHandY(player.getGun().getType());
+        }
     }
 }

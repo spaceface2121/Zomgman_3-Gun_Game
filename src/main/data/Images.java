@@ -12,7 +12,7 @@ public class Images {
     private static final String P2_LEFT_IMAGE_PATH = "file:resources/p2WIP3L.png";
     private static final ArrayList<String> PLAYER_PATHS = new ArrayList<>(Arrays.asList(P1_RIGHT_IMAGE_PATH, P2_RIGHT_IMAGE_PATH, P1_LEFT_IMAGE_PATH, P2_LEFT_IMAGE_PATH));
 
-    private static final String BLOCK_IMAGE_PATH = "file:resources/block4.jpg";
+    //private static final String BLOCK_IMAGE_PATH = "file:resources/block2.jpg";
 
     private static final String GLOCK_RIGHT_IMAGE_PATH = "file:resources/glock_right.png";
     private static final String UZI_RIGHT_IMAGE_PATH = "file:resources/uzi_right.png";
@@ -45,7 +45,7 @@ public class Images {
     private static final String HAND2_IMAGE_PATH = "file:resources/hand2new.png";
 
     private static ArrayList<Image> playerImages = new ArrayList<>();
-    private static Image block = new Image(BLOCK_IMAGE_PATH);
+    private static Image block;// = new Image(BLOCK_IMAGE_PATH);
     private static Image background, mainMenuImage = new Image("file:resources/menu_image.jpeg");
     private static ArrayList<Image> gunImages = new ArrayList<>();
     private static ArrayList<Image> bulletImages = new ArrayList<>();
@@ -54,7 +54,7 @@ public class Images {
 
     public static void generateScaledImages(float scaleX, float scaleY) {
         fillArrayListWithScaledImages(scaleX, scaleY, PLAYER_PATHS, playerImages);
-        block = getScaledImage(scaleX, scaleY, block);
+        //block = getScaledImage(scaleX, scaleY, block);
         fillArrayListWithScaledImages(scaleX, scaleY, GUN_PATHS, gunImages);
         fillArrayListWithScaledImages(scaleX, scaleY, BULLET_PATHS, bulletImages);
         hand1 = getScaledImage(scaleX, scaleY, hand1);
@@ -100,6 +100,10 @@ public class Images {
 
     public static void setBackgroundImage(float scaleX, float scaleY, Image backgroundImage) {
         background = getScaledImage(scaleX, scaleY, backgroundImage);
+    }
+
+    public static void setBlockImage(float scaleX, float scaleY, Image blockImage) {
+        block = getScaledImage(scaleX, scaleY, blockImage);
     }
 
     public static Image getHandImage(boolean player1or2) {
