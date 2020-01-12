@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Map {
     private String mapPath, backgroundPath;
     private File map;
-    private final byte NUM_MAPS = 4, NUM_BACKGROUNDS = 8;
+    private final byte NUM_MAPS = 4, NUM_BACKGROUNDS = 5;
     private static ArrayList<MapObject> blocks = new ArrayList<>();
 
     public Map(float scaleX, float scaleY) {
@@ -20,7 +20,7 @@ public class Map {
         mapPath = "resources/map" + (int)(Math.random() * NUM_MAPS + 1) + ".txt";
         map = new File(mapPath);
         //backgroundPath = "file:resources/background1.jpg";
-        backgroundPath = "file:resources/background" + (int)(Math.random() * NUM_BACKGROUNDS + 1) + ".jpg";
+        backgroundPath = "file:resources/background" + (int)(Math.random() * NUM_BACKGROUNDS + 9) + ".jpg";
         Images.setBackgroundImage(scaleX, scaleY, new Image(backgroundPath));
         Images.generateScaledImages(scaleX, scaleY);
 

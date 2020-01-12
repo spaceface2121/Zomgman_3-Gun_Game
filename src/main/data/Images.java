@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Images {
-    private static final String P1_RIGHT_IMAGE_PATH = "file:resources/player1_right.png"; //CHANGE THE NAME NIGGUH
-    private static final String P2_RIGHT_IMAGE_PATH = "file:resources/player2_right.png";
-    private static final String P1_LEFT_IMAGE_PATH = "file:resources/player1_left.png";
-    private static final String P2_LEFT_IMAGE_PATH = "file:resources/player2_left.png";
+    private static final String P1_RIGHT_IMAGE_PATH = "file:resources/p1WIP3.png"; //CHANGE THE NAME NIGGUH
+    private static final String P2_RIGHT_IMAGE_PATH = "file:resources/p2WIP3.png";
+    private static final String P1_LEFT_IMAGE_PATH = "file:resources/p1WIP3L.png";
+    private static final String P2_LEFT_IMAGE_PATH = "file:resources/p2WIP3L.png";
     private static final ArrayList<String> PLAYER_PATHS = new ArrayList<>(Arrays.asList(P1_RIGHT_IMAGE_PATH, P2_RIGHT_IMAGE_PATH, P1_LEFT_IMAGE_PATH, P2_LEFT_IMAGE_PATH));
 
-    private static final String BLOCK_IMAGE_PATH = "file:resources/block.jpg";
+    private static final String BLOCK_IMAGE_PATH = "file:resources/block3.jpg";
 
     private static final String GLOCK_RIGHT_IMAGE_PATH = "file:resources/glock_right.png";
     private static final String UZI_RIGHT_IMAGE_PATH = "file:resources/uzi_right.jpg";
@@ -41,8 +41,8 @@ public class Images {
     private static final ArrayList<String> BULLET_PATHS = new ArrayList<>(Arrays.asList(LIGHT_BULLET_RIGHT_IMAGE_PATH, STANDARD_BULLET_RIGHT_IMAGE_PATH, HEAVY_BULLET_RIGHT_IMAGE_PATH,
             LIGHT_BULLET_LEFT_IMAGE_PATH, STANDARD_BULLET_LEFT_IMAGE_PATH, HEAVY_BULLET_LEFT_IMAGE_PATH));
 
-    private static final String HAND1_IMAGE_PATH = "file:resources/hand1.png";
-    private static final String HAND2_IMAGE_PATH = "file:resources/hand2.png";
+    private static final String HAND1_IMAGE_PATH = "file:resources/hand1new.png";
+    private static final String HAND2_IMAGE_PATH = "file:resources/hand2new.png";
 
     private static ArrayList<Image> playerImages = new ArrayList<>();
     private static Image block = new Image(BLOCK_IMAGE_PATH);
