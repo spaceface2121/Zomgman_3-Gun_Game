@@ -37,11 +37,13 @@ public class Images {
     private static final String LIGHT_BULLET_RIGHT_IMAGE_PATH = "file:resources/bullet_light_right.png";
     private static final String STANDARD_BULLET_RIGHT_IMAGE_PATH = "file:resources/bullet_standard_right.png";
     private static final String HEAVY_BULLET_RIGHT_IMAGE_PATH = "file:resources/bullet_heavy_right.png";
+    private static final String SHOTGUN_BULLET_RIGHT_IMAGE_PATH = "file:resources/bullet_shotgun_right.png";
     private static final String LIGHT_BULLET_LEFT_IMAGE_PATH = "file:resources/bullet_light_left.png";
     private static final String STANDARD_BULLET_LEFT_IMAGE_PATH = "file:resources/bullet_standard_left.png";
     private static final String HEAVY_BULLET_LEFT_IMAGE_PATH = "file:resources/bullet_heavy_left.png";
+    private static final String SHOTGUN_BULLET_LEFT_IMAGE_PATH = "file:resources/bullet_shotgun_left.png";
     private static final ArrayList<String> BULLET_PATHS = new ArrayList<>(Arrays.asList(LIGHT_BULLET_RIGHT_IMAGE_PATH, STANDARD_BULLET_RIGHT_IMAGE_PATH, HEAVY_BULLET_RIGHT_IMAGE_PATH,
-            LIGHT_BULLET_LEFT_IMAGE_PATH, STANDARD_BULLET_LEFT_IMAGE_PATH, HEAVY_BULLET_LEFT_IMAGE_PATH));
+            SHOTGUN_BULLET_RIGHT_IMAGE_PATH, LIGHT_BULLET_LEFT_IMAGE_PATH, STANDARD_BULLET_LEFT_IMAGE_PATH, HEAVY_BULLET_LEFT_IMAGE_PATH, SHOTGUN_BULLET_LEFT_IMAGE_PATH));
 
     private static final String HAND1_IMAGE_PATH = "file:resources/hand1new.png";
     private static final String HAND2_IMAGE_PATH = "file:resources/hand2new.png";

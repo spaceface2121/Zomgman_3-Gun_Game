@@ -13,18 +13,20 @@ public class Map {
     private static ArrayList<MapObject> blocks = new ArrayList<>();
 
     public Map(float scaleX, float scaleY) {
-        final byte NUM_MAPS = 4, NUM_BACKGROUNDS = 5, NUM_BLOCKS = 3;
+        final byte NUM_MAPS = 4, NUM_BACKGROUNDS = 6, NUM_BLOCKS = 3;
 
 
         String mapPath = "resources/map" + (int) (Math.random() * NUM_MAPS + 1) + ".txt";
+        //mapPath = "resources/map4.txt";
         File map = new File(mapPath);
 
         String backgroundPath;// = "file:resources/backgroundL12.jpg";
-        backgroundPath = "file:resources/backgroundL" + (int)(Math.random() * NUM_BACKGROUNDS + 9) + ".jpg";
+        backgroundPath = "file:resources/background" + (int)(Math.random() * NUM_BACKGROUNDS + 9) + ".jpg";
+        //backgroundPath = "file:resources/background14.jpg";
 
         String blockPath = "file:resources/block" + (int)(Math.random() * NUM_BLOCKS + 1) + ".jpg";
         //System.out.println("background num: " + Integer.parseInt(backgroundPath.substring(backgroundPath.indexOf('L') + 1, backgroundPath.indexOf('.'))));
-        switch (Integer.parseInt(backgroundPath.substring(backgroundPath.indexOf('L') + 1, backgroundPath.indexOf('.')))) {
+        switch (Integer.parseInt(backgroundPath.substring(backgroundPath.lastIndexOf('d') + 1, backgroundPath.indexOf('.')))) {
             case 10: blockPath = "file:resources/block2.jpg"; break;
             case 13: blockPath = "file:resources/block1.jpg"; break;
         }

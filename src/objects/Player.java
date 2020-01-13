@@ -233,14 +233,6 @@ public class Player extends MovingDirectionalMapObject {
         }
     }
 
-    public boolean isFalling() {
-        return falling;
-    }
-
-    public boolean getStrafing() {
-        return strafing;
-    }
-
     public void setStrafing(boolean s) {
         strafing = s;
     }
@@ -285,12 +277,5 @@ public class Player extends MovingDirectionalMapObject {
     public void changeDirection() {
         super.changeDirection();
         gun.changeDirection();
-    }
-
-    public void addHealth(byte additionalHealth) {
-        health += additionalHealth;
-        if (health > 100) {
-            health = 100;
-        }
     }
 }
