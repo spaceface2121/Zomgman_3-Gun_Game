@@ -83,7 +83,7 @@ public class Gun extends DirectionalMapObject {
                     System.out.println("in buckshot");
                     System.out.println("delay: " + delayBetweenShots + " curr - last: " + (currTime - timeAtLastShot));
                     if (currTime - timeAtLastShot > delayBetweenShots) {
-                        for (int i = -1; i <= 1; i++) {
+                        for (int i = -2; i <= 2; i += 2) {
                             Bullet bullet = new Bullet(this);
                             bullet.setyVel((byte)i);
                             bullets.add(bullet);

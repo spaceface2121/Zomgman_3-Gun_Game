@@ -233,6 +233,7 @@ public class Player extends MovingDirectionalMapObject {
         }
     }
 
+
     public void setStrafing(boolean s) {
         strafing = s;
     }
