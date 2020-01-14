@@ -14,7 +14,7 @@ public class GunLogic {
     private static final byte[] DAMAGE_PER_HIT = {13, 13, 12, 35, 14, 20, 17, 17, 50};
     private static final byte[] MAG_CAPACITY = {16, 25, 30, 6, 30, 10, 30, 5, 5};
     private static int[] RANGE = {680, 720, 760, 1000, 800, 500, 900, 400, 9999999}; //not "final" because these will have to be scaled based on screen resolution
-    private static float[] RELATIVE_BULLET_EXIT_POINT_Y = {-3, 0, 3, -8, 4, -3, 1, -2, -5};
+    private static float[] RELATIVE_BULLET_EXIT_POINT_Y = {-3, 0, 0, -8, 4, -3, 1, -2, -5};
     private static float[] RELATIVE_X_POSITION = {12, 12, 0, 12, 5, 2, 0, 3, 0};
 
     private static final int BURST_DELAY = 150;

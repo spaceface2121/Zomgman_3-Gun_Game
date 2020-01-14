@@ -11,7 +11,7 @@ public class PlayerLogic {
     private static float[] relativeRightHandX = {15, 20, 28, 20, 30, 30, 25, 40, 43}; //absolute value of where the right hand would be relative to the gun (x)
     private static float[] relativeLeftHandX = {-6, -6, -13, -8, -8, -9, -7, -11, -11}; //same thing but left hand
     private static float[] relativeRightHandY = {16, 18, 19, 17, 19, 13, 16, 16, 16}; //absolute value of where the right hand would be relative to the gun (y)
-    private static float[] relativeLeftHandY = {22, 16, 23, 27, 20, 15, 18, 18, 20}; //same thing but left hand
+    private static float[] relativeLeftHandY = {22, 16, 23, 24, 20, 15, 18, 18, 20}; //same thing but left hand
     //actually fill in these values nig
 
     public static float getRelativeRightHandX(byte gunType) {
