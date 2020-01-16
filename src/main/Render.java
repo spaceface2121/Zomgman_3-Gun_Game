@@ -62,6 +62,13 @@ public class Render {
         graphicsContext.drawImage(hand1l.getObjectData().image, hand1l.getObjectData().x, hand1l.getObjectData().y);
         graphicsContext.drawImage(hand2r.getObjectData().image, hand2r.getObjectData().x, hand2r.getObjectData().y);
         graphicsContext.drawImage(hand2l.getObjectData().image, hand2l.getObjectData().x, hand2l.getObjectData().y);
+
+        graphicsContext.setFont(Font.font("Impact", 20 * Game.scaleFullX));
+        graphicsContext.setFill(Color.rgb(117, 148, 224));
+        graphicsContext.fillText(GAME.getPlayer1().getHealth() + "%", 10 * Game.scaleFullX, GAME.fullH - 8 * Game.scaleFullY);
+
+        graphicsContext.setFill(Color.rgb(228, 136, 157));
+        graphicsContext.fillText(GAME.getPlayer2().getHealth() + "%", GAME.fullW - 55 * Game.scaleFullX, GAME.fullH - 8 * Game.scaleFullY);
     }
 
     public static void drawPaused() {

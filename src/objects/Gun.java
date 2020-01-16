@@ -150,10 +150,10 @@ public class Gun extends DirectionalMapObject {
             Player playerToTakeDamage, thisPlayer;
 
             if (player1or2) { //if this gun (and subsequently these bullets) belong to player 1
-                thisPlayer = Main.getGame().getPlayer1();
+                //thisPlayer = Main.getGame().getPlayer1();
                 playerToTakeDamage = Main.getGame().getPlayer2();
             } else { //if player 2
-                thisPlayer = Main.getGame().getPlayer2();
+                //thisPlayer = Main.getGame().getPlayer2();
                 playerToTakeDamage = Main.getGame().getPlayer1();
             }
 
