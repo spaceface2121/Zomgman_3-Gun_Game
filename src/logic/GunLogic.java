@@ -1,12 +1,14 @@
 package logic;
 
+import main.Game;
+
 public class GunLogic {
     public static final byte SEMI = 0, BURST = 1, AUTO = 2, BUCKSHOT = 3;
     public static final byte GLOCK = 0, UZI = 1, MP5 = 2, REVOLVER = 3, FAMAS = 4, SAIGA = 5, AK = 6, SHOTGUN = 7, SNIPER = 8;
     public static final byte LIGHT_BULLET = 0, STANDARD_BULLET = 1, HEAVY_BULLET = 2, SHOTGUN_BULLET = 3;
 
     //private static float[] X_VELS = {1, 1, 1, 1, 1, 1, 1, 1, 1};
-    private static float[] X_VELS = {19, 23, 23, 28, 26, 25, 24, 24, 40};
+    private static float[] X_VELS = {19, 20, 23, 28, 26, 25, 24, 24, 40};
     private static final byte[] FIRE_MODES = {SEMI, BURST, AUTO, SEMI, BURST, AUTO, AUTO, BUCKSHOT, SEMI};
     private static final byte[] BULLET_TYPES = {LIGHT_BULLET, LIGHT_BULLET, LIGHT_BULLET, HEAVY_BULLET, STANDARD_BULLET, SHOTGUN_BULLET, STANDARD_BULLET, SHOTGUN_BULLET, HEAVY_BULLET};
     private static final int[] SHOT_DELAY_MILLIS = {100, 20, 100, 600, 30, 200, 120, 800, 1200};
@@ -31,11 +33,11 @@ public class GunLogic {
         //return 0;
         switch (type) {
             case GLOCK:
-            case MP5: return (float)(Math.random() * 3 - 1.5);
+            case MP5: return (float)(Math.random() * 3 - 1.5) * Game.scaleFullY;
             case UZI:
             case FAMAS:
             case SAIGA:
-            case AK: return (float)(Math.random() * 2 - 1);
+            case AK: return (float)(Math.random() * 2 - 1) * Game.scaleFullY;
             case REVOLVER:
             case SNIPER:
             case SHOTGUN: return 0;

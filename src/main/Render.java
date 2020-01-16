@@ -4,6 +4,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import logic.GunLogic;
 import main.data.Images;
 import main.data.Map;
 import main.data.ObjectData;
@@ -63,12 +64,27 @@ public class Render {
         graphicsContext.drawImage(hand2r.getObjectData().image, hand2r.getObjectData().x, hand2r.getObjectData().y);
         graphicsContext.drawImage(hand2l.getObjectData().image, hand2l.getObjectData().x, hand2l.getObjectData().y);
 
+        // draws health percentage and ammo remaining
         graphicsContext.setFont(Font.font("Impact", 20 * Game.scaleFullX));
+
         graphicsContext.setFill(Color.rgb(117, 148, 224));
-        graphicsContext.fillText(GAME.getPlayer1().getHealth() + "%", 10 * Game.scaleFullX, GAME.fullH - 8 * Game.scaleFullY);
+        graphicsContext.fillText(player1.getHealth() + "%", 10 * Game.scaleFullX, GAME.fullH - 8 * Game.scaleFullY);
+        String ammoText;
+        if (player1.getGun().isReloading()) {
+            ammoText = "reloading...";
+        } else {
+            ammoText = player1.getGun().getRemainingAmmo() + "/" + GunLogic.getMagCapacity(player1.getGun().getType());
+        }
+        graphicsContext.fillText(ammoText, 150 * Game.scaleFullX, GAME.fullH - 8 * Game.scaleFullY);
 
         graphicsContext.setFill(Color.rgb(228, 136, 157));
-        graphicsContext.fillText(GAME.getPlayer2().getHealth() + "%", GAME.fullW - 55 * Game.scaleFullX, GAME.fullH - 8 * Game.scaleFullY);
+        graphicsContext.fillText(player2.getHealth() + "%", GAME.fullW - 55 * Game.scaleFullX, GAME.fullH - 8 * Game.scaleFullY);
+        if (player2.getGun().isReloading()) {
+            ammoText = "reloading...";
+        } else {
+            ammoText = player2.getGun().getRemainingAmmo() + "/" + GunLogic.getMagCapacity(player2.getGun().getType());
+        }
+        graphicsContext.fillText(ammoText, GAME.fullW - 205 * Game.scaleFullX, GAME.fullH - 8 * Game.scaleFullY);
     }
 
     public static void drawPaused() {

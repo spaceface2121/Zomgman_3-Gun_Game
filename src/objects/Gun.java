@@ -5,6 +5,7 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import logic.CollisionLogic;
 import logic.GunLogic;
+import main.Game;
 import main.Main;
 import main.data.Images;
 import main.data.ObjectData;
@@ -54,19 +55,9 @@ public class Gun extends DirectionalMapObject {
         reloadTime = GunLogic.getReloadTime(type);
     }
 
-
     public void fire() {
-        //System.out.println("firing: " + firing + " num: " + numSuccessiveRoundsFired);
         long currTime = System.currentTimeMillis();
-
-        if (reloading && currTime - timeAtReloadStart < reloadTime) {
-            return;
-        } else if (reloading) {
-            reloading = false;
-            ammoRemaining = GunLogic.getMagCapacity(type);
-        } else if (ammoRemaining <= 0) {
-            reload(currTime);
-        }
+        checkReload(currTime);
 
         if (!reloading) {
             if (firing) {
@@ -85,7 +76,7 @@ public class Gun extends DirectionalMapObject {
                     if (currTime - timeAtLastShot > delayBetweenShots) {
                         for (int i = -2; i <= 2; i += 2) {
                             Bullet bullet = new Bullet(this);
-                            bullet.setyVel((byte)i);
+                            bullet.setyVel(i * Game.scaleFullY);
                             bullets.add(bullet);
                             timeAtLastShot = currTime;
                         }
@@ -179,6 +170,18 @@ public class Gun extends DirectionalMapObject {
         if (firing) {
             fire();
         }
+        checkReload(System.currentTimeMillis());
+    }
+
+    public void checkReload(long currTime) {
+        if (reloading && currTime - timeAtReloadStart < reloadTime) {
+            return;
+        } else if (reloading) {
+            reloading = false;
+            ammoRemaining = GunLogic.getMagCapacity(type);
+        } else if (ammoRemaining <= 0) {
+            reload(currTime);
+        }
     }
 
     public ArrayList<Bullet> getBullets() {
@@ -191,14 +194,6 @@ public class Gun extends DirectionalMapObject {
 
     public byte getFireMode() {
         return fireMode;
-    }
-
-    public byte getAmmoRemaining() {
-        return ammoRemaining;
-    }
-
-    public byte getNumSuccessiveRoundsFired() {
-        return numSuccessiveRoundsFired;
     }
 
     public void upgrade() {
@@ -237,6 +232,10 @@ public class Gun extends DirectionalMapObject {
             getObjectData().x = player.getObjectData().x + player.getObjectData().w - getObjectData().w - GunLogic.getRelativeXPosition(type);
         }
         getObjectData().y = (float)(player.getObjectData().y + 1.0 / 6 * player.getObjectData().h);
+    }
+
+    public byte getRemainingAmmo() {
+        return ammoRemaining;
     }
 
     public boolean isReloading() {

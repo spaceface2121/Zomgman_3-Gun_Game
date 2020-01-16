@@ -254,6 +254,7 @@ public class Player extends MovingDirectionalMapObject {
 
     public void update() {
         move();
+        gun.checkReload(System.currentTimeMillis());
         //more will be added potentially
     }
 
