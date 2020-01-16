@@ -9,7 +9,7 @@ public class GunLogic {
     private static float[] X_VELS = {19, 23, 23, 28, 26, 25, 24, 24, 40};
     private static final byte[] FIRE_MODES = {SEMI, BURST, AUTO, SEMI, BURST, AUTO, AUTO, BUCKSHOT, SEMI};
     private static final byte[] BULLET_TYPES = {LIGHT_BULLET, LIGHT_BULLET, LIGHT_BULLET, HEAVY_BULLET, STANDARD_BULLET, SHOTGUN_BULLET, STANDARD_BULLET, SHOTGUN_BULLET, HEAVY_BULLET};
-    private static final int[] SHOT_DELAY_MILLIS = {100, 20, 100, 600, 30, 260, 120, 800, 1200};
+    private static final int[] SHOT_DELAY_MILLIS = {100, 20, 100, 600, 30, 200, 120, 800, 1200};
     private static final int[] RELOAD_TIME_MILLIS = {1300, 1400, 1700, 2000, 2300, 3000, 2400, 2500, 3500};
     private static final byte[] DAMAGE_PER_HIT = {13, 13, 12, 35, 14, 20, 17, 17, 50};
     private static final byte[] MAG_CAPACITY = {16, 25, 30, 6, 30, 10, 30, 5, 5};

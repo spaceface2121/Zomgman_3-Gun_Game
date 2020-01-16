@@ -84,7 +84,7 @@ public class Player extends MovingDirectionalMapObject {
         if (player1or2 && !getDir() || !player1or2 && getDir()) {
             changeDirection();
         }
-        downgradeGun();
+        //downgradeGun();
     }
 
     public boolean isAlive() {
