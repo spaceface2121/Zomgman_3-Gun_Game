@@ -15,13 +15,16 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import logic.CollisionLogic;
 import logic.GunLogic;
 import logic.PlayerLogic;
 import main.data.Images;
 import main.data.Map;
 import objects.Player;
 
+import java.awt.*;
 import java.util.BitSet;
+import java.util.Collection;
 
 
 public class Game extends Application {
@@ -29,15 +32,18 @@ public class Game extends Application {
     private GraphicsContext graphicsContext;
     private Scene scene;
     private Stage stage;
-    public int w, h, fullW, fullH;
+    public int fullW, fullH;
+    public final int w = 1280, h = 720;
 
-    private static float scaleX, scaleY;
+    public static float scaleX, scaleY;
     public static float scaleFullX, scaleFullY;
 
     private byte screen;
+    public static final byte MENU_SCREEN = 0, GAME_SCREEN = 1, PAUSE_SCREEN = 2, WIN_SCREEN = 3;
 
     private Map map;
     private Player player1, player2;
+    private boolean winner, finished = false;
 
     private BitSet keyboardBitSet = new BitSet();
 
@@ -53,8 +59,6 @@ public class Game extends Application {
             this.stage = stage;
             screen = 0;
 
-            w = 1280;
-            h = 720;
 //            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 //            w = (int)primaryScreenBounds.getWidth();
 //            h = (int)primaryScreenBounds.getHeight();
@@ -87,7 +91,6 @@ public class Game extends Application {
             this.stage.setScene(scene);
             this.stage.setResizable(false);
             this.stage.setOnCloseRequest((event) -> System.exit(0));
-
             this.stage.show();
 
             Timeline loop = new Timeline();
@@ -97,44 +100,80 @@ public class Game extends Application {
                     Duration.seconds(1.0 / 60),
                     new EventHandler<ActionEvent>() {
                         public void handle(ActionEvent actionEvent) {
-                            /*Screens:
-                            0: Main menu screen
-                            1: Game screen
-                            2: Game paused screen
-                            3: Tournament mode screen
-                            */
                             switch (screen) {
-                                case 0:
-                                    Render.drawMainMenu();
+                                case MENU_SCREEN:
+                                    //Render.drawMainMenu();
                                     break;
-                                case 1:
+                                case GAME_SCREEN:
                                     player1.update();
                                     player2.update();
                                     player1.getGun().update();
                                     player2.getGun().update();
                                     Render.drawGame();
                                     break;
-                                case 2:
+                                case PAUSE_SCREEN:
+                                    //Render.drawPaused();
                                     break;
-                                case 3:
+                                case WIN_SCREEN:
+                                    Render.drawWinScreen();
                                     break;
                             }
 
                         }
                     }
             );
-            map = new Map(scaleFullX, scaleFullY);
-            GunLogic.generateScaledProperties(scaleFullX, scaleFullY);
-            PlayerLogic.generateScaledProperties(scaleFullX, scaleFullY);
-
-            player1 = new Player(true);
-            player2 = new Player(false);
-
+            reset();
 
             loop.getKeyFrames().add(keyFrame);
             loop.play();
+            Render.drawMainMenu();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void setFxThings() {
+        int width, height;
+        if (finished) {
+            width = fullW;
+            height = fullH;
+        } else {
+            width = w;
+            height = h;
+        }
+        canvas = new Canvas(width, height);
+        graphicsContext = canvas.getGraphicsContext2D();
+        Group group = new Group();
+        group.getChildren().add(canvas);
+        scene = new Scene(group);
+        scene.setOnKeyPressed(new KeyPressedHandler());
+        scene.setOnKeyReleased(new KeyReleasedHandler());
+
+        this.stage.setTitle("Zomgman 3 - Gun Game");
+        this.stage.setWidth(width);
+        this.stage.setHeight(height);
+        this.stage.setScene(scene);
+        this.stage.setResizable(false);
+        this.stage.setOnCloseRequest((event) -> System.exit(0));
+        this.stage.show();
+    }
+
+    public void reset() {
+        map = new Map(scaleFullX, scaleFullY);
+        GunLogic.generateScaledProperties(scaleFullX, scaleFullY);
+        PlayerLogic.generateScaledProperties(scaleFullX, scaleFullY);
+
+        player1 = new Player(true);
+        player2 = new Player(false);
+
+        if (finished) {
+            Render.setGame(this);
+            Render.setGraphicsContext(graphicsContext);
+            CollisionLogic.setBlocks(map.getBlocks());
+            Player[] players = {player1, player2};
+            CollisionLogic.setPlayers(players);
+            Main.setGame(this);
+            finished = false;
         }
     }
 
@@ -148,6 +187,7 @@ public class Game extends Application {
 
     public void setScreen(byte screen) {
         this.screen = screen;
+        System.out.println("screen: " + screen);
     }
 
     public byte getScreen() {
@@ -162,6 +202,10 @@ public class Game extends Application {
         return stage;
     }
 
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
     public GraphicsContext getGraphicsContext() {
         return graphicsContext;
     }
@@ -172,5 +216,26 @@ public class Game extends Application {
 
     public Player getPlayer2() {
         return player2;
+    }
+
+    public boolean getWinner() {
+        return winner;
+    }
+
+    public void setWinner(boolean player1or2) {
+        winner = player1or2;
+        finished = true;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
+    }
+
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public Map getMap() {
+        return map;
     }
 }

@@ -13,7 +13,7 @@ import java.rmi.server.RemoteObjectInvocationHandler;
 import java.util.ArrayList;
 
 public class CollisionLogic {
-    private static ArrayList<MapObject> blocks = Map.getBlocks();
+    private static ArrayList<MapObject> blocks = Main.getGame().getMap().getBlocks();
     private static Player[] players = {Main.getGame().getPlayer1(), Main.getGame().getPlayer2()};
 
     private static boolean intersectsOnHorizontalPlane(ObjectData object1Data, ObjectData object2Data) {
@@ -280,9 +280,15 @@ public class CollisionLogic {
         return yVel;
     }
 
+    public static void setBlocks(ArrayList<MapObject> blocks) {
+        CollisionLogic.blocks = blocks;
+    }
 
+    public static void setPlayers(Player[] players) {
+        CollisionLogic.players = players;
+    }
 
-//    public static boolean collidedLeft(MapObject object) {
+    //    public static boolean collidedLeft(MapObject object) {
 //        ObjectData objectData = object.getObjectData();
 //        for (MapObject block : blocks) {
 //            ObjectData blockData = block.getObjectData();

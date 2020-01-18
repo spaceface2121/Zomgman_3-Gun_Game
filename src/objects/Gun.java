@@ -7,6 +7,7 @@ import logic.CollisionLogic;
 import logic.GunLogic;
 import main.Game;
 import main.Main;
+import main.Render;
 import main.data.Images;
 import main.data.ObjectData;
 
@@ -20,6 +21,7 @@ public class Gun extends DirectionalMapObject {
     private long timeAtReloadStart = 0;
     private boolean player1or2; //who this gun belongs to
     private boolean firing = false, reloading = false;
+    private boolean won = false;
 
     private ArrayList<Bullet> bullets;
 
@@ -152,10 +154,11 @@ public class Gun extends DirectionalMapObject {
                 if (Math.abs(CollisionLogic.willCollideHorizontallyWithPlayer(bullet)) < Math.abs(bullet.getxVel()) || CollisionLogic.collided(playerToTakeDamage.getObjectData(), bullet.getObjectData())) {
                     if (playerToTakeDamage.getHealth() - bullet.getDamage() <= 0) {
                         upgrade();
-                        System.out.println("upgrading in moving bullets");
                         //thisPlayer.addHealth((byte)40);
                     }
-                    playerToTakeDamage.takeDamage(bullet.getDamage());
+                    if (!won) {
+                        playerToTakeDamage.takeDamage(bullet.getDamage());
+                    }
                 }
                 bullets.remove(i);
                 i--;
@@ -200,8 +203,14 @@ public class Gun extends DirectionalMapObject {
         if (type < GunLogic.SNIPER) {
             type++;
             reset();
+        } else {
+            Main.getGame().setWinner(player1or2);
+            won = true;
+            Main.getGame().setScreen(Game.WIN_SCREEN);
+            //Render.drawWinScreen();
         }
     }
+
     public void downgrade() {
         if (type > 0) {
             type--;

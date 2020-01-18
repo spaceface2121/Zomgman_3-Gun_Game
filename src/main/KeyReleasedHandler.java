@@ -6,23 +6,16 @@ import javafx.scene.input.KeyEvent;
 import objects.Player;
 
 public class KeyReleasedHandler implements EventHandler<KeyEvent> {
-    private final Game GAME = Main.getGame();
+    private Game GAME = Main.getGame();
 
     @Override
     public void handle(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();
         GAME.setKey(code, false);
         switch (GAME.getScreen()) {
-            /*Screens:
-              0: Main menu screen
-              1: Game screen
-              2: Game paused screen
-              3: Tournament mode screen
-            */
-            case 0:
 
-                break;
-            case 1:
+            case Game.GAME_SCREEN:
+
                 Player p1 = GAME.getPlayer1();
                 Player p2 = GAME.getPlayer2();
                 if /*player1 controls \/  */ (code == KeyCode.W) {
@@ -60,12 +53,10 @@ public class KeyReleasedHandler implements EventHandler<KeyEvent> {
                     p2.setHoldingShoot(false);
                 }
                 break;
-            case 2:
-                if (code == KeyCode.ESCAPE) {
-
-                }
-                break;
-            case 3: break;
         }
+    }
+
+    public void setGame(Game game) {
+        this.GAME = game;
     }
 }

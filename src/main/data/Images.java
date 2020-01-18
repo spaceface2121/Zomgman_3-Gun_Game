@@ -59,6 +59,7 @@ public class Images {
     private static Image hand2 = new Image(HAND2_IMAGE_PATH);
 
     public static void generateScaledImages(float scaleX, float scaleY) {
+        System.out.println("generating images");
         fillArrayListWithScaledImages(scaleX, scaleY, PLAYER_PATHS, playerImages);
         //block = getScaledImage(scaleX, scaleY, block);
         fillArrayListWithScaledImages(scaleX, scaleY, GUN_PATHS, gunImages);
@@ -118,5 +119,11 @@ public class Images {
         } else {
             return hand2;
         }
+    }
+
+    public static void clearAll() {
+        playerImages.clear();
+        gunImages.clear();
+        bulletImages.clear();
     }
 }

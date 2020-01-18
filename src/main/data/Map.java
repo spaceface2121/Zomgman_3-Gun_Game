@@ -1,6 +1,7 @@
 package main.data;
 
 import javafx.scene.image.Image;
+import logic.CollisionLogic;
 import main.Game;
 import objects.MapObject;
 
@@ -10,26 +11,26 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Map {
-    private static ArrayList<MapObject> blocks = new ArrayList<>();
+    private ArrayList<MapObject> blocks = new ArrayList<>();
 
     public Map(float scaleX, float scaleY) {
-        final byte NUM_MAPS = 4, NUM_BACKGROUNDS = 6, NUM_BLOCKS = 3;
+        final byte NUM_MAPS = 4, NUM_BACKGROUNDS = 6, NUM_BLOCKS = 4;
 
 
         String mapPath = "resources/map" + (int) (Math.random() * NUM_MAPS + 1) + ".txt";
         //mapPath = "resources/map4.txt";
         File map = new File(mapPath);
 
-        String backgroundPath;// = "file:resources/backgroundL12.jpg";
-        backgroundPath = "file:resources/background" + (int)(Math.random() * NUM_BACKGROUNDS + 9) + ".jpg";
-        //backgroundPath = "file:resources/background14.jpg";
+        String backgroundPath = "file:resources/background" + (int)(Math.random() * NUM_BACKGROUNDS + 1) + ".jpg";
+        //backgroundPath = "file:resources/background1.jpg";
 
         String blockPath = "file:resources/block" + (int)(Math.random() * NUM_BLOCKS + 1) + ".jpg";
-        //System.out.println("background num: " + Integer.parseInt(backgroundPath.substring(backgroundPath.indexOf('L') + 1, backgroundPath.indexOf('.'))));
+        //blockPath = "file:resources/block4.jpg";
         switch (Integer.parseInt(backgroundPath.substring(backgroundPath.lastIndexOf('d') + 1, backgroundPath.indexOf('.')))) {
             case 10: blockPath = "file:resources/block2.jpg"; break;
             case 13: blockPath = "file:resources/block1.jpg"; break;
         }
+        Images.clearAll();
         Images.setBlockImage(scaleX, scaleY, new Image(blockPath, 30, 30, false, false));
         Images.setBackgroundImage(scaleX, scaleY, new Image(backgroundPath, 1920, 1080, false, false));
         Images.generateScaledImages(scaleX, scaleY);
@@ -57,7 +58,7 @@ public class Map {
         }
     }
 
-    public static ArrayList<MapObject> getBlocks() {
+    public ArrayList<MapObject> getBlocks() {
         return blocks;
     }
 }

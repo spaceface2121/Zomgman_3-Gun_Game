@@ -5,13 +5,14 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Screen;
+import javafx.stage.Stage;
 import logic.GunLogic;
 import logic.PlayerLogic;
 import main.data.Images;
 import objects.Player;
 
 public class KeyPressedHandler implements EventHandler<KeyEvent> {
-    private final Game GAME = Main.getGame();
+    private Game GAME = Main.getGame();
 
     @Override
     public void handle(KeyEvent keyEvent) {
@@ -21,25 +22,26 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
             /*Screens:
               0: Main menu screen
               1: Game screen
-              2: Game paused screen
-              3: Tournament mode screen
+              2: Paused screen
+              3: Winner screen
             */
-            case 0:
+            case Game.MENU_SCREEN:
                 if (code == KeyCode.ENTER) {
-                    GAME.setScreen((byte)1);
+                    if (GAME.isFinished()) {
+                        GAME.reset();
+                    }
+                    GAME.setScreen(Game.GAME_SCREEN);
                     maximize();
-                    Render.drawGame();
-                    System.out.println("screen: " + GAME.getScreen());
+                    //Render.drawGame();
                 }
                 break;
-            case 1:
+            case Game.GAME_SCREEN:
                 Player p1 = GAME.getPlayer1();
                 Player p2 = GAME.getPlayer2();
                 if (code == KeyCode.ESCAPE) {
-                    GAME.setScreen((byte)2);
-                    minimize();
+                    GAME.setScreen(Game.PAUSE_SCREEN);
+                    //minimize();
                     Render.drawPaused();
-                    System.out.println("screen: " + GAME.getScreen());
                 } else if /*player1 controls \/  */ (code == KeyCode.W) {
                     p1.jump();
                     p1.setJumping(true);
@@ -124,18 +126,34 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
                     p2.upgradeGun();
                 }
                 break;
-            case 2:
+            case Game.PAUSE_SCREEN:
                 if (code == KeyCode.ENTER) {
-                    GAME.setScreen((byte)1);
+                    GAME.setScreen((Game.GAME_SCREEN));
                     maximize();
-                    Render.drawGame();
-                    System.out.println("screen: " + GAME.getScreen());
-                } else {
-                    //blah
+                    //Render.drawGame();
+                } else if (code == KeyCode.ESCAPE){
+                    GAME.setFinished(true);
+                    GAME.setScreen(Game.MENU_SCREEN);
+                    Render.drawMainMenu();
                 }
                 break;
-            case 3: break;
+            case Game.WIN_SCREEN:
+                if (code == KeyCode.ENTER) {
+                    GAME.reset();
+                    GAME.setScreen(Game.GAME_SCREEN);
+                    Render.setDrawnWinScreen(false);
+                } else if (code == KeyCode.ESCAPE) {
+                    GAME.setScreen(Game.MENU_SCREEN);
+                    minimize();
+                    Render.drawMainMenu();
+                    Render.setDrawnWinScreen(false);
+                }
+                break;
         }
+    }
+
+    public void setGame(Game game) {
+        this.GAME = game;
     }
 
     private void minimize() {

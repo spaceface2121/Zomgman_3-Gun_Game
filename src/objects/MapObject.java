@@ -1,6 +1,5 @@
 package objects;
 
-import javafx.scene.image.Image;
 import main.data.ObjectData;
 
 public class MapObject {
@@ -16,5 +15,9 @@ public class MapObject {
 
     public void setObjectData(ObjectData objectData) {
         this.objectData = objectData;
+    }
+
+    public String toString() {
+        return "x: " + objectData.x + ", y: " + objectData.y + ". w: " + objectData.w + ", h: " + objectData.h;
     }
 }
