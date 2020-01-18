@@ -52,7 +52,7 @@ public class Images {
 
     private static ArrayList<Image> playerImages = new ArrayList<>();
     private static Image block;// = new Image(BLOCK_IMAGE_PATH);
-    private static Image background, mainMenuImage = new Image("file:resources/menu_image.png");
+    private static Image background, mainMenuImage = new Image("file:resources/bruh3.png", 1280, 720, false, false);
     private static ArrayList<Image> gunImages = new ArrayList<>();
     private static ArrayList<Image> bulletImages = new ArrayList<>();
     private static Image hand1 = new Image(HAND1_IMAGE_PATH);
