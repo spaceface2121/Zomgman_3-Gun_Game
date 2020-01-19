@@ -1,6 +1,6 @@
 package objects;
 
-import main.data.ObjectData;
+import main.ObjectData;
 
 public class MapObject {
     private ObjectData objectData;

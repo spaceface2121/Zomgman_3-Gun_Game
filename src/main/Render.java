@@ -1,14 +1,9 @@
 package main;
 
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import logic.GunLogic;
-import main.data.Images;
-import main.data.Map;
-import main.data.ObjectData;
 import objects.*;
 
 import java.util.ArrayList;

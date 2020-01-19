@@ -1,14 +1,8 @@
 package main;
 
 import javafx.event.EventHandler;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
-import logic.GunLogic;
-import logic.PlayerLogic;
-import main.data.Images;
 import objects.Player;
 
 public class KeyPressedHandler implements EventHandler<KeyEvent> {

@@ -6,10 +6,9 @@ import logic.CollisionLogic;
 import logic.GunLogic;
 import logic.PlayerLogic;
 import main.Game;
-import main.KeyPressedHandler;
 import main.Main;
-import main.data.Images;
-import main.data.ObjectData;
+import main.Images;
+import main.ObjectData;
 
 public class Player extends MovingDirectionalMapObject {
     private Hand rightHand, leftHand;

@@ -2,7 +2,7 @@ package objects;
 
 
 import javafx.scene.image.Image;
-import main.data.ObjectData;
+import main.ObjectData;
 
 public class DirectionalMapObject extends MapObject {
     private Image otherImage;

@@ -3,7 +3,7 @@ package objects;
 import javafx.scene.image.Image;
 import logic.CollisionLogic;
 import main.Main;
-import main.data.ObjectData;
+import main.ObjectData;
 
 public class MovingDirectionalMapObject extends DirectionalMapObject {
     private float xVel, yVel;

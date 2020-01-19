@@ -1,15 +1,12 @@
 package objects;
 
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
-import javafx.util.Duration;
 import logic.CollisionLogic;
 import logic.GunLogic;
 import main.Game;
 import main.Main;
-import main.Render;
-import main.data.Images;
-import main.data.ObjectData;
+import main.Images;
+import main.ObjectData;
 
 import java.util.ArrayList;
 

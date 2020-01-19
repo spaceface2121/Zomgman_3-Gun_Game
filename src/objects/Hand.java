@@ -2,8 +2,8 @@ package objects;
 
 import javafx.scene.image.Image;
 import logic.PlayerLogic;
-import main.data.Images;
-import main.data.ObjectData;
+import main.Images;
+import main.ObjectData;
 
 public class Hand extends MapObject {
     private boolean player1or2;
