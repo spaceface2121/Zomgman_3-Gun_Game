@@ -60,6 +60,9 @@ public class Images {
     private static Image hand1 = new Image(HAND1_IMAGE_PATH);
     private static Image hand2 = new Image(HAND2_IMAGE_PATH);
 
+    /**
+     * Scaling method for all images that are scaled based on screen resolution
+     */
     public static void generateScaledImages(float scaleX, float scaleY) {
         fillArrayListWithScaledImages(scaleX, scaleY, PLAYER_PATHS, playerImages);
         fillArrayListWithScaledImages(scaleX, scaleY, GUN_PATHS, gunImages);
@@ -67,13 +70,19 @@ public class Images {
         hand1 = getScaledImage(scaleX, scaleY, hand1);
         hand2 = getScaledImage(scaleX, scaleY, hand2);
     }
-    
+
+    /**
+     * Method responsible for adding scaled images to the final array of images
+     */
     private static void fillArrayListWithScaledImages(float scaleX, float scaleY, ArrayList<String> paths, ArrayList<Image> destination) {
         for (int i = 0; i < paths.size(); i++) {
             destination.add(getScaledImage(scaleX, scaleY, new Image(paths.get(i))));
         }
     }
 
+    /**
+     * Method for actually scaling individual images
+     */
     private static Image getScaledImage(float scaleX, float scaleY, Image original) {
         return new Image(original.getUrl(), original.getWidth() * scaleX, original.getHeight() * scaleY, false, false); //makes a new image with the proper scaled dimensions
     }
@@ -93,6 +102,9 @@ public class Images {
         }
     }
 
+    /**
+     * Accessor methods for images and arrays
+     */
     public static Image getBlockImage() {
         return block;
     }
@@ -112,6 +124,9 @@ public class Images {
         return bulletImages;
     }
 
+    /**
+     * Mutator methods for scaled background and block images
+     */
     public static void setBackgroundImage(float scaleX, float scaleY, Image backgroundImage) {
         background = getScaledImage(scaleX, scaleY, backgroundImage);
     }
@@ -120,6 +135,9 @@ public class Images {
         block = getScaledImage(scaleX, scaleY, blockImage);
     }
 
+    /**
+     * Accessor method for hand images based on the identity of the player
+     */
     public static Image getHandImage(boolean player1or2) {
         if (player1or2) {
             return hand1;

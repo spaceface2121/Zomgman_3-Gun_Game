@@ -11,9 +11,17 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Map class that handles the background image and block placement
+ */
 public class Map {
     private ArrayList<MapObject> blocks = new ArrayList<>();
 
+    /**
+     * Constructor to create a random map based on screen resolution
+     * @param scaleX horizontal scaling factor
+     * @param scaleY vertical scaling factor
+     */
     public Map(float scaleX, float scaleY) {
         final byte NUM_MAPS = 4, NUM_BACKGROUNDS = 7, NUM_BLOCKS = 6;
 
