@@ -159,9 +159,14 @@ public class Game extends Application {
     }
 
     public void reset() {
+        Main.setGame(this);
+
         map = new Map(scaleFullX, scaleFullY);
-        GunLogic.generateScaledProperties(scaleFullX, scaleFullY);
-        PlayerLogic.generateScaledProperties(scaleFullX, scaleFullY);
+
+        if (!finished) {
+            GunLogic.generateScaledProperties(scaleFullX, scaleFullY);
+            PlayerLogic.generateScaledProperties(scaleFullX, scaleFullY);
+        }
 
         player1 = new Player(true);
         player2 = new Player(false);
@@ -172,7 +177,6 @@ public class Game extends Application {
             CollisionLogic.setBlocks(map.getBlocks());
             Player[] players = {player1, player2};
             CollisionLogic.setPlayers(players);
-            Main.setGame(this);
             finished = false;
         }
     }

@@ -82,16 +82,16 @@ public class Render {
         } else {
             ammoText = player1.getGun().getRemainingAmmo() + "/" + GunLogic.getMagCapacity(player1.getGun().getType());
         }
-        graphicsContext.fillText(ammoText, 150 * Game.scaleFullX, GAME.fullH - 8 * Game.scaleFullY);
+        graphicsContext.fillText(ammoText, 160 * Game.scaleFullX, GAME.fullH - GAME.getMap().getBlocks().get(0).getObjectData().h / 3.75 * Game.scaleFullY);
 
         graphicsContext.setFill(p2Color);
-        graphicsContext.fillText(player2.getHealth() + "%", GAME.fullW - 55 * Game.scaleFullX, GAME.fullH - 8 * Game.scaleFullY);
+        graphicsContext.fillText(player2.getHealth() + "%", GAME.fullW - 50 * Game.scaleFullX, GAME.fullH - 8 * Game.scaleFullY);
         if (player2.getGun().isReloading()) {
             ammoText = "reloading...";
         } else {
             ammoText = player2.getGun().getRemainingAmmo() + "/" + GunLogic.getMagCapacity(player2.getGun().getType());
         }
-        graphicsContext.fillText(ammoText, GAME.fullW - 205 * Game.scaleFullX, GAME.fullH - 8 * Game.scaleFullY);
+        graphicsContext.fillText(ammoText, GAME.fullW - 205 * Game.scaleFullX, GAME.fullH - GAME.getMap().getBlocks().get(0).getObjectData().h / 3.75 * Game.scaleFullY);
     }
 
     public static void drawPaused() {

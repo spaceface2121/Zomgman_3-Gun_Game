@@ -3,6 +3,7 @@ package main.data;
 import javafx.scene.image.Image;
 import logic.CollisionLogic;
 import main.Game;
+import main.Main;
 import objects.MapObject;
 
 import java.io.File;
@@ -30,11 +31,12 @@ public class Map {
             case 10: blockPath = "file:resources/block2.jpg"; break;
             case 13: blockPath = "file:resources/block1.jpg"; break;
         }
-        Images.clearAll();
+        //Images.clearAll();
         Images.setBlockImage(scaleX, scaleY, new Image(blockPath, 30, 30, false, false));
         Images.setBackgroundImage(scaleX, scaleY, new Image(backgroundPath, 1920, 1080, false, false));
-        Images.generateScaledImages(scaleX, scaleY);
-
+        if (!Main.getGame().isFinished()) {
+            Images.generateScaledImages(scaleX, scaleY);
+        }
 
         Scanner input = null;
 
