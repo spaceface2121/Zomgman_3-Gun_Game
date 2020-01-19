@@ -43,13 +43,13 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
 //                    if (p1.getDir() || p1.getxVel() > 0) { //if player 1 is moving right
 //                        p1.changeDirection();
 //                    }
-//                    if (p1.getxVel() != PlayerLogic.getxVel()) {
+//                    if (p1.getxVel() != PlayerLogic.getMaxXVel()) {
 //                        if (p1.getxVel() > -PlayerLogic.getMinXVel()) {
 //                            p1.setxVel(-PlayerLogic.getMinXVel());
-//                        } else if (p1.getxVel() > PlayerLogic.getxAcceleration() - PlayerLogic.getxVel()) {
+//                        } else if (p1.getxVel() > PlayerLogic.getxAcceleration() - PlayerLogic.getMaxXVel()) {
 //                            p1.setxVel(p1.getxVel() - PlayerLogic.getxAcceleration());
 //                        } else {
-//                            p1.setxVel(-PlayerLogic.getxVel());
+//                            p1.setxVel(-PlayerLogic.getMaxXVel());
 //                        }
 //                    }
 //                    p1.setStrafing(true);
@@ -57,13 +57,13 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
 //                    if (!p1.getDir() || p1.getxVel() < 0) { //if player 1 is moving left
 //                        p1.changeDirection();
 //                    }
-//                    if (p1.getxVel() != -PlayerLogic.getxVel()) {
+//                    if (p1.getxVel() != -PlayerLogic.getMaxXVel()) {
 //                        if (p1.getxVel() < PlayerLogic.getMinXVel()) {
 //                            p1.setxVel(PlayerLogic.getMinXVel());
-//                        } else if (p1.getxVel() < PlayerLogic.getxVel() - PlayerLogic.getxAcceleration()) {
+//                        } else if (p1.getxVel() < PlayerLogic.getMaxXVel() - PlayerLogic.getxAcceleration()) {
 //                            p1.setxVel(p1.getxVel() + PlayerLogic.getxAcceleration());
 //                        } else {
-//                            p1.setxVel(PlayerLogic.getxVel());
+//                            p1.setxVel(PlayerLogic.getMaxXVel());
 //                        }
 //                    }
 //                    p1.setStrafing(true);
@@ -82,13 +82,13 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
 //                    if (p2.getDir() || p2.getxVel() > 0) { //if player 2 is moving right
 //                        p2.changeDirection();
 //                    }
-//                    if (p2.getxVel() != PlayerLogic.getxVel()) {
+//                    if (p2.getxVel() != PlayerLogic.getMaxXVel()) {
 //                        if (p2.getxVel() > -PlayerLogic.getMinXVel()) {
 //                            p2.setxVel(-PlayerLogic.getMinXVel());
-//                        } else if (p2.getxVel() > PlayerLogic.getxAcceleration() - PlayerLogic.getxVel()) {
+//                        } else if (p2.getxVel() > PlayerLogic.getxAcceleration() - PlayerLogic.getMaxXVel()) {
 //                            p2.setxVel(p2.getxVel() - PlayerLogic.getxAcceleration());
 //                        } else {
-//                            p2.setxVel(-PlayerLogic.getxVel());
+//                            p2.setxVel(-PlayerLogic.getMaxXVel());
 //                        }
 //                    }
 //                    p2.setStrafing(true);
@@ -97,13 +97,13 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
 //                    if (!p2.getDir() || p2.getxVel() < 0) { //if player 2 is moving right
 //                        p2.changeDirection();
 //                    }
-//                    if (p2.getxVel() != -PlayerLogic.getxVel()) {
+//                    if (p2.getxVel() != -PlayerLogic.getMaxXVel()) {
 //                        if (p2.getxVel() < PlayerLogic.getMinXVel()) {
 //                            p2.setxVel(PlayerLogic.getMinXVel());
-//                        } else if (p2.getxVel() < PlayerLogic.getxVel() - PlayerLogic.getxAcceleration()) {
+//                        } else if (p2.getxVel() < PlayerLogic.getMaxXVel() - PlayerLogic.getxAcceleration()) {
 //                            p2.setxVel(p2.getxVel() + PlayerLogic.getxAcceleration());
 //                        } else {
-//                            p2.setxVel(PlayerLogic.getxVel());
+//                            p2.setxVel(PlayerLogic.getMaxXVel());
 //                        }
 //                    }
 //                    p2.setStrafing(true);

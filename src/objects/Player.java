@@ -115,10 +115,10 @@ public class Player extends MovingDirectionalMapObject {
                 }
                 if (getxVel() > -PlayerLogic.getMinXVel()) {
                     setxVel(-PlayerLogic.getMinXVel());
-                } else if (getxVel() > PlayerLogic.getxAcceleration() - PlayerLogic.getxVel()) {
+                } else if (getxVel() > PlayerLogic.getxAcceleration() - PlayerLogic.getMaxXVel()) {
                     setxVel(getxVel() - PlayerLogic.getxAcceleration());
                 } else {
-                    setxVel(-PlayerLogic.getxVel());
+                    setxVel(-PlayerLogic.getMaxXVel());
                 }
                 setStrafing(true);
             } else if (GAME.isPressed(KeyCode.D) && !GAME.isPressed(KeyCode.A)) {
@@ -127,19 +127,19 @@ public class Player extends MovingDirectionalMapObject {
                 }
                 if (getxVel() < PlayerLogic.getMinXVel()) {
                     setxVel(PlayerLogic.getMinXVel());
-                } else if (getxVel() < PlayerLogic.getxVel() - PlayerLogic.getxAcceleration()) {
+                } else if (getxVel() < PlayerLogic.getMaxXVel() - PlayerLogic.getxAcceleration()) {
                     setxVel(getxVel() + PlayerLogic.getxAcceleration());
                 } else {
-                    setxVel(PlayerLogic.getxVel());
+                    setxVel(PlayerLogic.getMaxXVel());
                 }
                 setStrafing(true);
             } else if (GAME.isPressed(KeyCode.A) && GAME.isPressed(KeyCode.D)) {
                 if (getDir()) {
-                    if (getxVel() == PlayerLogic.getxVel()) {
+                    if (getxVel() == PlayerLogic.getMaxXVel()) {
                         changeDirection();
                     }
                 } else {
-                    if (getxVel() == -PlayerLogic.getxVel()) {
+                    if (getxVel() == -PlayerLogic.getMaxXVel()) {
                         changeDirection();
                     }
                 }
@@ -155,10 +155,10 @@ public class Player extends MovingDirectionalMapObject {
                 }
                 if (getxVel() > -PlayerLogic.getMinXVel()) {
                     setxVel(-PlayerLogic.getMinXVel());
-                } else if (getxVel() > PlayerLogic.getxAcceleration() - PlayerLogic.getxVel()) {
+                } else if (getxVel() > PlayerLogic.getxAcceleration() - PlayerLogic.getMaxXVel()) {
                     setxVel(getxVel() - PlayerLogic.getxAcceleration());
                 } else {
-                    setxVel(-PlayerLogic.getxVel());
+                    setxVel(-PlayerLogic.getMaxXVel());
                 }
                 setStrafing(true);
             } else if (GAME.isPressed(KeyCode.RIGHT) && !GAME.isPressed(KeyCode.LEFT)) {
@@ -167,19 +167,19 @@ public class Player extends MovingDirectionalMapObject {
                 }
                 if (getxVel() < PlayerLogic.getMinXVel()) {
                     setxVel(PlayerLogic.getMinXVel());
-                } else if (getxVel() < PlayerLogic.getxVel() - PlayerLogic.getxAcceleration()) {
+                } else if (getxVel() < PlayerLogic.getMaxXVel() - PlayerLogic.getxAcceleration()) {
                     setxVel(getxVel() + PlayerLogic.getxAcceleration());
                 } else {
-                    setxVel(PlayerLogic.getxVel());
+                    setxVel(PlayerLogic.getMaxXVel());
                 }
                 setStrafing(true);
             } else if (GAME.isPressed(KeyCode.LEFT) && GAME.isPressed(KeyCode.RIGHT)) {
                 if (getDir()) {
-                    if (getxVel() == PlayerLogic.getxVel()) {
+                    if (getxVel() == PlayerLogic.getMaxXVel()) {
                         changeDirection();
                     }
                 } else {
-                    if (getxVel() == -PlayerLogic.getxVel()) {
+                    if (getxVel() == -PlayerLogic.getMaxXVel()) {
                         changeDirection();
                     }
                 }
