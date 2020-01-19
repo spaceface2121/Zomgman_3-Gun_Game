@@ -19,12 +19,6 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
         KeyCode code = keyEvent.getCode();
         GAME.setKey(code, true);
         switch (GAME.getScreen()) {
-            /*Screens:
-              0: Main menu screen
-              1: Game screen
-              2: Paused screen
-              3: Winner screen
-            */
             case Game.MENU_SCREEN:
                 if (code == KeyCode.ENTER) {
                     if (GAME.isFinished()) {

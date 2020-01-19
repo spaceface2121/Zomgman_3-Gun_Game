@@ -11,22 +11,24 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import logic.CollisionLogic;
 import logic.GunLogic;
 import logic.PlayerLogic;
-import main.data.Images;
 import main.data.Map;
 import objects.Player;
-
-import java.awt.*;
 import java.util.BitSet;
-import java.util.Collection;
 
 
+/**
+ * Michael Mityushkin, Sean Vasserman
+ * Zomgman 3 - Gun Game
+ * Mr. Benum
+ * ICS 4UE
+ * Game class is the "main" class although there is a class called Main. It is the window in which everything is drawn and all events are handled
+ */
 public class Game extends Application {
     private Canvas canvas;
     private GraphicsContext graphicsContext;
@@ -39,7 +41,7 @@ public class Game extends Application {
     public static float scaleFullX, scaleFullY;
 
     private byte screen;
-    public static final byte MENU_SCREEN = 0, GAME_SCREEN = 1, PAUSE_SCREEN = 2, WIN_SCREEN = 3;
+    public static final byte MENU_SCREEN = 0, GAME_SCREEN = 1, PAUSE_SCREEN = 2, WIN_SCREEN = 3, RULES_SCREEN = 4;
 
     private Map map;
     private Player player1, player2;
@@ -116,6 +118,9 @@ public class Game extends Application {
                                     break;
                                 case WIN_SCREEN:
                                     Render.drawWinScreen();
+                                    break;
+                                case RULES_SCREEN:
+
                                     break;
                             }
 

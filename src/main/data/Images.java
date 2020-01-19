@@ -1,18 +1,20 @@
 package main.data;
 
 import javafx.scene.image.Image;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Class responsible for all the images used in the game
+ */
 public class Images {
-    private static final String P1_RIGHT_IMAGE_PATH = "file:resources/p1WIP3.png"; //CHANGE THE NAME NIGGUH
-    private static final String P2_RIGHT_IMAGE_PATH = "file:resources/p2WIP3.png";
-    private static final String P1_LEFT_IMAGE_PATH = "file:resources/p1WIP3L.png";
-    private static final String P2_LEFT_IMAGE_PATH = "file:resources/p2WIP3L.png";
-    private static final ArrayList<String> PLAYER_PATHS = new ArrayList<>(Arrays.asList(P1_RIGHT_IMAGE_PATH, P2_RIGHT_IMAGE_PATH, P1_LEFT_IMAGE_PATH, P2_LEFT_IMAGE_PATH));
+    //takes all "groups" of images (players, guns, bullets) and puts them in respective arraylists (first all the right images, then left images)
 
-    //private static final String BLOCK_IMAGE_PATH = "file:resources/block2.jpg";
+    private static final String P1_RIGHT_IMAGE_PATH = "file:resources/player1_right.png";
+    private static final String P2_RIGHT_IMAGE_PATH = "file:resources/player2_right.png";
+    private static final String P1_LEFT_IMAGE_PATH = "file:resources/player1_left.png";
+    private static final String P2_LEFT_IMAGE_PATH = "file:resources/player2_left.png";
+    private static final ArrayList<String> PLAYER_PATHS = new ArrayList<>(Arrays.asList(P1_RIGHT_IMAGE_PATH, P2_RIGHT_IMAGE_PATH, P1_LEFT_IMAGE_PATH, P2_LEFT_IMAGE_PATH));
 
     private static final String GLOCK_RIGHT_IMAGE_PATH = "file:resources/glock_right.png";
     private static final String UZI_RIGHT_IMAGE_PATH = "file:resources/uzi_right.png";
@@ -47,21 +49,19 @@ public class Images {
     private static final ArrayList<String> BULLET_PATHS = new ArrayList<>(Arrays.asList(LIGHT_BULLET_RIGHT_IMAGE_PATH, STANDARD_BULLET_RIGHT_IMAGE_PATH, HEAVY_BULLET_RIGHT_IMAGE_PATH,
             SHOTGUN_BULLET_RIGHT_IMAGE_PATH, LIGHT_BULLET_LEFT_IMAGE_PATH, STANDARD_BULLET_LEFT_IMAGE_PATH, HEAVY_BULLET_LEFT_IMAGE_PATH, SHOTGUN_BULLET_LEFT_IMAGE_PATH));
 
-    private static final String HAND1_IMAGE_PATH = "file:resources/hand1new.png";
-    private static final String HAND2_IMAGE_PATH = "file:resources/hand2new.png";
+    private static final String HAND1_IMAGE_PATH = "file:resources/hand1.png";
+    private static final String HAND2_IMAGE_PATH = "file:resources/hand2.png";
 
     private static ArrayList<Image> playerImages = new ArrayList<>();
-    private static Image block;// = new Image(BLOCK_IMAGE_PATH);
-    private static Image background, mainMenuImage = new Image("file:resources/bruh3.png", 1280, 720, false, false);
+    private static Image block;
+    private static Image background, mainMenuImage = new Image("file:resources/menu_image.png", 1280, 720, false, false);
     private static ArrayList<Image> gunImages = new ArrayList<>();
     private static ArrayList<Image> bulletImages = new ArrayList<>();
     private static Image hand1 = new Image(HAND1_IMAGE_PATH);
     private static Image hand2 = new Image(HAND2_IMAGE_PATH);
 
     public static void generateScaledImages(float scaleX, float scaleY) {
-        System.out.println("generating images");
         fillArrayListWithScaledImages(scaleX, scaleY, PLAYER_PATHS, playerImages);
-        //block = getScaledImage(scaleX, scaleY, block);
         fillArrayListWithScaledImages(scaleX, scaleY, GUN_PATHS, gunImages);
         fillArrayListWithScaledImages(scaleX, scaleY, BULLET_PATHS, bulletImages);
         hand1 = getScaledImage(scaleX, scaleY, hand1);
@@ -78,6 +78,13 @@ public class Images {
         return new Image(original.getUrl(), original.getWidth() * scaleX, original.getHeight() * scaleY, false, false); //makes a new image with the proper scaled dimensions
     }
 
+    /**
+     *
+     * @param list the list you want to get an image from
+     * @param index the index of the image (not taking into account whether it is a right or left image)
+     * @param dir whether it is a right (true) image or left (false) image
+     * @return the Image you were looking for
+     */
     public static Image getImageFromList(ArrayList<Image> list, byte index, boolean dir) {
         if (dir) {
             return list.get(index); //all the right images are first
@@ -121,6 +128,7 @@ public class Images {
         }
     }
 
+    //unused
     public static void clearAll() {
         playerImages.clear();
         gunImages.clear();

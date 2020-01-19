@@ -135,6 +135,10 @@ public class Render {
         }
     }
 
+    public static void drawRulesScreen() {
+        
+    }
+
     public static void setDrawnWinScreen(boolean drawnWinScreen) {
         Render.drawnWinScreen = drawnWinScreen;
     }
