@@ -15,7 +15,7 @@ public class Map {
     private ArrayList<MapObject> blocks = new ArrayList<>();
 
     public Map(float scaleX, float scaleY) {
-        final byte NUM_MAPS = 4, NUM_BACKGROUNDS = 6, NUM_BLOCKS = 4;
+        final byte NUM_MAPS = 4, NUM_BACKGROUNDS = 7, NUM_BLOCKS = 6;
 
 
         String mapPath = "resources/map" + (int) (Math.random() * NUM_MAPS + 1) + ".txt";
@@ -23,10 +23,10 @@ public class Map {
         File map = new File(mapPath);
 
         String backgroundPath = "file:resources/background" + (int)(Math.random() * NUM_BACKGROUNDS + 1) + ".jpg";
-        //backgroundPath = "file:resources/background1.jpg";
+        //backgroundPath = "file:resources/background7.jpg";
 
         String blockPath = "file:resources/block" + (int)(Math.random() * NUM_BLOCKS + 1) + ".jpg";
-        //blockPath = "file:resources/block4.jpg";
+        //blockPath = "file:resources/block7.jpg";
         switch (Integer.parseInt(backgroundPath.substring(backgroundPath.lastIndexOf('d') + 1, backgroundPath.indexOf('.')))) {
             case 10: blockPath = "file:resources/block2.jpg"; break;
             case 13: blockPath = "file:resources/block1.jpg"; break;
