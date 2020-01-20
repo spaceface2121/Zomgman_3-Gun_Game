@@ -10,7 +10,13 @@ import main.Main;
 import main.data.Images;
 import main.data.ObjectData;
 
+/**
+ * Player class
+ */
 public class Player extends MovingDirectionalMapObject {
+    /**
+     * All player fields
+     */
     private Hand rightHand, leftHand;
     private Gun gun;
     private byte health;
@@ -24,6 +30,10 @@ public class Player extends MovingDirectionalMapObject {
 
     private byte timesJumped = 0;
 
+    /**
+     * PLayer constructor, based on the player's identity
+     * @param player1or2
+     */
     public Player(boolean player1or2) {
         super(getInitialPlayerData(player1or2), getOtherImage(player1or2), player1or2, 0, 0); //player1or2 is equivalent in terms of its boolean value to direction (dir)
 
@@ -36,7 +46,11 @@ public class Player extends MovingDirectionalMapObject {
         leftHand = new Hand(this, true);
     }
 
-    //gets initial player data based on which player it is
+    /**
+     * Accessor method for the initial player data based on which player it is
+     * @param player1or2
+     * @return
+     */
     private static ObjectData getInitialPlayerData(boolean player1or2) {
         if (player1or2)  { //if player 1
             return new ObjectData(0, 0, Images.getImageFromList(Images.getPlayerImages(), PlayerLogic.PLAYER1, true)); //player 1's "default" image is facing right
@@ -44,7 +58,12 @@ public class Player extends MovingDirectionalMapObject {
             return new ObjectData((int)(1890 * Game.scaleFullX), 0, Images.getImageFromList(Images.getPlayerImages(), PlayerLogic.PLAYER2, false)); //players 2's is facing left
         }
     }
-    //gets the initial "other" image
+
+    /**
+     * Accessor method for the initial alternate direction image
+     * @param player1or2
+     * @return
+     */
     private static Image getOtherImage(boolean player1or2) {
         if (player1or2) {
             return Images.getImageFromList(Images.getPlayerImages(), PlayerLogic.PLAYER1, false);
@@ -53,6 +72,11 @@ public class Player extends MovingDirectionalMapObject {
         }
     }
 
+    /**
+     * Accessor method for the hand based on its direction
+     * @param dir
+     * @return Hand
+     */
     public Hand getHand(boolean dir) {
         if (dir) {
             return leftHand;
@@ -61,14 +85,24 @@ public class Player extends MovingDirectionalMapObject {
         }
     }
 
+    /**
+     * Upgrades a player's gun
+     */
     public void upgradeGun() {
         gun.upgrade();
     }
 
+    /**
+     * Downgrades a player's gun
+     */
     public void downgradeGun() {
         gun.downgrade();
     }
 
+    /**
+     * Decreases a player's health when they are injured
+     * @param damage
+     */
     public void takeDamage(int damage) {
         health -= damage;
         if (!isAlive()) {
@@ -76,6 +110,9 @@ public class Player extends MovingDirectionalMapObject {
         }
     }
 
+    /**
+     * Respawns the player after they die
+     */
     public void respawn() {
         setObjectData(getInitialPlayerData(player1or2));
         health = 100;
@@ -88,10 +125,17 @@ public class Player extends MovingDirectionalMapObject {
         }
     }
 
+    /**
+     * Checks if the player is alive
+     * @return
+     */
     public boolean isAlive() {
         return health > 0;
     }
 
+    /**
+     * Jumps
+     */
     public void jump() {
         switch (timesJumped) {
             case 0:
@@ -105,6 +149,9 @@ public class Player extends MovingDirectionalMapObject {
         }
     }
 
+    /**
+     * Moves the player (this is the best method in the whole game)
+     */
     public void move() {
         final Game GAME = Main.getGame();
         if (player1or2) { //if player 1
@@ -234,15 +281,26 @@ public class Player extends MovingDirectionalMapObject {
         }
     }
 
-
+    /**
+     * Mutator method for the strafing (holding a directional movement key) variable
+     * @param s
+     */
     public void setStrafing(boolean s) {
         strafing = s;
     }
 
+    /**
+     * Mutator method for the jumping variable
+     * @param j
+     */
     public void setJumping(boolean j) {
         jumping = j;
     }
 
+    /**
+     * Accessor method for the other player
+     * @return
+     */
     private Player getOtherPlayer() {
         if (player1or2) {
             return Main.getGame().getPlayer2();
@@ -251,32 +309,58 @@ public class Player extends MovingDirectionalMapObject {
         }
     }
 
+    /**
+     * Updates the player
+     */
     public void update() {
         move();
         gun.checkReload(System.currentTimeMillis());
         //more will be added potentially
     }
 
+    /**
+     * Accessor method for the player's gun
+     * @return
+     */
     public Gun getGun() {
         return gun;
     }
 
+    /**
+     * Accessor method for the player's health
+     * @return
+     */
     public byte getHealth() {
         return health;
     }
 
+    /**
+     * Accessor method for the player's identity
+     * @return
+     */
     public boolean isPlayer1or2() {
         return player1or2;
     }
 
+    /**
+     * Mutator method for the player holding the shoot button
+     * @param holdingShoot
+     */
     public void setHoldingShoot(boolean holdingShoot) {
         this.holdingShoot = holdingShoot;
     }
 
+    /**
+     * Accessor method for the player holding the shoot button
+     * @return
+     */
     public boolean isHoldingShoot() {
         return holdingShoot;
     }
 
+    /**
+     * Changes direction
+     */
     public void changeDirection() {
         super.changeDirection();
         gun.changeDirection();
