@@ -30,22 +30,13 @@ public class MovingDirectionalMapObject extends DirectionalMapObject {
 
     /**
      * Moves the object, depends on if it is allowed past the screen edge or not
-     * @param allowOutOfBounds
+     * @param allowOutOfBounds is the object allowed to go out of bounds
      */
     public void move(boolean allowOutOfBounds) {
         ObjectData data = getObjectData();
 
-//        if (xVel > 0 && !CollisionLogic.collidedRightWithBlock(data) || xVel < 0 && !CollisionLogic.collidedLeftWithBlock(data)) {
-//            data.x += xVel;
-//        }
-//        if (yVel > 0 && !CollisionLogic.collidedBottomWithBlock(data) || yVel < 0 && !CollisionLogic.collidedTopWithBlock(data)) {
-//            data.y += yVel;
-//        }
-
         data.x += CollisionLogic.willCollideHorizontallyWithObject(this);
-        //System.out.println("in dirMapObj move data.x moved");
         data.y += CollisionLogic.willCollideVerticallyWithObject(this);
-        //System.out.println("in dirMapObj move data.y moved");
 
         if (!allowOutOfBounds) {
             if (data.x < 0) {
@@ -77,7 +68,6 @@ public class MovingDirectionalMapObject extends DirectionalMapObject {
      */
     public void changeDirection() {
         super.changeDirection();
-        //xVel = -xVel;
     }
 
     /**

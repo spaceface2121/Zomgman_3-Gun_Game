@@ -7,9 +7,7 @@ import javafx.scene.image.Image;
  */
 public class ObjectData {
 
-    /**
-     * Fields
-     */
+    //Fields
     public float x, y;
     public byte w, h;
     public Image image; //all of these are public so i can use them without stupid getter methods

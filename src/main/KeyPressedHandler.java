@@ -11,10 +11,11 @@ import objects.Player;
 public class KeyPressedHandler implements EventHandler<KeyEvent> {
     private Game GAME = Main.getGame();
 
-    @Override
     /**
      * Handles all the Key presses except for sideways player movement
+     * @param keyEvent the event of a key press
      */
+    @Override
     public void handle(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();
         GAME.setKey(code, true);
@@ -26,7 +27,6 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
                     }
                     GAME.setScreen(Game.GAME_SCREEN);
                     maximize();
-                    //Render.drawGame();
                 }
                 break;
             case Game.GAME_SCREEN:
@@ -52,7 +52,7 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
                 } else if (code == KeyCode.SLASH) {
                     p2.setHoldingShoot(true);
                     p2.getGun().fire();
-                } else if (code == KeyCode.DIGIT1) {
+                } else if (code == KeyCode.DIGIT1) { // for testing purposes \/ use 1 and 2 to upgrade and downgrade player 1's guns and 9 and 0 for p2
                     p1.downgradeGun();
                 } else if (code == KeyCode.DIGIT2) {
                     p1.upgradeGun();
@@ -66,7 +66,6 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
                 if (code == KeyCode.ENTER) {
                     GAME.setScreen((Game.GAME_SCREEN));
                     maximize();
-                    //Render.drawGame();
                 } else if (code == KeyCode.ESCAPE){
                     GAME.setFinished(true);
                     GAME.setScreen(Game.MENU_SCREEN);
@@ -100,7 +99,6 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
      * Minimizes game window
      */
     private void minimize() {
-        //GAME.getStage().setMaximized(false);
         GAME.getStage().setFullScreen(false);
         GAME.getStage().setHeight(GAME.h);
         GAME.getStage().setWidth(GAME.w);
@@ -112,7 +110,6 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
      * Maximizes game window
      */
     private void maximize() {
-        //GAME.getStage().setMaximized(true);
         GAME.getStage().setFullScreen(true);
         GAME.getStage().setHeight(GAME.fullH);
         GAME.getStage().setWidth(GAME.fullW);

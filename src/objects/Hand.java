@@ -12,8 +12,8 @@ public class Hand extends MapObject {
 
     /**
      * Constructor for the hand based on its leftness or rightness and player identity
-     * @param player
-     * @param dir
+     * @param player who's hand it is
+     * @param dir whether its the right (true) hand or left (false)
      */
     public Hand(Player player, boolean dir) {
         super(getInitialHandData(player, dir));
@@ -21,8 +21,8 @@ public class Hand extends MapObject {
 
     /**
      * Accessor method for the hand image based on the player
-     * @param player
-     * @return
+     * @param player who's hand it is
+     * @return returns the image of the hand
      */
     private static Image getHandImage(Player player) {
         return Images.getHandImage(player.isPlayer1or2());
@@ -30,9 +30,9 @@ public class Hand extends MapObject {
 
     /**
      * Accessor method for the initial hand data based on the player and their direction
-     * @param player
-     * @param dir
-     * @return ObjectData
+     * @param player the player
+     * @param dir the direction
+     * @return the initial ObjectData of the hand
      */
     private static ObjectData getInitialHandData(Player player, boolean dir) {
         ObjectData playerData = player.getObjectData();

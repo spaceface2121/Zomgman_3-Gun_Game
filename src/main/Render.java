@@ -14,18 +14,16 @@ import java.util.ArrayList;
  * Class to render and draw all the images on the screen in their positions
  */
 public class Render {
-    /**
-     * Game, colour, and text fields
-     */
+    // Game, colour, and text fields
     private static Game GAME = Main.getGame();
     private static GraphicsContext graphicsContext = GAME.getGraphicsContext();
     private static boolean drawnWinScreen = false;
 
-    private static Color p1Color = Color.rgb(117, 148, 224);
-    private static Color p2Color = Color.rgb(228, 136, 157);
-    private static Color transparentBlack = Color.rgb(0, 0, 0, 0.6);
-    private static float winScreenTextX = (GAME.fullW / (float)2.0) - 290 * Game.scaleFullX, winScreenTextY = (GAME.fullH / (float)2.0) - 50 * Game.scaleFullY;
-    private static float pauseScreenTextX = (GAME.w / (float)2.0) - 390 * Game.scaleX, pauseScreenTextY = (GAME.h / (float)2.0) - 60 * Game.scaleY;
+    private static final Color p1Color = Color.rgb(117, 148, 224); // the player colours
+    private static final Color p2Color = Color.rgb(228, 136, 157);
+    private static final Color transparentBlack = Color.rgb(0, 0, 0, 0.6); // to darken the screen
+    private static final float winScreenTextX = (GAME.fullW / (float)2.0) - 290 * Game.scaleFullX, winScreenTextY = (GAME.fullH / (float)2.0) - 50 * Game.scaleFullY;
+    private static final float pauseScreenTextX = (GAME.w / (float)2.0) - 390 * Game.scaleX, pauseScreenTextY = (GAME.h / (float)2.0) - 60 * Game.scaleY;
 
     /**
      * Draws main menu
@@ -49,12 +47,8 @@ public class Render {
 
         // draws players
         Player player1 = GAME.getPlayer1(), player2 = GAME.getPlayer2();
-//        graphicsContext.setFont(Font.getDefault());
-//        graphicsContext.fillText(player1.getHealth() + "%", player1.getObjectData().x, player1.getObjectData().y - 20);
-//        graphicsContext.fill();
+
         graphicsContext.drawImage(player1.getObjectData().image, player1.getObjectData().x, player1.getObjectData().y);
-//        graphicsContext.fillText(player2.getHealth() + "%", player2.getObjectData().x, player2.getObjectData().y - 20);
-//        graphicsContext.fill();
         graphicsContext.drawImage(player2.getObjectData().image, player2.getObjectData().x, player2.getObjectData().y);
 
         // draws guns and their respective bullets
@@ -107,10 +101,7 @@ public class Render {
      * Draws the pause screen
      */
     public static void drawPaused() {
-        System.out.println("draw pause screen");
-
-        //drawGame();
-        graphicsContext.setFill(transparentBlack);
+        graphicsContext.setFill(transparentBlack); // darkens the screen
         graphicsContext.fillRect(0, 0, GAME.fullW, GAME.fullH);
 
         graphicsContext.setFont(Font.font("Impact", 100));
@@ -128,7 +119,6 @@ public class Render {
     public static void drawWinScreen() {
         if (!drawnWinScreen) {
             drawnWinScreen = true;
-            System.out.println("draw win screen");
 
             //drawGame();
             graphicsContext.setFill(transparentBlack);
@@ -151,8 +141,8 @@ public class Render {
     }
 
     /**
-     * Mutator method for drawing the win screen
-     * @param drawnWinScreen
+     * Mutator method for setting the boolean (was the win screen drawn or not)
+     * @param drawnWinScreen whether the win
      */
     public static void setDrawnWinScreen(boolean drawnWinScreen) {
         Render.drawnWinScreen = drawnWinScreen;
@@ -160,7 +150,7 @@ public class Render {
 
     /**
      * Mutator method for game
-     * @param game
+     * @param game the Game
      */
     public static void setGame(Game game) {
         Render.GAME = game;
@@ -168,7 +158,7 @@ public class Render {
 
     /**
      * Mutator method for graphicsContext
-     * @param graphicsContext
+     * @param graphicsContext the GraphicsContext
      */
     public static void setGraphicsContext(GraphicsContext graphicsContext) {
         Render.graphicsContext = graphicsContext;

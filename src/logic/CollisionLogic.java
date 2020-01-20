@@ -18,7 +18,9 @@ public class CollisionLogic {
 
     /**
      * Checks whether 2 objects intersect on the same horizontal plane (if you move the objects horizontally they would meet each other)
-     * takes the objectDatas of the 2 objects and returns true or false (whether they intersect on the same horizontal plane or not)
+     * @param object1Data the objectData of the reference object
+     * @param object2Data the objectData of the second object
+     * @return returns true or false (whether they intersect on the same horizontal plane or not)
      */
     private static boolean intersectsOnHorizontalPlane(ObjectData object1Data, ObjectData object2Data) {
         return object2Data.y - object1Data.y < object1Data.h && object1Data.y - object2Data.y < object2Data.h;
@@ -26,7 +28,9 @@ public class CollisionLogic {
 
     /**
      * Checks whether 2 objects intersect on the same vertical plane (if you move the objects vertically they would meet each other)
-     * takes the objectDatas of the 2 objects and returns true or false (whether they intersect on the same vertical plane or not)
+     * @param object1Data the objectData of the reference object
+     * @param object2Data the objectData of the second object
+     * @return returns true or false (whether they intersect on the same vertical plane or not)
      */
     private static boolean intersectsOnVerticalPlane(ObjectData object1Data, ObjectData object2Data) {
         return object2Data.x - object1Data.x < object1Data.w && object1Data.x - object2Data.x < object2Data.w;
@@ -34,7 +38,9 @@ public class CollisionLogic {
 
     /**
      * Checks whether or not the reference object (object1) has collided on its left side with object 2
-     * Takes the 2 objects' objectDatas and returns true or false (whether object 1 collided left with object 2 or not)
+     * @param object1Data the objectData of the reference object
+     * @param object2Data the objectData of the second object
+     * @return returns true or false (whether object 1 collided left with object 2 or not)
      */
     public static boolean collidedLeft(ObjectData object1Data, ObjectData object2Data) {
         return object1Data.x - object2Data.x <= object2Data.w && object1Data.x - object2Data.x > 0 && intersectsOnHorizontalPlane(object1Data, object2Data);
@@ -42,7 +48,9 @@ public class CollisionLogic {
 
     /**
      * Checks whether or not the reference object (object1) has collided on its right side with object 2
-     * Takes the 2 objects' objectDatas and returns true or false (whether object 1 collided right with object 2 or not)
+     * @param object1Data the objectData of the reference object
+     * @param object2Data the objectData of the second object
+     * @return returns true or false (whether object 1 collided right with object 2 or not)
      */
     public static boolean collidedRight(ObjectData object1Data, ObjectData object2Data) {
         return object2Data.x - object1Data.x <= object1Data.w && object2Data.x - object1Data.x > 0 && intersectsOnHorizontalPlane(object1Data, object2Data);
@@ -50,7 +58,9 @@ public class CollisionLogic {
 
     /**
      * Checks whether or not the reference object (object1) has collided on the top side with object 2
-     * Takes the 2 objects' objectDatas and returns true or false (whether object 1 collided top with object 2 or not)
+     * @param object1Data the objectData of the reference object
+     * @param object2Data the objectData of the second object
+     * @return returns true or false (whether object 1 collided top with object 2 or not)
      */
     public static boolean collidedTop(ObjectData object1Data, ObjectData object2Data) {
         if (object1Data.y - object2Data.y <= object2Data.h && object1Data.y - object2Data.y > 0 && intersectsOnVerticalPlane(object1Data, object2Data)) {
@@ -62,7 +72,9 @@ public class CollisionLogic {
 
     /**
      * Checks whether or not the reference object (object1) has collided on the bottom side with object 2
-     * Takes the 2 objects' objectDatas and returns true or false (whether object 1 collided bottom with object 2 or not)
+     * @param object1Data the objectData of the reference object
+     * @param object2Data the objectData of the second object
+     * @return returns true or false (whether object 1 collided bottom with object 2 or not)
      */
     public static boolean collidedBottom(ObjectData object1Data, ObjectData object2Data) {
         if (object2Data.y - object1Data.y <= object1Data.h && object2Data.y - object1Data.y > 0 && intersectsOnVerticalPlane(object1Data, object2Data)) {
@@ -74,17 +86,18 @@ public class CollisionLogic {
 
     /**
      * Checks whether or not the reference object (object1) has collided on any of the 4 sides with object 2
-     * Takes the 2 objects' objectDatas and returns true or false (whether object 1 collided with object 2 or not)
+     * @param object1Data the objectData of the reference object
+     * @param object2Data the objectData of the second object
+     * @return returns true or false (whether object 1 collided with object 2 or not)
      */
     public static boolean collided(ObjectData object1Data, ObjectData object2Data) {
         return collidedLeft(object1Data, object2Data) || collidedRight(object1Data, object2Data) || collidedTop(object1Data, object2Data) || collidedBottom(object1Data, object2Data);
     }
 
-
-
     /**
      * Checks whether or not the object has collided on its left side with any block on the map
-     * Takes the objectData of the object as a parameter and returns true or false (whether or not it has collided on the left with any block)
+     * @param objectData the objectData of the object to check collisions for
+     * @return returns true or false (whether or not it has collided on the left with any block)
      */
     public static boolean collidedLeftWithBlock(ObjectData objectData) {
         for (MapObject block : blocks) {
@@ -97,7 +110,8 @@ public class CollisionLogic {
 
     /**
      * Checks whether or not the object has collided on its right side with any block on the map
-     * Takes the objectData of the object as a parameter and returns true or false (whether or not it has collided on the right with any block)
+     * @param objectData the objectData of the object to check collisions for
+     * @return returns true or false (whether or not it has collided on the right with any block)
      */
     public static boolean collidedRightWithBlock(ObjectData objectData) {
         for (MapObject block : blocks) {
@@ -110,7 +124,8 @@ public class CollisionLogic {
 
     /**
      * Checks whether or not the object has collided on the top with any block on the map
-     * Takes the objectData of the object as a parameter and returns true or false (whether or not it has collided on the top with any block)
+     * @param objectData the objectData of the object to check collisions for
+     * @return returns true or false (whether or not it has collided on the top with any block)
      */
     public static boolean collidedTopWithBlock(ObjectData objectData) {
         for (MapObject block : blocks) {
@@ -124,7 +139,8 @@ public class CollisionLogic {
 
     /**
      * Checks whether or not the object has collided on the bottom with any block on the map
-     * Takes the objectData of the object as a parameter and returns true or false (whether or not it has collided on the bottom with any block)
+     * @param objectData the objectData of the object to check collisions for
+     * @return returns true or false (whether or not it has collided on the bottom with any block)
      */
     public static boolean collidedBottomWithBlock(ObjectData objectData) {
         for (MapObject block : blocks) {
@@ -137,16 +153,18 @@ public class CollisionLogic {
 
     /**
      * Checks whether or not the object has collided on any side with any of the blocks on the map
-     * Takes the objectData of the object as a parameter and returns true or false (whether or not it has collided with any block)
+     * @param objectData the objectData of the object to check collisions for
+     * @return returns true or false (whether or not it has collided with any block)
      */
     public static boolean collidedWithBlock(ObjectData objectData) {
         return collidedLeftWithBlock(objectData) || collidedRightWithBlock(objectData) || collidedTopWithBlock(objectData) || collidedBottomWithBlock(objectData);
     }
 
-
     /**
      * Checks whether or not this player has collided top with the other player
-     * Takes this player's object data and whether this player is player 1 or 2 and returns true or false (collided top or not)
+     * @param objectData this player's objectData
+     * @param player1or2 if this player is p1 or p2 (true of false, respectively)
+     * @return returns true or false (collided top or not)
      */
     public static boolean collidedTopWithPlayer(ObjectData objectData, boolean player1or2) { //player1or2 is THIS player, not the one we check collision with
         ObjectData otherPlayerData;
@@ -160,7 +178,9 @@ public class CollisionLogic {
 
     /**
      * Checks whether or not this player has collided bottom with the other player
-     * Takes this player's object data and whether this player is player 1 or 2 and returns true or false (collided bottom or not)
+     * @param objectData this player's objectData
+     * @param player1or2 if this player is p1 or p2 (true of false, respectively)/
+     * @return returns true or false (collided bottom or not)
      */
     public static boolean collidedBottomWithPlayer(ObjectData objectData, boolean player1or2) { //player1or2 is THIS player, not the one we check collision with
         ObjectData otherPlayerData;
@@ -172,11 +192,10 @@ public class CollisionLogic {
         return collidedBottom(objectData, otherPlayerData);
     }
 
-
     /**
      * Checks whether or not a MovingDirectionalMapObject will collide horizontally with any block on the map within the next frame (between its current position and its current position + velocity)
-     * Takes the moving object as a parameter and returns the x velocity it must move within the next frame in order to not clip into or through a block. If, within the next frame, the moving
-     * directional map object will not collide with any block, its regular velocity is returned.
+     * @param object the MovingDirectionalMapObject to check collisions with
+     * @return returns the x velocity it must move within the next frame in order to not clip into or through a block. If, within the next frame, the moving directional map object will not collide with any block, its regular velocity is returned.
      */
     public static float willCollideHorizontallyWithBlock(MovingDirectionalMapObject object) {
         float xVel = object.getxVel();
@@ -199,8 +218,8 @@ public class CollisionLogic {
 
     /**
      * Checks whether or not a MovingDirectionalMapObject will collide horizontally with either of the players on the map within the next frame (between its current position and its current position + velocity)
-     * Takes the moving object as a parameter and returns the x velocity it must move within the next frame in order to not clip into or through a player. If, within the next frame, the moving
-     * directional map object will not collide with either player, its regular velocity is returned.
+     * @param object the MovingDirectionalMapObject to check collisions with
+     * @return returns the x velocity it must move within the next frame in order to not clip into or through a player. If, within the next frame, the moving directional map object will not collide with either player, its regular velocity is returned.
      */
     public static float willCollideHorizontallyWithPlayer(MovingDirectionalMapObject object) {
         float xVel = object.getxVel();
@@ -244,8 +263,8 @@ public class CollisionLogic {
 
     /**
      * Checks whether or not a MovingDirectionalMapObject will collide vertically with any block on the map within the next frame (between its current position and its current position + velocity)
-     * Takes the moving object as a parameter and returns the y velocity it must move within the next frame in order to not clip into or through a block. If, within the next frame, the moving
-     * directional map object will not collide with any block, its regular velocity is returned.
+     * @param object the MovingDirectionalMapObject to check collisions with
+     * @return returns the y velocity it must move within the next frame in order to not clip into or through a block. If, within the next frame, the moving directional map object will not collide with any block, its regular velocity is returned.
      */
     public static float willCollideVerticallyWithBlock(MovingDirectionalMapObject object) {
         float yVel = object.getyVel();
@@ -269,8 +288,8 @@ public class CollisionLogic {
 
     /**
      * Checks whether or not a MovingDirectionalMapObject will collide vertically with either of the players on the map within the next frame (between its current position and its current position + velocity)
-     * Takes the moving object as a parameter and returns the y velocity it must move within the next frame in order to not clip into or through a player. If, within the next frame, the moving
-     * directional map object will not collide with either player, its regular velocity is returned.
+     * @param object the MovingDirectionalMapObject to check collisions with
+     * @return returns the y velocity it must move within the next frame in order to not clip into or through a player. If, within the next frame, the moving directional map object will not collide with either player, its regular velocity is returned.
      */
     public static float willCollideVerticallyWithPlayer(MovingDirectionalMapObject object) {
         float yVel = object.getyVel();
@@ -296,11 +315,10 @@ public class CollisionLogic {
         return yVel;
     }
 
-
     /**
      * Checks whether or not a MovingDirectionalMapObject will collide horizontally with either of the players or blocks on the map within the next frame (between its current position and its current position + velocity)
-     * Takes the moving object as a parameter and returns the x velocity it must move within the next frame in order to not clip into or through a player or block. If, within the next frame, the moving
-     * directional map object will not collide with either player or block, its regular velocity is returned.
+     * @param object the MovingDirectionalMapObject to check collisions with
+     * @return returns the x velocity it must move within the next frame in order to not clip into or through a player or block. If, within the next frame, the moving directional map object will not collide with either player or block, its regular velocity is returned.
      */
     public static float willCollideHorizontallyWithObject(MovingDirectionalMapObject object) { //returns the maximum displacement without clipping into a block
         float xVel = object.getxVel();
@@ -342,39 +360,17 @@ public class CollisionLogic {
 
     /**
      * Sets the blocks array for when a new map is generated
+     * @param blocks the new array
      */
     public static void setBlocks(ArrayList<MapObject> blocks) {
         CollisionLogic.blocks = blocks;
     }
 
     /**
-     * Sets the blocks array for when a new map is generated
+     * Sets the players array for when a new game is started
+     * @param players the new array
      */
     public static void setPlayers(Player[] players) {
         CollisionLogic.players = players;
     }
-
-    //    public static boolean collidedLeft(MapObject object) {
-//        ObjectData objectData = object.getObjectData();
-//        for (MapObject block : blocks) {
-//            ObjectData blockData = block.getObjectData();
-//            if (objectData.x - blockData.x <= blockData.w && objectData.x - blockData.x > 0 && intersectsOnHorizontalPlane(objectData, blockData)) {
-//                System.out.println("collided left with block at " + blockData.x + "," + blockData.y);
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-//
-//    public static boolean collidedRight(MapObject object) {
-//        ObjectData objectData = object.getObjectData();
-//        for (MapObject block : blocks) {
-//            ObjectData blockData = block.getObjectData();
-//            if (blockData.x - objectData.x <= objectData.w && blockData.x - objectData.x > 0 && intersectsOnHorizontalPlane(objectData, blockData)) {
-//                System.out.println("object at " + objectData.x + "," + objectData.y + " collided right with block at " + blockData.x + "," + blockData.y);
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
 }

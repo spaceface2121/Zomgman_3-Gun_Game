@@ -11,10 +11,11 @@ import objects.Player;
 public class KeyReleasedHandler implements EventHandler<KeyEvent> {
     private Game GAME = Main.getGame();
 
-    @Override
     /**
      * Handles all of the Key releases
+     * @param keyEvent the event of a key press
      */
+    @Override
     public void handle(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();
         GAME.setKey(code, false);

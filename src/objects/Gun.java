@@ -15,9 +15,7 @@ import java.util.ArrayList;
  */
 public class Gun extends DirectionalMapObject {
 
-    /**
-     * Gun fields
-     */
+    //Gun fields
     private byte type = 0, fireMode, ammoRemaining, numSuccessiveRoundsFired;
     private int delayBetweenShots, reloadTime;
     private long timeAtLastShot = 0;
@@ -31,7 +29,7 @@ public class Gun extends DirectionalMapObject {
 
     /**
      * Gun constructor based on the player the gun belongs to
-     * @param player
+     * @param player the player who's gun this is
      */
     public Gun(Player player) {
         super(getInitialGunData(player), getOtherImage(player), player.getDir());
@@ -42,8 +40,8 @@ public class Gun extends DirectionalMapObject {
 
     /**
      * Accessor method for the initial gun data based on the player the gun belongs to
-     * @param player
-     * @return ObjectData
+     * @param player the player who's gun it is
+     * @return the initial ObjectData of the gun
      */
     private static ObjectData getInitialGunData(Player player) {
         ObjectData playerData = player.getObjectData();
@@ -59,8 +57,8 @@ public class Gun extends DirectionalMapObject {
 
     /**
      * Accessor method for the alternate directional image
-     * @param player
-     * @return Image
+     * @param player the player who's gun it is
+     * @return the "other" image
      */
     private static Image getOtherImage(Player player) {
         return Images.getImageFromList(Images.getGunImages(), (byte)0, !player.getDir());
@@ -137,7 +135,7 @@ public class Gun extends DirectionalMapObject {
 
     /**
      * Reloads the gun, if it is reloadable based on the current time
-     * @param currTime
+     * @param currTime the current System time
      */
     public void reload(long currTime) {
         if (ammoRemaining < GunLogic.getMagCapacity(type)) {
@@ -174,13 +172,11 @@ public class Gun extends DirectionalMapObject {
     private void moveBullets() {
         for (int i = 0; i < bullets.size(); i++) {
             Bullet bullet = bullets.get(i);
-            Player playerToTakeDamage, thisPlayer;
+            Player playerToTakeDamage;
 
             if (player1or2) { //if this gun (and subsequently these bullets) belong to player 1
-                //thisPlayer = Main.getGame().getPlayer1();
                 playerToTakeDamage = Main.getGame().getPlayer2();
             } else { //if player 2
-                //thisPlayer = Main.getGame().getPlayer2();
                 playerToTakeDamage = Main.getGame().getPlayer1();
             }
 
@@ -188,9 +184,8 @@ public class Gun extends DirectionalMapObject {
                 if (Math.abs(CollisionLogic.willCollideHorizontallyWithPlayer(bullet)) < Math.abs(bullet.getxVel()) || CollisionLogic.collided(playerToTakeDamage.getObjectData(), bullet.getObjectData())) {
                     if (playerToTakeDamage.getHealth() - bullet.getDamage() <= 0) {
                         upgrade();
-                        //thisPlayer.addHealth((byte)40);
                     }
-                    if (!won) {
+                    if (!won) { //only actually kills the other player if the game hasn't ended
                         playerToTakeDamage.takeDamage(bullet.getDamage());
                     }
                 }
@@ -215,7 +210,7 @@ public class Gun extends DirectionalMapObject {
 
     /**
      * Checks if the reload has finished
-     * @param currTime
+     * @param currTime the current system time
      */
     public void checkReload(long currTime) {
         if (reloading && currTime - timeAtReloadStart < reloadTime) {
@@ -230,7 +225,7 @@ public class Gun extends DirectionalMapObject {
 
     /**
      * Accessor method for the array of bullets
-     * @return
+     * @return the bullets that belong to this gun
      */
     public ArrayList<Bullet> getBullets() {
         return bullets;
@@ -238,7 +233,7 @@ public class Gun extends DirectionalMapObject {
 
     /**
      * Accessor method for the type of gun
-     * @return
+     * @return the type of gun
      */
     public byte getType() {
         return type;
@@ -246,7 +241,7 @@ public class Gun extends DirectionalMapObject {
 
     /**
      * Accessor method for the fire mode
-     * @return
+     * @return the fire mode
      */
     public byte getFireMode() {
         return fireMode;
@@ -259,11 +254,10 @@ public class Gun extends DirectionalMapObject {
         if (type < GunLogic.SNIPER) {
             type++;
             reset();
-        } else {
+        } else { //if upgrading from the sniper, then the player has won
             Main.getGame().setWinner(player1or2);
             won = true;
             Main.getGame().setScreen(Game.WIN_SCREEN);
-            //Render.drawWinScreen();
         }
     }
 
@@ -287,19 +281,9 @@ public class Gun extends DirectionalMapObject {
         setOtherImage(Images.getImageFromList(Images.getGunImages(), type, !getDir()));
     }
 
-    /*public void updateCoordinates(Player player) {
-        if (player.getDir()) { //if facing right
-            getObjectData().x = player.getObjectData().x + player.getObjectData().w - 2;
-        } else { //if facing left
-            getObjectData().x = (float)(player.getObjectData().x - getObjectData().image.getWidth() + 2);
-        }
-        getObjectData().y = (int)(player.getObjectData().y + 1.0 / 3 * player.getObjectData().h);
-    }
-*/
-
     /**
      * Moves the gun with the player, at the relative position from the player that it needs to be
-     * @param player
+     * @param player this player
      */
     public void updateCoordinates(Player player) {
         if (getDir()) { //if facing right
@@ -312,7 +296,7 @@ public class Gun extends DirectionalMapObject {
 
     /**
      * Accessor method for ammo
-     * @return
+     * @return the ammo remaining
      */
     public byte getRemainingAmmo() {
         return ammoRemaining;
@@ -320,7 +304,7 @@ public class Gun extends DirectionalMapObject {
 
     /**
      * Accessor method for reloading
-     * @return
+     * @return whether its reloading or not
      */
     public boolean isReloading() {
         return reloading;
@@ -328,7 +312,7 @@ public class Gun extends DirectionalMapObject {
 
     /**
      * Accessor method for the gun's player identity
-     * @return
+     * @return whether its p1 or p2 (true or false)
      */
     public boolean isPlayer1or2() {
         return player1or2;

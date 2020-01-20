@@ -10,9 +10,7 @@ import objects.Player;
  */
 public class PlayerLogic {
 
-    /**
-     * Static fields and arrays
-     */
+    // Static fields and arrays
     public static byte PLAYER1 = 0, PLAYER2 = 1;
     private static float MAX_X_VEL = 7, MIN_X_VEL = 3, Y_VEL = -12, Y_ACCELERATION = (float)0.5, X_ACCELERATION = (float)0.4; //values that define player movement velocities and accelerations
     private static float[] relativeRightHandX = {15, 20, 28, 20, 30, 30, 25, 40, 43}; //absolute value of where the right hand would be relative to the gun (x)
@@ -20,9 +18,7 @@ public class PlayerLogic {
     private static float[] relativeRightHandY = {16, 18, 19, 17, 19, 13, 16, 16, 16}; //absolute value of where the right hand would be relative to the gun (y)
     private static float[] relativeLeftHandY = {22, 16, 23, 24, 20, 15, 18, 18, 20}; //same thing but left hand
 
-    /**
-     * Accessor methods for hand positions, based on type of gun
-     */
+    // Accessor methods for hand positions, based on type of gun
 
     /**
      * Returns right hand x position, based on type of gun
@@ -80,9 +76,7 @@ public class PlayerLogic {
         }
     }
 
-    /**
-     * Accessor methods for movement fields
-     */
+    // Accessor methods for movement fields
 
     /**
      * Accessor method for MAX_X_VEL

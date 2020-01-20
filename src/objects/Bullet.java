@@ -34,15 +34,15 @@ public class Bullet extends MovingDirectionalMapObject {
 
     /**
      * Mutator method for the bullet's initial object data
-     * @param gun
-     * @return ObjectData
+     * @param gun the Gun which is shooting this bullet
+     * @return the initial ObjectData of the bullet
      */
     private static ObjectData getInitialBulletData(Gun gun) {
         ObjectData gunData = gun.getObjectData();
 
         Image image = Images.getImageFromList(Images.getBulletImages(), GunLogic.getBulletTypes(gun.getType()), gun.getDir());
 
-        float x, y; //where the bullet spawns
+        float x; //where the bullet spawns
         if (gun.getDir()) { //if facing right
             x = gunData.x + gunData.w;
             if (gun.getFireMode() == GunLogic.SEMI && gun.getType() != GunLogic.REVOLVER) {
@@ -54,32 +54,13 @@ public class Bullet extends MovingDirectionalMapObject {
                 x -= image.getWidth();
             }
         }
-        y = gunData.y + GunLogic.getRelativeBulletExitPointY(gun.getType());
-
-/*        switch(gun.getType()) { //DONT FORGET TO ACTUALLY DO THIS
-            case GunLogic.GLOCK:
-
-            case GunLogic.UZI:
-
-            case GunLogic.MP5:
-
-            case GunLogic.AK:
-
-            case GunLogic.REVOLVER:
-
-            case GunLogic.SHOTGUN:
-
-            case GunLogic.SNIPER:
-
-        }*/
-
-        return new ObjectData(x, y, image);
+        return new ObjectData(x, gunData.y + GunLogic.getRelativeBulletExitPointY(gun.getType()), image);
     }
 
     /**
      * Accessor method for the left facing bullet image based on the gun
-     * @param gun
-     * @return
+     * @param gun the Gun which is shooting this bullet
+     * @return the "other" image of the bullet
      */
     private static Image getOtherImage(Gun gun) {
         return Images.getImageFromList(Images.getBulletImages(), GunLogic.getBulletTypes(gun.getType()), !gun.getDir());
@@ -95,7 +76,7 @@ public class Bullet extends MovingDirectionalMapObject {
 
     /**
      * Accessor method for the distance traveled
-     * @return
+     * @return the distance traveled by the bullet
      */
     public float getDistanceTraveled() {
         return distanceTraveled;
@@ -103,7 +84,7 @@ public class Bullet extends MovingDirectionalMapObject {
 
     /**
      * Accessor method for range
-     * @return
+     * @return the max range of the bullet
      */
     public int getRange() {
         return range;
@@ -111,7 +92,7 @@ public class Bullet extends MovingDirectionalMapObject {
 
     /**
      * Accessor method for the player identity
-     * @return
+     * @return whether this bullet belongs to player 1 or 2 (true or false)
      */
     public boolean isPlayer1or2() {
         return player1or2;
@@ -119,7 +100,7 @@ public class Bullet extends MovingDirectionalMapObject {
 
     /**
      * Accessor method for damage
-     * @return
+     * @return the damage the bullet should do
      */
     public byte getDamage() {
         return damage;

@@ -4,9 +4,7 @@ package main;
  * Main class to run game
  */
 public class Main {
-    /**
-     * Game field
-     */
+    // Game field
     private static Game game;
 
     /**
@@ -20,7 +18,7 @@ public class Main {
 
     /**
      * Accessor method for game
-     * @return
+     * @return returns the Game
      */
     public static Game getGame() {
         return game;
@@ -28,7 +26,7 @@ public class Main {
 
     /**
      * Mutator method for game
-     * @param game
+     * @param game the Game
      */
     public static void setGame(Game game) {
         Main.game = game;

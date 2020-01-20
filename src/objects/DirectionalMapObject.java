@@ -16,9 +16,9 @@ public class DirectionalMapObject extends MapObject {
 
     /**
      * DirectionalMapObject constructor
-     * @param objectData
+     * @param objectData the ObjectData
      * @param otherImage left facing image
-     * @param dir direction
+     * @param dir direction (true = right, false = left)
      */
     public DirectionalMapObject(ObjectData objectData, Image otherImage, boolean dir) {
         super(objectData);
@@ -38,7 +38,7 @@ public class DirectionalMapObject extends MapObject {
 
     /**
      * Mutator method for left facing image
-     * @param otherImage
+     * @param otherImage the image for the other direction
      */
     public void setOtherImage(Image otherImage) {
         this.otherImage = otherImage;
@@ -46,7 +46,7 @@ public class DirectionalMapObject extends MapObject {
 
     /**
      * Accessor method for direction
-     * @return
+     * @return the direction
      */
     public boolean getDir() {
         return dir;

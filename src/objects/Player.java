@@ -141,10 +141,6 @@ public class Player extends MovingDirectionalMapObject {
             case 0:
             case 1:
                 setyVel(PlayerLogic.getyVel());
-//                if (CollisionLogic.collidedRightWithBlock(getObjectData()) || CollisionLogic.collidedLeftWithBlock(getObjectData())) {
-//                    setxVel(-getxVel() * (float)0.4);
-//                    changeDirection();
-//                }
                 timesJumped++; break;
         }
     }
@@ -190,9 +186,6 @@ public class Player extends MovingDirectionalMapObject {
                     }
                 }
                 setStrafing(true);
-            } else if (GAME.isPressed(KeyCode.SPACE)) {
-//                setHoldingShoot(true);
-//                getGun().fire();
             }
         } else { //if player 2
             if (GAME.isPressed(KeyCode.LEFT) && !GAME.isPressed(KeyCode.RIGHT)) {
@@ -230,12 +223,10 @@ public class Player extends MovingDirectionalMapObject {
                     }
                 }
                 setStrafing(true);
-            } else if (GAME.isPressed(KeyCode.SLASH)) {
-//                setHoldingShoot(true);
-//                getGun().fire();
             }
         }
 
+        // horizontal deceleration
         if (!strafing && !falling && Math.abs(getxVel()) > 0) {
             setxVel(getxVel()*(float)0.6);
         } else if (!strafing && falling && Math.abs(getxVel()) > 0) {
@@ -250,9 +241,9 @@ public class Player extends MovingDirectionalMapObject {
         if (CollisionLogic.collidedRightWithBlock(getObjectData()) || CollisionLogic.collidedLeftWithBlock(getObjectData())) {
             setxVel(0);
             if (jumping) {
-                setyVel(getyVel() - PlayerLogic.getyAcceleration());
+                setyVel(getyVel() - PlayerLogic.getyAcceleration()); //gliding up walls
             } else {
-                setyVel(PlayerLogic.getyAcceleration());
+                setyVel(PlayerLogic.getyAcceleration()); //slowly descending down a wall
             }
             timesJumped = 0;
         }
@@ -264,17 +255,9 @@ public class Player extends MovingDirectionalMapObject {
                 timesJumped = 0;
             } else if (CollisionLogic.collidedTopWithBlock(getObjectData()) || CollisionLogic.collidedTopWithPlayer(getObjectData(), player1or2) || getObjectData().y <= 0) {
                 setyVel((float) (-0.5 * getyVel() + 0.01)); //so you bounce off when you jump and hit ur head
-            } /*else if (CollisionLogic.collidedRightWithBlock(getObjectData()) || CollisionLogic.collidedLeftWithBlock(getObjectData())) {
-                //setyVel(getyVel() - PlayerLogic.getyAcceleration());
-                setxVel(0);
-                if (jumping) {
-                    setyVel(getyVel() - PlayerLogic.getyAcceleration());
-                } else {
-                    setyVel(PlayerLogic.getyAcceleration());
-                }
-                timesJumped = 0;
-            }*/ else {
-                setyVel(getyVel() + PlayerLogic.getyAcceleration());
+                // + 0.01 cuz if you jump up and touch the ceiling just as your yVel becomes 0 you would stick to the ceiling
+            } else {
+                setyVel(getyVel() + PlayerLogic.getyAcceleration()); //vertical acceleration
             }
         } else if (!(CollisionLogic.collidedBottomWithBlock(getObjectData()) && !CollisionLogic.collidedBottom(getObjectData(), getOtherPlayer().getObjectData()))) {
             falling = true;
@@ -288,7 +271,7 @@ public class Player extends MovingDirectionalMapObject {
     public void setStrafing(boolean s) {
         strafing = s;
     }
-
+//bruh
     /**
      * Mutator method for the jumping variable
      * @param j
@@ -315,7 +298,6 @@ public class Player extends MovingDirectionalMapObject {
     public void update() {
         move();
         gun.checkReload(System.currentTimeMillis());
-        //more will be added potentially
     }
 
     /**

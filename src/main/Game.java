@@ -40,8 +40,8 @@ public class Game extends Application {
     public static float scaleX, scaleY;
     public static float scaleFullX, scaleFullY;
 
-    private byte screen;
-    public static final byte MENU_SCREEN = 0, GAME_SCREEN = 1, PAUSE_SCREEN = 2, WIN_SCREEN = 3, RULES_SCREEN = 4;
+    private byte screen; //which screen the game is on
+    public static final byte MENU_SCREEN = 0, GAME_SCREEN = 1, PAUSE_SCREEN = 2, WIN_SCREEN = 3;
 
     private Map map;
     private Player player1, player2;
@@ -101,10 +101,10 @@ public class Game extends Application {
             this.stage.setOnCloseRequest((event) -> System.exit(0));
             this.stage.show();
 
-            Timeline loop = new Timeline();
+            Timeline loop = new Timeline(); //the loop that runs 60 times per second
             loop.setCycleCount(Timeline.INDEFINITE);
 
-            KeyFrame keyFrame = new KeyFrame(
+            KeyFrame keyFrame = new KeyFrame( //theres only 1 keyframe in the timeline cuz theres no need for more
                     Duration.seconds(1.0 / 60),
                     new EventHandler<ActionEvent>() {
                         public void handle(ActionEvent actionEvent) {
@@ -125,15 +125,12 @@ public class Game extends Application {
                                 case WIN_SCREEN:
                                     Render.drawWinScreen();
                                     break;
-                                case RULES_SCREEN:
-
-                                    break;
                             }
 
                         }
                     }
             );
-            reset();
+            reset(); //sets all the stuff
 
             loop.getKeyFrames().add(keyFrame);
             loop.play();
@@ -141,32 +138,6 @@ public class Game extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private void setFxThings() {
-        int width, height;
-        if (finished) {
-            width = fullW;
-            height = fullH;
-        } else {
-            width = w;
-            height = h;
-        }
-        canvas = new Canvas(width, height);
-        graphicsContext = canvas.getGraphicsContext2D();
-        Group group = new Group();
-        group.getChildren().add(canvas);
-        scene = new Scene(group);
-        scene.setOnKeyPressed(new KeyPressedHandler());
-        scene.setOnKeyReleased(new KeyReleasedHandler());
-
-        this.stage.setTitle("Zomgman 3 - Gun Game");
-        this.stage.setWidth(width);
-        this.stage.setHeight(height);
-        this.stage.setScene(scene);
-        this.stage.setResizable(false);
-        this.stage.setOnCloseRequest((event) -> System.exit(0));
-        this.stage.show();
     }
 
     /**
