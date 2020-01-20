@@ -10,7 +10,14 @@ import main.data.ObjectData;
 
 import java.util.ArrayList;
 
+/**
+ * Gun class
+ */
 public class Gun extends DirectionalMapObject {
+
+    /**
+     * Gun fields
+     */
     private byte type = 0, fireMode, ammoRemaining, numSuccessiveRoundsFired;
     private int delayBetweenShots, reloadTime;
     private long timeAtLastShot = 0;
@@ -22,6 +29,10 @@ public class Gun extends DirectionalMapObject {
 
     private ArrayList<Bullet> bullets;
 
+    /**
+     * Gun constructor based on the player the gun belongs to
+     * @param player
+     */
     public Gun(Player player) {
         super(getInitialGunData(player), getOtherImage(player), player.getDir());
         setGunProperties();
@@ -29,7 +40,11 @@ public class Gun extends DirectionalMapObject {
         bullets = new ArrayList<>();
     }
 
-    //gets the initial gunData
+    /**
+     * Accessor method for the initial gun data based on the player the gun belongs to
+     * @param player
+     * @return ObjectData
+     */
     private static ObjectData getInitialGunData(Player player) {
         ObjectData playerData = player.getObjectData();
         float x;
@@ -41,12 +56,19 @@ public class Gun extends DirectionalMapObject {
         }
         return new ObjectData(x, (float)(playerData.y + 1.0 / 4 * playerData.h), image);
     }
-    //get the initial "other" image of the gun
+
+    /**
+     * Accessor method for the alternate directional image
+     * @param player
+     * @return Image
+     */
     private static Image getOtherImage(Player player) {
         return Images.getImageFromList(Images.getGunImages(), (byte)0, !player.getDir());
     }
 
-
+    /**
+     * Mutator method for all the gun property fields
+     */
     private void setGunProperties() {
         fireMode = GunLogic.getFireMode(type); // 0 = semi, 1 = burst, 2 = auto, 3 = shotgun
         ammoRemaining = GunLogic.getMagCapacity(type);
@@ -54,6 +76,9 @@ public class Gun extends DirectionalMapObject {
         reloadTime = GunLogic.getReloadTime(type);
     }
 
+    /**
+     * Fires the gun
+     */
     public void fire() {
         long currTime = System.currentTimeMillis();
         checkReload(currTime);
@@ -110,6 +135,10 @@ public class Gun extends DirectionalMapObject {
         }
     }
 
+    /**
+     * Reloads the gun, if it is reloadable based on the current time
+     * @param currTime
+     */
     public void reload(long currTime) {
         if (ammoRemaining < GunLogic.getMagCapacity(type)) {
             reloading = true;
@@ -124,6 +153,9 @@ public class Gun extends DirectionalMapObject {
         }
     }
 
+    /**
+     * Stops firing the gun
+     */
     public void stopFiring() {
         System.out.println("sf");
         if (firing) {
@@ -136,6 +168,9 @@ public class Gun extends DirectionalMapObject {
         }
     }
 
+    /**
+     * Moves all the bullets that came out of the gun
+     */
     private void moveBullets() {
         for (int i = 0; i < bullets.size(); i++) {
             Bullet bullet = bullets.get(i);
@@ -167,6 +202,9 @@ public class Gun extends DirectionalMapObject {
         }
     }
 
+    /**
+     * Updates the bullet movement, firing, and reload
+     */
     public void update() {
         moveBullets();
         if (firing) {
@@ -175,6 +213,10 @@ public class Gun extends DirectionalMapObject {
         checkReload(System.currentTimeMillis());
     }
 
+    /**
+     * Checks if the reload has finished
+     * @param currTime
+     */
     public void checkReload(long currTime) {
         if (reloading && currTime - timeAtReloadStart < reloadTime) {
             return;
@@ -186,18 +228,33 @@ public class Gun extends DirectionalMapObject {
         }
     }
 
+    /**
+     * Accessor method for the array of bullets
+     * @return
+     */
     public ArrayList<Bullet> getBullets() {
         return bullets;
     }
 
+    /**
+     * Accessor method for the type of gun
+     * @return
+     */
     public byte getType() {
         return type;
     }
 
+    /**
+     * Accessor method for the fire mode
+     * @return
+     */
     public byte getFireMode() {
         return fireMode;
     }
 
+    /**
+     * Upgrades a gun to the next type
+     */
     public void upgrade() {
         if (type < GunLogic.SNIPER) {
             type++;
@@ -210,6 +267,9 @@ public class Gun extends DirectionalMapObject {
         }
     }
 
+    /**
+     * Downgrades a gun to the previous type
+     */
     public void downgrade() {
         if (type > 0) {
             type--;
@@ -217,6 +277,9 @@ public class Gun extends DirectionalMapObject {
         }
     }
 
+    /**
+     * Sets the images of the gun
+     */
     public void setImages() {
         getObjectData().image = Images.getImageFromList(Images.getGunImages(), type, getDir());
         getObjectData().w = (byte) getObjectData().image.getWidth();
@@ -233,6 +296,11 @@ public class Gun extends DirectionalMapObject {
         getObjectData().y = (int)(player.getObjectData().y + 1.0 / 3 * player.getObjectData().h);
     }
 */
+
+    /**
+     * Moves the gun with the player, at the relative position from the player that it needs to be
+     * @param player
+     */
     public void updateCoordinates(Player player) {
         if (getDir()) { //if facing right
             getObjectData().x = player.getObjectData().x + GunLogic.getRelativeXPosition(type);
@@ -242,18 +310,33 @@ public class Gun extends DirectionalMapObject {
         getObjectData().y = (float)(player.getObjectData().y + 1.0 / 6 * player.getObjectData().h);
     }
 
+    /**
+     * Accessor method for ammo
+     * @return
+     */
     public byte getRemainingAmmo() {
         return ammoRemaining;
     }
 
+    /**
+     * Accessor method for reloading
+     * @return
+     */
     public boolean isReloading() {
         return reloading;
     }
 
+    /**
+     * Accessor method for the gun's player identity
+     * @return
+     */
     public boolean isPlayer1or2() {
         return player1or2;
     }
 
+    /**
+     * Resets the gun
+     */
     private void reset() {
         numSuccessiveRoundsFired = 0;
         timeAtLastShot = 0;
