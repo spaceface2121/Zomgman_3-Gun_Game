@@ -23,7 +23,7 @@ import java.util.BitSet;
 
 
 /**
- * Michael Mityushkin, Sean Vasserman
+ * Michael Mityushkin, Sean Vaserman
  * Zomgman 3 - Gun Game
  * Mr. Benum
  * ICS 4UE
@@ -49,12 +49,18 @@ public class Game extends Application {
 
     private BitSet keyboardBitSet = new BitSet();
 
+    /**
+     * Launches game
+     */
     public void initialize() {
         Game.launch();
     }
 
 
     @Override
+    /**
+     * Sets stage and does a bunch of resolution stuff
+     */
     public void start(Stage stage){
         try {
             Main.setGame(this);
@@ -163,6 +169,9 @@ public class Game extends Application {
         this.stage.show();
     }
 
+    /**
+     * Resets the game
+     */
     public void reset() {
         Main.setGame(this);
 
@@ -186,64 +195,126 @@ public class Game extends Application {
         }
     }
 
+    /**
+     * Sets key presses for the keyboardBitSet
+     * @param key on keyboard
+     * @param pressed
+     */
     public void setKey(KeyCode key, boolean pressed) {
         keyboardBitSet.set(key.ordinal(), pressed);
     }
 
+    /**
+     * Checks if a key is pressed
+     * @param key on keyboard
+     * @return boolean pressed or not pressed
+     */
     public boolean isPressed(KeyCode key) {
         return keyboardBitSet.get(key.ordinal());
     }
 
+    /**
+     * Mutator method to set screen
+     * @param screen
+     */
     public void setScreen(byte screen) {
         this.screen = screen;
         System.out.println("screen: " + screen);
     }
 
+    /**
+     * Accessor method to get screen
+     * @return screen
+     */
     public byte getScreen() {
         return screen;
     }
 
+    /**
+     * Accessor method to get canvas
+     * @return canvas
+     */
     public Canvas getCanvas() {
         return canvas;
     }
 
+    /**
+     * Accessor method to get stage
+     * @return stage
+     */
     public Stage getStage() {
         return stage;
     }
 
+    /**
+     * Unused mutator method to set stage
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Accessor method for graphicsContext
+     * @return
+     */
     public GraphicsContext getGraphicsContext() {
         return graphicsContext;
     }
 
+    /**
+     * Accessor method for player1
+     * @return
+     */
     public Player getPlayer1() {
         return player1;
     }
 
+    /**
+     * Accessor method for player2
+     * @return
+     */
     public Player getPlayer2() {
         return player2;
     }
 
+    /**
+     * Accessor method for the winning player
+     * @return
+     */
     public boolean getWinner() {
         return winner;
     }
 
+    /**
+     * Mutator method to set the winning player
+     * @param player1or2
+     */
     public void setWinner(boolean player1or2) {
         winner = player1or2;
         finished = true;
     }
 
+    /**
+     * Finishes the game
+     * @param finished
+     */
     public void setFinished(boolean finished) {
         this.finished = finished;
     }
 
+    /**
+     * Checks if game is finished
+     * @return
+     */
     public boolean isFinished() {
         return finished;
     }
 
+    /**
+     * Accessor method for map
+     * @return
+     */
     public Map getMap() {
         return map;
     }
