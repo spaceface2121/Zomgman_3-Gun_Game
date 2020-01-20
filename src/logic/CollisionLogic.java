@@ -1,7 +1,7 @@
 package logic;
 
 import main.Main;
-import main.ObjectData;
+import main.data.ObjectData;
 import objects.Bullet;
 import objects.MapObject;
 import objects.MovingDirectionalMapObject;

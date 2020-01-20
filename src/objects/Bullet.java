@@ -2,8 +2,8 @@ package objects;
 
 import javafx.scene.image.Image;
 import logic.GunLogic;
-import main.Images;
-import main.ObjectData;
+import main.data.Images;
+import main.data.ObjectData;
 
 public class Bullet extends MovingDirectionalMapObject {
     private byte damage;

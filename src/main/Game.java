@@ -17,6 +17,7 @@ import javafx.util.Duration;
 import logic.CollisionLogic;
 import logic.GunLogic;
 import logic.PlayerLogic;
+import main.data.Map;
 import objects.Player;
 import java.util.BitSet;
 

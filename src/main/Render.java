@@ -4,6 +4,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import logic.GunLogic;
+import main.data.Images;
+import main.data.ObjectData;
 import objects.*;
 
 import java.util.ArrayList;

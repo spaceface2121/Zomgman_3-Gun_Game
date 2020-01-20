@@ -27,7 +27,7 @@ title __ZOMGMAN_3-GUN_GAME's Class Diagram__\n
   
 
   namespace main {
-    class main.Images {
+    class main.data.Images {
     }
   }
   
@@ -51,13 +51,13 @@ title __ZOMGMAN_3-GUN_GAME's Class Diagram__\n
   
 
   namespace main {
-    class main.Map {
+    class main.data.Map {
     }
   }
   
 
   namespace main {
-    class main.ObjectData {
+    class main.data.ObjectData {
     }
   }
   
@@ -111,7 +111,7 @@ title __ZOMGMAN_3-GUN_GAME's Class Diagram__\n
   
 
   main.Game -up-|> javafx.application.Application
-  main.Game o-- main.Map : map
+  main.Game o-- main.data.Map : map
   main.Game o-- objects.Player : player1
   main.Game o-- objects.Player : player2
   main.KeyPressedHandler .up.|> javafx.event.EventHandler
@@ -122,7 +122,7 @@ title __ZOMGMAN_3-GUN_GAME's Class Diagram__\n
   objects.DirectionalMapObject -up-|> objects.MapObject
   objects.Gun -up-|> objects.DirectionalMapObject
   objects.Hand -up-|> objects.MapObject
-  objects.MapObject o-- main.ObjectData : objectData
+  objects.MapObject o-- main.data.ObjectData : objectData
   objects.MovingDirectionalMapObject -up-|> objects.DirectionalMapObject
   objects.Player -up-|> objects.MovingDirectionalMapObject
   objects.Player o-- objects.Gun : gun

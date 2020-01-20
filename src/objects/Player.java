@@ -7,8 +7,8 @@ import logic.GunLogic;
 import logic.PlayerLogic;
 import main.Game;
 import main.Main;
-import main.Images;
-import main.ObjectData;
+import main.data.Images;
+import main.data.ObjectData;
 
 public class Player extends MovingDirectionalMapObject {
     private Hand rightHand, leftHand;

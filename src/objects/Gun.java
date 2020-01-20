@@ -5,8 +5,8 @@ import logic.CollisionLogic;
 import logic.GunLogic;
 import main.Game;
 import main.Main;
-import main.Images;
-import main.ObjectData;
+import main.data.Images;
+import main.data.ObjectData;
 
 import java.util.ArrayList;
 

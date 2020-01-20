@@ -1,6 +1,9 @@
-package main;
+package main.data;
 
 import javafx.scene.image.Image;
+import main.Main;
+import main.data.Images;
+import main.data.ObjectData;
 import objects.MapObject;
 
 import java.io.File;
