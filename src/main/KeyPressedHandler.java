@@ -5,6 +5,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import objects.Player;
 
+/**
+ * Class for key presses
+ */
 public class KeyPressedHandler implements EventHandler<KeyEvent> {
     private Game GAME = Main.getGame();
 

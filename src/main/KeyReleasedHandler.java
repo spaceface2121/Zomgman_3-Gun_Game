@@ -5,10 +5,16 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import objects.Player;
 
+/**
+ * Class for key releases
+ */
 public class KeyReleasedHandler implements EventHandler<KeyEvent> {
     private Game GAME = Main.getGame();
 
     @Override
+    /**
+     * Handles all of the Key releases
+     */
     public void handle(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();
         GAME.setKey(code, false);
@@ -56,6 +62,10 @@ public class KeyReleasedHandler implements EventHandler<KeyEvent> {
         }
     }
 
+    /**
+     * Mutator method for game
+     * @param game
+     */
     public void setGame(Game game) {
         this.GAME = game;
     }
