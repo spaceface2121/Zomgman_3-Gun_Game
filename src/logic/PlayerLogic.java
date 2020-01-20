@@ -23,24 +23,47 @@ public class PlayerLogic {
     /**
      * Accessor methods for hand positions, based on type of gun
      */
+
+    /**
+     * Returns right hand x position, based on type of gun
+     * @param gunType
+     * @return right hand x position
+     */
     public static float getRelativeRightHandX(byte gunType) {
         return relativeRightHandX[gunType];
     }
 
+    /**
+     * Returns left hand x position, based on type of gun
+     * @param gunType
+     * @return left hand x position
+     */
     public static float getRelativeLeftHandX(byte gunType) {
         return relativeLeftHandX[gunType];
     }
 
+    /**
+     * Returns right hand y position, based on type of gun
+     * @param gunType
+     * @return right hand y position
+     */
     public static float getRelativeRightHandY(byte gunType) {
         return relativeRightHandY[gunType];
     }
 
+    /**
+     * Returns left hand y position, based on type of gun
+     * @param gunType
+     * @return left hand y position
+     */
     public static float getRelativeLeftHandY(byte gunType) {
         return relativeLeftHandY[gunType];
     }
 
     /**
      * Scaling method for all fields based on screen resolution
+     * @param scaleX horizontal scaling factor
+     * @param scaleY vertical scaling factor
      */
     public static void generateScaledProperties(float scaleX, float scaleY) {
         MAX_X_VEL *= scaleX;
@@ -60,20 +83,43 @@ public class PlayerLogic {
     /**
      * Accessor methods for movement fields
      */
+
+    /**
+     * Accessor method for MAX_X_VEL
+     * @return maximum X velocity
+     */
     public static float getMaxXVel() {
         return MAX_X_VEL;
     }
 
-    public static float getMinXVel() {return MIN_X_VEL;}
+    /**
+     * Accessor method for MIN_X_VEL
+     * @return minimum X velocity
+     */
+    public static float getMinXVel() {
+        return MIN_X_VEL;
+    }
 
+    /**
+     * Accessor method for Y_VEL (jumping velocity)
+     * @return Y velocity when jumping
+     */
     public static float getyVel() {
         return Y_VEL;
     }
 
+    /**
+     * Accessor method for Y_ACCELERATION (when falling)
+     * @return Y acceleration when falling
+     */
     public static float getyAcceleration() {
         return Y_ACCELERATION;
     }
 
+    /**
+     * Accessor method for X_ACCELERATION (when accelerating from MIN_X_VEL to MAX_X_VEL)
+     * @return X acceleration
+     */
     public static float getxAcceleration() {
         return X_ACCELERATION;
     }
