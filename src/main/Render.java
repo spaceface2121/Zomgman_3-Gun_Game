@@ -10,7 +10,13 @@ import objects.*;
 
 import java.util.ArrayList;
 
+/**
+ * Class to render and draw all the images on the screen in their positions
+ */
 public class Render {
+    /**
+     * Game, colour, and text fields
+     */
     private static Game GAME = Main.getGame();
     private static GraphicsContext graphicsContext = GAME.getGraphicsContext();
     private static boolean drawnWinScreen = false;
@@ -21,10 +27,16 @@ public class Render {
     private static float winScreenTextX = (GAME.fullW / (float)2.0) - 290 * Game.scaleFullX, winScreenTextY = (GAME.fullH / (float)2.0) - 50 * Game.scaleFullY;
     private static float pauseScreenTextX = (GAME.w / (float)2.0) - 390 * Game.scaleX, pauseScreenTextY = (GAME.h / (float)2.0) - 60 * Game.scaleY;
 
+    /**
+     * Draws main menu
+     */
     public static void drawMainMenu() {
         graphicsContext.drawImage(Images.getMainMenuImage(), 0, 0);
     }
 
+    /**
+     * Draws all the objects in the game
+     */
     public static void drawGame() {
         // draws background
         graphicsContext.drawImage(Images.getBackgroundImage(), 0, 0);
@@ -91,6 +103,9 @@ public class Render {
         graphicsContext.fillText(ammoText, GAME.fullW - 205 * Game.scaleFullX, GAME.fullH - GAME.getMap().getBlocks().get(0).getObjectData().h / 3.75 * Game.scaleFullY);
     }
 
+    /**
+     * Draws the pause screen
+     */
     public static void drawPaused() {
         System.out.println("draw pause screen");
 
@@ -107,6 +122,9 @@ public class Render {
         graphicsContext.fillText("Press escape to go to main menu", pauseScreenTextX - 50, pauseScreenTextY + 150);
     }
 
+    /**
+     * Draws the win screen
+     */
     public static void drawWinScreen() {
         if (!drawnWinScreen) {
             drawnWinScreen = true;
@@ -132,18 +150,26 @@ public class Render {
         }
     }
 
-    public static void drawRulesScreen() {
-        
-    }
-
+    /**
+     * Mutator method for drawing the win screen
+     * @param drawnWinScreen
+     */
     public static void setDrawnWinScreen(boolean drawnWinScreen) {
         Render.drawnWinScreen = drawnWinScreen;
     }
 
+    /**
+     * Mutator method for game
+     * @param game
+     */
     public static void setGame(Game game) {
         Render.GAME = game;
     }
 
+    /**
+     * Mutator method for graphicsContext
+     * @param graphicsContext
+     */
     public static void setGraphicsContext(GraphicsContext graphicsContext) {
         Render.graphicsContext = graphicsContext;
     }
