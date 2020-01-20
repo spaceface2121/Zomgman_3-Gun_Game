@@ -68,6 +68,10 @@ public class Map {
         }
     }
 
+    /**
+     * Accessor method for the arraylist of blocks
+     * @return arraylist of blocks
+     */
     public ArrayList<MapObject> getBlocks() {
         return blocks;
     }
