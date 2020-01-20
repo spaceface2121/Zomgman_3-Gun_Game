@@ -38,9 +38,11 @@ public class GunLogic {
      */
     private static final int BURST_DELAY = 150;
 
-
     /**
      * Accessor method for bullet X velocity based on the type of gun and player direction
+     * @param type gun type
+     * @param dir player direction
+     * @return bullet X velocity
      */
     public static float getxVel(byte type, boolean dir) {
         if (dir) { //facing right
@@ -52,6 +54,8 @@ public class GunLogic {
 
     /**
      * Accessor method for bullet Y velocity (bullet spread) based on the type of gun
+     * @param type gun type
+     * @return bullet Y velocity
      */
     public static float getyVel(byte type) {
         //return 0;
@@ -115,6 +119,8 @@ public class GunLogic {
 
     /**
      * Scaling method for all fields based on screen resolution
+     * @param scaleX horizontal scaling factor
+     * @param scaleY vertical scaling factor
      */
     public static void generateScaledProperties(float scaleX, float scaleY) {
         for (int i = 0; i < RANGE.length; i++) { //all the arrays are the same length
