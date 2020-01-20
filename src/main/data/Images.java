@@ -62,6 +62,8 @@ public class Images {
 
     /**
      * Scaling method for all images that are scaled based on screen resolution
+     * @param scaleX horizontal scaling factor
+     * @param scaleY vertical scaling factor
      */
     public static void generateScaledImages(float scaleX, float scaleY) {
         fillArrayListWithScaledImages(scaleX, scaleY, PLAYER_PATHS, playerImages);
@@ -72,7 +74,11 @@ public class Images {
     }
 
     /**
-     * Method responsible for adding scaled images to the final array of images
+     * Method responsible for adding scaled images to the final arraylist of images
+     * @param scaleX horizontal scaling factor
+     * @param scaleY vertical scaling factor
+     * @param paths image file path
+     * @param destination arraylist that the image needs to be added to
      */
     private static void fillArrayListWithScaledImages(float scaleX, float scaleY, ArrayList<String> paths, ArrayList<Image> destination) {
         for (int i = 0; i < paths.size(); i++) {
@@ -82,13 +88,17 @@ public class Images {
 
     /**
      * Method for actually scaling individual images
+     * @param scaleX horizontal scaling factor
+     * @param scaleY vertical scaling factor
+     * @param original original image
+     * @return new scaled image
      */
     private static Image getScaledImage(float scaleX, float scaleY, Image original) {
         return new Image(original.getUrl(), original.getWidth() * scaleX, original.getHeight() * scaleY, false, false); //makes a new image with the proper scaled dimensions
     }
 
     /**
-     *
+     * Accessor method for returning an image from a list
      * @param list the list you want to get an image from
      * @param index the index of the image (not taking into account whether it is a right or left image)
      * @param dir whether it is a right (true) image or left (false) image
@@ -137,6 +147,8 @@ public class Images {
 
     /**
      * Accessor method for hand images based on the identity of the player
+     * @param player1or2 identity of player
+     * @return hand image
      */
     public static Image getHandImage(boolean player1or2) {
         if (player1or2) {
