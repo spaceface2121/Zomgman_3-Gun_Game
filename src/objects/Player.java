@@ -150,46 +150,48 @@ public class Player extends MovingDirectionalMapObject {
      */
     public void move() {
         final Game GAME = Main.getGame();
+
+        //these are all the active player inputted horizontal movements
         if (player1or2) { //if player 1
-            if (GAME.isPressed(KeyCode.A) && !GAME.isPressed(KeyCode.D)) {
-                if (getDir()) { //if player 1 is moving right
+            if (GAME.isPressed(KeyCode.A) && !GAME.isPressed(KeyCode.D)) { //player 1 is holding left and not holding right
+                if (getDir()) { //if player 1 is facing right
                     changeDirection();
                 }
-                if (getxVel() > -PlayerLogic.getMinXVel()) {
-                    setxVel(-PlayerLogic.getMinXVel());
-                } else if (getxVel() > PlayerLogic.getxAcceleration() - PlayerLogic.getMaxXVel()) {
-                    setxVel(getxVel() - PlayerLogic.getxAcceleration());
-                } else {
-                    setxVel(-PlayerLogic.getMaxXVel());
+                if (getxVel() > -PlayerLogic.getMinXVel()) { //player 1 is slower than the minimum velocity
+                    setxVel(-PlayerLogic.getMinXVel()); //set velocity to minimum velocity
+                } else if (getxVel() > PlayerLogic.getxAcceleration() - PlayerLogic.getMaxXVel()) { //player 1 is in between minimum and maximum velocity
+                    setxVel(getxVel() - PlayerLogic.getxAcceleration()); //accelerate the player
+                } else { //player 1 is at or somehow went over the maximum velocity
+                    setxVel(-PlayerLogic.getMaxXVel()); //set velocity to maximum velocity
                 }
-                setStrafing(true);
-            } else if (GAME.isPressed(KeyCode.D) && !GAME.isPressed(KeyCode.A)) {
-                if (!getDir()) { //if player 1 is moving left
+                setStrafing(true); //used for deceleration
+            } else if (GAME.isPressed(KeyCode.D) && !GAME.isPressed(KeyCode.A)) { //player 1 is holding right and not holding left
+                if (!getDir()) { //if player 1 is facing left
                     changeDirection();
                 }
-                if (getxVel() < PlayerLogic.getMinXVel()) {
-                    setxVel(PlayerLogic.getMinXVel());
-                } else if (getxVel() < PlayerLogic.getMaxXVel() - PlayerLogic.getxAcceleration()) {
-                    setxVel(getxVel() + PlayerLogic.getxAcceleration());
-                } else {
-                    setxVel(PlayerLogic.getMaxXVel());
+                if (getxVel() < PlayerLogic.getMinXVel()) { //player 1 is slower than the minimum velocity
+                    setxVel(PlayerLogic.getMinXVel()); //set velocity to minimum velocity
+                } else if (getxVel() < PlayerLogic.getMaxXVel() - PlayerLogic.getxAcceleration()) { //player 1 is in between minimum and maximum velocity
+                    setxVel(getxVel() + PlayerLogic.getxAcceleration()); //accelerate the player
+                } else { //player 1 is at or somehow went over the maximum velocity
+                    setxVel(PlayerLogic.getMaxXVel()); //set velocity to maximum velocity
                 }
                 setStrafing(true);
-            } else if (GAME.isPressed(KeyCode.A) && GAME.isPressed(KeyCode.D)) {
-                if (getDir()) {
-                    if (getxVel() == PlayerLogic.getMaxXVel()) {
-                        changeDirection();
+            } else if (GAME.isPressed(KeyCode.A) && GAME.isPressed(KeyCode.D)) { //if player 1 is holding both left and right inputs
+                if (getDir()) { //if player 1 is facing right
+                    if (getxVel() == PlayerLogic.getMaxXVel()) { //if player 1 is traveling at maximum velocity right
+                        changeDirection(); //changes direction without changing velocity so player can shoot backwards
                     }
-                } else {
-                    if (getxVel() == -PlayerLogic.getMaxXVel()) {
-                        changeDirection();
+                } else { //if player 1 is facing left
+                    if (getxVel() == -PlayerLogic.getMaxXVel()) { //if player 1 is traveling at maximum velocity left
+                        changeDirection(); //changes direction without changing velocity so player can shoot backwards
                     }
                 }
                 setStrafing(true);
             }
-        } else { //if player 2
+        } else { //if player 2 (all the code is the same so it is not commented)
             if (GAME.isPressed(KeyCode.LEFT) && !GAME.isPressed(KeyCode.RIGHT)) {
-                if (getDir()) { //if player 2 is moving right
+                if (getDir()) {
                     changeDirection();
                 }
                 if (getxVel() > -PlayerLogic.getMinXVel()) {
@@ -201,7 +203,7 @@ public class Player extends MovingDirectionalMapObject {
                 }
                 setStrafing(true);
             } else if (GAME.isPressed(KeyCode.RIGHT) && !GAME.isPressed(KeyCode.LEFT)) {
-                if (!getDir()) { //if player 2 is moving left
+                if (!getDir()) {
                     changeDirection();
                 }
                 if (getxVel() < PlayerLogic.getMinXVel()) {
@@ -226,18 +228,22 @@ public class Player extends MovingDirectionalMapObject {
             }
         }
 
-        // horizontal deceleration
-        if (!strafing && !falling && Math.abs(getxVel()) > 0) {
+        //horizontal deceleration
+        if (!strafing && !falling && Math.abs(getxVel()) > 0) { //when not making any inputs and when on the ground (surface friction)
             setxVel(getxVel()*(float)0.6);
-        } else if (!strafing && falling && Math.abs(getxVel()) > 0) {
+        } else if (!strafing && falling && Math.abs(getxVel()) > 0) { //when not making any inputs and when in the air (air resistance)
             setxVel(getxVel()*(float)0.9);
         }
 
+        //prevents player traveling out of bounds
         super.move(false);
+
+        //moves all the associated objects with the player
         gun.updateCoordinates(this);
         rightHand.updateCoordinates(this, true);
         leftHand.updateCoordinates(this, false);
 
+        //wall climbing and descending
         if (CollisionLogic.collidedRightWithBlock(getObjectData()) || CollisionLogic.collidedLeftWithBlock(getObjectData())) {
             setxVel(0);
             if (jumping) {
@@ -248,6 +254,7 @@ public class Player extends MovingDirectionalMapObject {
             timesJumped = 0;
         }
 
+        //falling, vertical collisions, and gravity
         if (falling) {
             if (CollisionLogic.collidedBottomWithBlock(getObjectData()) || CollisionLogic.collidedBottomWithPlayer(getObjectData(), player1or2)) {
                 falling = false;
@@ -271,7 +278,7 @@ public class Player extends MovingDirectionalMapObject {
     public void setStrafing(boolean s) {
         strafing = s;
     }
-//bruh
+
     /**
      * Mutator method for the jumping variable
      * @param j
