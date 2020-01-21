@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Zomgman_3-Gun_Game:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Zomgman_3_Gun_Game_jar</output-path>
+    <root id="archive" name="Zomgman_3-Gun_Game.jar">
+      <element id="module-output" name="Zomgman_3-Gun_Game" />
+    </root>
+  </artifact>
+</component>

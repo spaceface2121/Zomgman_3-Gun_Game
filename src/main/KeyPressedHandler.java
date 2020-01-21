@@ -34,7 +34,7 @@ public class KeyPressedHandler implements EventHandler<KeyEvent> {
                 Player p2 = GAME.getPlayer2();
                 if (code == KeyCode.ESCAPE) {
                     GAME.setScreen(Game.PAUSE_SCREEN);
-                    //minimize();
+                    minimize();
                     Render.drawPaused();
                 } else if /*player1 controls \/  */ (code == KeyCode.W) {
                     p1.jump();
